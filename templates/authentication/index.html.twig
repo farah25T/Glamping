@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{title}}
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/login.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="/assets/script.js"></script>
+{% endblock %}
+
+
+{% block body %}
+	<div class="background"></div>
+	<div class="container">
+		<div class="item">
+			<h2 class="logo">Glamping
+			</i>
+		</h2>
+		<div class="text-item">
+			<h2>Welcome !
+				<br/><span>To Our Site</span>
+			</h2>
+			<p>
+				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab
+							            nesciunt officiis a eaque exercitationem laboriosam sunt qui.
+							            Obcaecati dolores voluptatem quis mollitia laboriosam aperiam
+							            quaerat explicabo. Sit minus facere corrupti?
+			</p>
+			<div class="social-icon">
+				<a href="https://www.facebook.com">
+					<i class="fab fa-brands fa-facebook fa-xl"></i>
+				</a>
+				<a href="https://www.instagram.com">
+					<i class="fab fa-brands fa-instagram fa-xl"></i>
+				</a>
+				<a href="https://www.whatsapp.com">
+					<i class="fa-brands fa-whatsapp fa-xl"></i>
+				</a>
+				<a href="https://www.twitter.com">
+					<i class="fa-brands fa-twitter fa-xl"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- *************************** -->
+	<div class="login-section">
+		<div class="form-box login">
+			<form action="">
+				<h2>Log In</h2>
+				<div class="input-box">
+					<span class="icon">
+						<i class="far fa-regular fa-envelope"></i>
+					</span>
+					<input type="email" id="myInput" name='email' required/>
+					<label for="">Email</label>
+				</div>
+				<div class="input-box">
+					<span class="icon">
+						<i class="far fa-regular fa-eye "></i>
+					</span>
+					<input type="password" name='password' required/>
+					<label for="">password</label>
+				</div>
+				<div class="remember-password">
+					<label for=""><input type="checkbox"/>Remember me</label>
+					<a href="3">Forget Password</a>
+				</div>
+				<button class="btn">Login</button>
+				<div class="create-account">
+					<p>
+						Create A New Account
+						<a href="#" class="register-link">Sign-up</a>
+					</p>
+				</div>
+			</form>
+		</div>
+		<!-- ************ -->
+		<div class="form-box register">
+			<form action="">
+				<h2>Sign Up</h2>
+				<div class="input-box">
+					<span class="icon">
+						<i class="far fa-regular fa-user"></i>
+					</span>
+					<input type="text" name='name' required/>
+					<label for="">UserName</label>
+				</div>
+				<div class="input-box">
+					<span class="icon">
+						<i class="far fa-regular fa-envelope"></i>
+					</span>
+					<input type="email" id="myInput" name='email'required/>
+					<label for="">Email</label>
+				</div>
+				<div class="input-box">
+					<span class="icon">
+						<i class="far fa-regular fa-eye"></i>
+					</span>
+					<input type="password" name='password' required/>
+					<label for="">password</label>
+				</div>
+				<div class="remember-password">
+					<label for=""><input type="checkbox"/>I agree with this statement
+					</label>
+				</div>
+				<button class="btn">Login</button>
+				<div class="create-account">
+					<p>
+						Already Have an Account ?
+						<a href="#" class="login-link">Log in</a>
+					</p>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>{% endblock %}
