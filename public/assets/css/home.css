@@ -1,0 +1,192 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 10%;
+  background: rgb(243, 242, 239);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+.logo {
+  font-size: 35px;
+  color: #e14807;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  animation: slideRight 1s ease forwards;
+  opacity: 0;
+}
+.navbar .btn {
+  margin-left: 35px;
+  background-color: #326423;
+}
+.navbar a {
+  font-size: 18px;
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
+  font-weight: 400;
+  margin-left: 35px;
+  animation: slideTop 0.5s ease forwards;
+  opacity: 0;
+  animation-delay: calc(0.2s * var(--clr));
+}
+.navbar a:hover,
+.navbar a.active {
+  color: #ef6e12;
+}
+/* animation */
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideTop {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideBottom {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes Zoom {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* Description */
+.titre {
+  font-family: "Poppins", sans-serif;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: #582707;
+  margin-top: 150px;
+}
+.descri {
+  font-family: "Play", sans-serif;
+  font-size: 30px;
+  color: #582707;
+}
+body {
+  background-color: rgb(243, 242, 239);
+}
+/* navbare */
+.navbare {
+ position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 920px;
+  height: 120px;
+  box-shadow: 20px 20px 60px rgb(124, 124, 124);
+  background-color:#fff ;
+ 
+}
+
+.navbare .btn {
+  background-color: #326423;
+    line-height: 14px;
+  letter-spacing: 1.2px;
+}
+
+/* navbare input style */
+.inputGroup {
+  font-family: "Segoe UI", sans-serif;
+  margin: 1em 0 1em 0;
+  width: 100%;
+  position: relative;
+}
+
+.inputGroup input {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 2px solid rgb(200, 200, 200);
+  background-color: inherit;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  left: 0;
+  padding: 0.8em;
+  margin-left: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgb(100, 100, 100);
+  font-family: "Play";
+}
+
+.inputGroup :is(input:focus, input:valid) ~ label {
+  transform: translateY(-50%) scale(0.9);
+  margin: 0em;
+  margin-left: 1.3em;
+  padding: 0.4em;
+  background-color: #fff;
+}
+
+.inputGroup :is(input:focus, input:valid) {
+  border-color: #1c3a13;
+}
+
+/* carousel  */
+.carousel {
+  width: 1040px;
+  height: 600px;
+  max-height: 600px;
+}
+.carousel .carousel-item{
+  height: 600px;
+}
+.carousel h5 {
+  font-family: "Pathway Extreme", sans-serif;
+  font-size: 40px;
+  background-color: transparent;
+  backdrop-filter: blur(2px);
+}
+.carousel p {
+  color: #ffffff;
+  font-size: 25px;
+  backdrop-filter: blur(2px);
+}

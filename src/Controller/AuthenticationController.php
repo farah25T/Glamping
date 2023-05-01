@@ -15,6 +15,7 @@ class AuthenticationController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $session = $request->getSession();
+      
         $id = $session->get('id');
         if (isset($id)) {
             return ($this->redirectToRoute('app_home'));
