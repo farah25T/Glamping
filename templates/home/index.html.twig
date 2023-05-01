@@ -25,10 +25,25 @@
 			<a href="#" style="--clr: 3">
 				Catalogue
 			</a>
-			<a href="#" style="--clr: 4">
-				Sign Up
-			</a>
-			<button type="button" class="btn btn-success ">Sign In</button>
+			{% if (user) %}
+
+				<a href="{{ path('app_authentication_logout') }}" style="--clr: 3">
+                         log out
+				</a>
+				<a href="#" style="--clr: 4">
+					{{user.name}}
+				</a>
+
+
+			{% else %}
+
+				<a href="{{ path('app_authentication_signup') }}" style="--clr: 4">
+					Sign Up
+				</a>
+				<a class="btn btn-success " href="{{ path('app_authentication') }}">Sign In</a>
+
+			{% endif %}
+
 		</nav>
 	</header>
 	<!-- description de notre site -->
@@ -65,7 +80,7 @@
 							<label for="guests" name="guest">
 								<span class="fas fa-regular fa-user"></span>
 								Add
-																							                  guests</label>
+																																																																																																							                  guests</label>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -88,7 +103,7 @@
 							<h5>Discover our newest events</h5>
 							<p>
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
+																																																																																																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
 							</p>
 						</div>
 					</div>
@@ -99,7 +114,7 @@
 							<h5>Hurry up !!</h5>
 							<p>
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
+																																																																																																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
 							</p>
 						</div>
 					</div>
@@ -110,7 +125,7 @@
 							<h5>Discover our most liked events</h5>
 							<p>
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
+																																																																																																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
 							</p>
 						</div>
 					</div>

@@ -34,6 +34,9 @@
   opacity: 0;
   animation-delay: calc(0.2s * var(--clr));
 }
+.header .navbar a.btn{
+  color: #fff;
+}
 .navbar a:hover,
 .navbar a.active {
   color: #ef6e12;
