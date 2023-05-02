@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "poppins", sans-serif;
+}
+body {
+  background: rgb(243, 242, 239);
+  color: #000;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 10%;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+.logo {
+  font-size: 26px;
+  color: #e14807;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  animation: slideRight 1s ease forwards;
+  opacity: 0;
+}
+.navbar a {
+  font-size: 18px;
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 35px;
+  animation: slideTop 0.5s ease forwards;
+  opacity: 0;
+  animation-delay: calc(0.2s * var(--clr));
+}
+.navbar a:hover,
+.navbar a.active {
+  color: #ef6e12;
+}
+.home {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 70px 10% 0;
+}
+.home .home-detail {
+  max-width: 600px;
+}
+.home-detail h3 {
+  font-size: 32px;
+  font-weight: 700;
+  animation: slideTop 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.7s;
+}
+.home-detail h3:nth-of-type(2) {
+  margin-bottom: 30px;
+  animation: slideTop 1s ease forwards;
+  animation-delay: 2s;
+  opacity: 0;
+}
+span {
+  color: #ef6e12;
+}
+
+.home-detail h1 {
+  font-size: 56px;
+  font-weight: 700;
+  margin: -3px 0;
+  animation: slideRight 1s ease forwards;
+  animation-delay: 1s;
+  opacity: 0;
+}
+.home-detail p {
+  font-size: 16px;
+  animation: slideLeft 1s ease forwards;
+  animation-delay: 1s;
+  opacity: 0;
+}
+.home-detail .social-media a {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ef6e12;
+  border-radius: 50%;
+  color: #ef6e12;
+  background: transparent;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 15px 30px 0;
+  transition: 0.5s ease;
+  font-size: 19px;
+  animation: slideLeft 1s ease forwards;
+  animation-delay: calc(0.2s * var(--vlr));
+  opacity: 0;
+}
+
+.social-media a:hover {
+  background: #ef6e12;
+  color: black;
+  box-shadow: 0 0 20px #ef6e12;
+}
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #ef6e12;
+  color: rgb(243, 242, 239);
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  transition: 0.5s ease;
+  cursor: pointer;
+  animation: slideTop 1s ease forwards;
+  animation-delay: 2s;
+  opacity: 0;
+  margin-right: 12px;
+}
+.btn:hover {
+  background: rgb(243, 242, 239);
+  color: #ef6e12;
+  border: 1px solid #ef6e12;
+}
+img {
+  width: 400px;
+  height: 400px;
+  margin-right: 20px;
+  border-radius: 50%;
+  animation: Zoom 1s ease forwards;
+  animation-delay: 2s ;
+  opacity: 0;
+}
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideTop {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideBottom {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes Zoom {
+  0% {
+    transform:scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

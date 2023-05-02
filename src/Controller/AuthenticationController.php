@@ -15,6 +15,7 @@ class AuthenticationController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $session = $request->getSession();
+      
         $id = $session->get('id');
         if (isset($id)) {
             return ($this->redirectToRoute('app_home'));
@@ -74,4 +75,17 @@ class AuthenticationController extends AbstractController
             'title' => 'sign up'
         ]);
     }
+    #[Route('/authentication/logout', name: 'app_authentication_logout')]
+    public function logout(Request $request, EntityManagerInterface $entityManager): Response
+    {            $session = $request->getSession();
+        $id=$session->get('id');
+        if (!isset($id)) {
+            return ($this->redirectToRoute('app_authentication'));
+        }
+        else {
+            $session->clear();
+            return ($this->redirectToRoute('app_home'));
+        }
+    }
+
 }
