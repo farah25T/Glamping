@@ -1,0 +1,467 @@
+body {
+  font-family: Poppins;
+  background-color: rgb(243, 242, 239);
+}
+
+.eventname {
+  font-size: 65px;
+  color: #582707;
+}
+
+.like-button {
+  width: 210px;
+  height: 50px;
+  max-width: 100%;
+  max-height: 100%;
+  background: linear-gradient(90deg, #1c3a13, #4d6347);
+  color: #f1f1f1;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  line-height: 50px;
+  z-index: 999;
+  transition: 0.6s linear;
+  border-radius: 40px;
+}
+
+.like-button .heart-icon {
+  height: 100px;
+  width: 100px;
+  background: url("/assets/images/EventPageImages/heart.png");
+  background-position: left;
+  cursor: pointer;
+  position: absolute;
+}
+
+.like-button .heart-icon.liked {
+  animation: like-anim 0.7s steps(28) forwards;
+}
+
+@keyframes like-anim {
+  to {
+    background-position: right;
+  }
+}
+
+.like-button .heart-bg {
+  background: rgba(255, 192, 200, 0);
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 100ms ease;
+}
+
+.like-button .heart-bg:hover {
+  background: rgba(255, 192, 200, 0.7);
+}
+
+.like-button {
+  display: flex;
+  align-items: center;
+}
+
+.like-button .likes-amount {
+  font-size: 21px;
+  font-family: "Play", sans-serif;
+  color: #888;
+  font-weight: 900;
+  max-width: 100%;
+  max-height: 100%;
+  margin-left: 1px;
+}
+
+.like-button:hover {
+  transform: scale(1.1);
+}
+
+.save-button {
+  width: 210px;
+  height: 50px;
+  max-width: 100%;
+  max-height: 100%;
+  background: linear-gradient(90deg, #1c3a13, #4d6347);
+  color: #f1f1f1;
+  text-align: center;
+  line-height: 50px;
+  z-index: 999;
+  transition: 0.6s linear;
+  border-radius: 40px;
+}
+
+.save-button:hover {
+  transform: scale(1.1);
+}
+
+.share-button {
+  width: 210px;
+  height: 50px;
+  background: #bbdb9b;
+  text-align: center;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s linear;
+  z-index: 1;
+}
+
+.share-button:hover {
+  transform: scale(1.1);
+}
+
+.share-button span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #1c3a13, #4d6347);
+  color: #f1f1f1;
+  text-align: center;
+  font-size: 20px;
+  line-height: 50px;
+  z-index: 999;
+  transition: 0.6s linear;
+  border-radius: 40px;
+}
+
+.share-button:hover span {
+  transform: translateX(-100%);
+  transition-delay: 0.3s;
+}
+
+.share-button a {
+  flex: 1;
+  font-size: 26px;
+  color: #1c3a13;
+  text-align: center;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: 0.3s linear;
+}
+
+.share-button:hover a {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.share-button a:nth-of-type(1) {
+  transition-delay: 1s;
+}
+
+.share-button a:nth-of-type(2) {
+  transition-delay: 0.8s;
+}
+
+.share-button a:nth-of-type(3) {
+  transition-delay: 0.6s;
+}
+
+.share-button a:nth-of-type(4) {
+  transition-delay: 0.4s;
+}
+
+.event-info {
+  list-style-type: none;
+}
+
+.card {
+  box-sizing: border-box;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.save-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.save-container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  font-size: 20px;
+}
+
+.save-container svg {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 50px;
+  transition: all 0.3s;
+  fill: #666;
+}
+
+.save-container svg:hover {
+  transform: scale(1.1);
+}
+
+.save-container input:checked ~ svg {
+  fill: #ffeb49;
+}
+
+.weather-map-placement {
+  z-index: 1;
+  color: aliceblue;
+  text-align: center;
+  height: 430px;
+}
+
+.weather {
+  width: 90%;
+  max-width: 470px;
+  color: #fff;
+  background: linear-gradient(135deg, #00feba, #5b548a);
+  border-radius: 20px;
+  text-align: center;
+}
+
+.weather-icon {
+  padding: 5px;
+  transform: scale(1.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.humidity-wind-text {
+  font-size: 20px;
+  margin-left: -50px;
+}
+
+/* footer styles */
+
+footer {
+  width: 100%;
+  height: auto;
+  background: linear-gradient(30deg, #f3f2ef, #fff3e2);
+  margin-top: 30px;
+  font-style: bold;
+  bottom: 0;
+  font-size: 20px;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+}
+.footer i {
+  size: 30px;
+}
+
+.footer .list-group {
+  background-color: inherit;
+}
+.footer ul li {
+  list-style: none;
+}
+.footer a {
+  text-decoration: none;
+  color: #212529;
+  font-family: "Ubuntu Condensed", sans-serif;
+  font-size: large;
+}
+.footer form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 30px;
+  width: 80%;
+}
+.footer form input {
+  width: 100%;
+  background: transparent;
+  color: #000000;
+  border: 0;
+  outline: none;
+  padding: 10px;
+}
+.footer form button {
+  outline: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.footer p {
+  font-family: "Poppins", sans-serif;
+  font-size: small;
+}
+
+.footer .social-icon a:hover i {
+  transform: scale(1.2);
+}
+
+/* header styles */
+
+.head-block {
+  position: fixed;
+  width: 100vw;
+  height: 10vh;
+  background: #e0e0e0;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+  /* background-color: inherit; */
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+}
+.bouton {
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: #fff;
+  -webkit-clip-path: polygon(
+    0 0,
+    0 0,
+    100% 0,
+    100% 0,
+    100% calc(100% - 15px),
+    calc(100% - 15px) 100%,
+    15px 100%,
+    0 100%
+  );
+  clip-path: polygon(
+    0 0,
+    0 0,
+    100% 0,
+    100% 0,
+    100% calc(100% - 15px),
+    calc(100% - 15px) 100%,
+    15px 100%,
+    0 100%
+  );
+  height: 40px;
+  font-size: 0.7rem;
+  line-height: 14px;
+  letter-spacing: 1.2px;
+  transition: 0.2s 0.1s;
+  background-image: linear-gradient(90deg, #1c3a13, #4d6347);
+  border: 0 solid;
+  overflow: hidden;
+}
+
+.bouton:hover {
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.bouton:active {
+  background-color: #1c3a13;
+}
+.cta {
+  border: none;
+  background: none;
+  position: relative;
+}
+
+.hover-underline-animation {
+  position: relative;
+  color: black;
+  padding-bottom: 20px;
+  font-family: "Play", sans-serif;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  font-family: "Play", sans-serif;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  font-family: "Play", sans-serif;
+}
+
+.row {
+  padding: 1%;
+}
+
+.logo {
+  padding-left: 30px;
+  font-family: "Poppins", sans-serif;
+  color: #e14807;
+  font-weight: 400;
+}
+
+/* input style */
+.inputGroup {
+  font-family: "Segoe UI", sans-serif;
+  margin: 1em 0 1em 0;
+  width: 100%;
+  position: relative;
+}
+
+.inputGroup input {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 2px solid rgb(200, 200, 200);
+  background-color: inherit;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  left: 0;
+  padding: 0.8em;
+  margin-left: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgb(100, 100, 100);
+  font-family: "Play";
+}
+
+.inputGroup :is(input:focus, input:valid) ~ label {
+  transform: translateY(-50%) scale(0.9);
+  margin: 0em;
+  margin-left: 1.3em;
+  padding: 0.4em;
+  background-color: #fff;
+}
+
+.inputGroup :is(input:focus, input:valid) {
+  border-color: #1c3a13;
+}
+
+.inputGroup button {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 0.8rem;
+  line-height: 14px;
+  letter-spacing: 1.2px;
+  font-style: normal;
+}
