@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{user.name}}
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/profile.css"/>
+{% endblock %}
+{% block javascripts %}
+	<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+	<script src="/assets/js/profile.js"></script>
+
+{% endblock %}
+
+{% block body %}
+
+	<header class="header">
+		<a href="{{ path('app_home')}}" class="logo">Glamping</a>
+
+		<nav class="navbar">
+			<a href="{{ path('app_home')}}" style="--clr: 1" class="active">
+
+				Home
+			</a>
+			<a href="#" style="--clr: 2">
+				about us
+			</a>
+			<a href="{{ path('app_authentication_logout') }}" style="--clr: 3">
+
+				log out
+			</a>
+			<a href="#" style="--clr: 4">
+				{{user.name}}
+
+			</a>
+		</nav>
+	</header>
+	<section class="home">
+		<div class="home-detail">
+			<h3>Welcome Back !</h3>
+			<h1>{{user.name}}</h1>
+
+			<h3>And Let's
+				<span class="textline"></span>
+			</h3>
+			<p>
+				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro illum
+																																												          laborum qui officia enim tempore cupiditate soluta earum est ullam ex
+																																												          quisquam rem dolores, dolor natus, odio labore animi dignissimos.
+			</p>
+
+			<div class="social-media">
+				<a href="https://www.facebook.com" style="--vlr: 5">
+					<i class="fab fa-brands fa-facebook fa-xl"></i>
+				</a>
+				<a href="https://www.instagram.com" style="--vlr: 6">
+					<i class="fab fa-brands fa-instagram fa-xl"></i>
+				</a>
+				<a href="https://www.whatsapp.com" style="--vlr: 7">
+					<i class="fa-brands fa-whatsapp fa-xl"></i>
+				</a>
+				<a href="https://www.twitter.com" style="--vlr: 8">
+					<i class="fa-brands fa-twitter fa-xl"></i>
+				</a>
+			</div>
+			<button class="btn">Your Events</button>
+			<button class="btn">Settings
+			</button>
+		</div>
+		<div class="profile-photo">
+			<img src="/assets/images/Vector Art.jpeg" alt="profile photo"/>
+		</div>
+	</section>
+	<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+	<script src="profile.js"></script>
+
+
+{% endblock %}
