@@ -1,432 +1,398 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Event Page{% endblock %}
+{% block title %}Event Page
+{% endblock %}
 
 {% block javascripts %}
- <script
-      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-      crossorigin=""
-    ></script>
-    <script src="/assets/js/EventPagejs/weatherscript.js"></script>
-    <script src="/assets/js/EventPagejs/mapscript.js"></script>
-    <script src="/assets/js/EventPagejs/likescript.js"></script>
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+	<script src="{{ asset('assets/js/EventPagejs/weatherscript.js') }}"></script>
+	<script src="{{ asset('assets/js/EventPagejs/mapscript.js') }}"></script>
+	<script src="{{ asset('assets/js/EventPagejs/likescript.js') }}"></script>
 {% endblock %}
 
 
 {% block stylesheets %}
-  <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-      crossorigin="anonymous"
-    />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"/>
 
-<link rel="stylesheet" href="/assets/css/EventPage.css" />
+	<link rel="stylesheet" href="{{ asset('/assets/css/EventPage.css') }}"/>
 
-  <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-      crossorigin=""
-    />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
 
 
 {% endblock %}
 
 {% block body %}
 
-    <div class="container-fluid">
-      <div class="row">
-        <!-- header -->
-        <div class="head-block z-3">
-          <div class="row">
-            <div class="col-4">
-              <h3 class="logo">Glamping</h3>
-            </div>
-            <div class="col-6">
-              <div class="container text-center">
-                <div class="row align-items-center">
-                  <div class="col">
-                    <button class="cta">
-                      <span class="hover-underline-animation"> About Us</span>
-                    </button>
-                  </div>
-                  <div class="col">
-                    <button class="cta">
-                      <span class="hover-underline-animation"> Catalogue </span>
-                    </button>
-                  </div>
-                  <div class="col">
-                    <button class="cta">
-                      <span class="hover-underline-animation"> Near me</span>
-                    </button>
-                  </div>
-                  <div class="col">
-                    <button class="cta">
-                      <span class="hover-underline-animation"> Login</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-2">
-              <button class="bouton">sign up</button>
-            </div>
-          </div>
-        </div>
-      </div>
+	<div class="container-fluid">
+		<div
+			class="row">
 
-      <div class="row">
-        <div class="col-md-1"></div>
+			<!-- header -->
+			<header class="header">
+				<a href="#" class="logo">Glamping</a>
+				<nav class="navbar">
+					<a href="#" style="--clr: 1" class="active">
+						Home
+					</a>
+					<a href="#" style="--clr: 2">
+						About Us
+					</a>
+					<a href="{{ path('app_event_page') }}" style="--clr: 3">
+						Catalogue
+					</a>
+					{% if (app.user) %}
 
-        <div class="col-md-10">
-          <div class="row">
-            <br />
-            <br />
-          </div>
+						<a href="{{ path('app_authentication_logout') }}" style="--clr: 3">
+							log out
+						</a>
+						<a href="{{ path('app_profile')}}" style="--clr: 4">
 
-          <div class="row"><h1 class="eventname">Camping Pré Fixe</h1></div>
+							{{app.user.username}}
+						</a>
 
-          <div class="row"><p>100% · 23 reviews · France, Occitanie</p></div>
 
-          <div class="row">
-            <div class="col-md-2">
-              <div class="like-button">
-                <div class="heart-bg">
-                  <div class="heart-icon"></div>
-                </div>
-                <div class="likes-amount">275</div>
-              </div>
-            </div>
+					{% else %}
 
-            <div class="col-md-2">
-              <div class="save-button">
-                <label class="save-container">
-                  <input type="checkbox" />
-                  <svg
-                    height="24px"
-                    id="Layer_1"
-                    version="1.2"
-                    viewBox="0 0 24 24"
-                    width="24px"
-                    xml:space="preserve"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                  >
-                    <g>
-                      <g>
-                        <path
-                          d="M9.362,9.158c0,0-3.16,0.35-5.268,0.584c-0.19,0.023-0.358,0.15-0.421,0.343s0,0.394,0.14,0.521    c1.566,1.429,3.919,3.569,3.919,3.569c-0.002,0-0.646,3.113-1.074,5.19c-0.036,0.188,0.032,0.387,0.196,0.506    c0.163,0.119,0.373,0.121,0.538,0.028c1.844-1.048,4.606-2.624,4.606-2.624s2.763,1.576,4.604,2.625    c0.168,0.092,0.378,0.09,0.541-0.029c0.164-0.119,0.232-0.318,0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191    s2.353-2.14,3.919-3.566c0.14-0.131,0.202-0.332,0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375,0.122-0.453,0.294C10.671,6.26,9.362,9.158,9.362,9.158z"
-                        ></path>
-                      </g>
-                    </g>
-                  </svg>
-                  Save
-                </label>
-              </div>
-            </div>
+						<a href="{{ path('app_authentication_signup') }}" style="--clr: 4">
+							Sign Up
+						</a>
+						<a class="btn btn-success " href="{{ path('app_authentication') }}">Sign In</a>
 
-            <div class="col-md-2">
-              <div class="share-button">
-                <span>Share</span>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              </div>
-            </div>
+					{% endif %}
 
-            <div class="col-md-6"></div>
-          </div>
+				</nav>
+			</header>
+		</div>
 
-          <div class="row">
-            <div class="col-md-6">
-              <br />
-              <img
-                class="rounded-5 card"
-                src="/assets/images/EventPageImages/01.jpg"
-                style="max-width: 100%; max-height: 100%"
-              />
-            </div>
+		<br><br><br><br>
+		<div class="row">
+			<div class="col-md-1"></div>
 
-            <div class="col-md-6">
-              <br />
+			<div class="col-md-10">
+				<div class="row">
+					<br/>
+					<br/>
+				</div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <img
-                    class="rounded-4 card"
-                    src="/assets/images/EventPageImages/02.jpg"
-                    style="max-width: 100%; max-height: 100%"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <img
-                    class="rounded-4 card"
-                    src="/assets/images/EventPageImages/05.jpg"
-                    style="max-width: 100%; max-height: 100%"
-                  />
-                </div>
-              </div>
+				<div class="row">
+					<h1 class="eventname">Camping Pré Fixe</h1>
+				</div>
 
-              <br />
+				<div class="row">
+					<p>100% · 23 reviews · France, Occitanie</p>
+				</div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <img
-                    class="rounded-4 card"
-                    src="/assets/images/EventPageImages/03.jpg"
-                    style="max-width: 100%; max-height: 100%"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <img
-                    class="rounded-4 card"
-                    src="/assets/images/EventPageImages/04.jpg"
-                    style="max-width: 100%; max-height: 100%"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="like-button">
+							<div class="heart-bg">
+								<div class="heart-icon"></div>
+							</div>
+							<div class="likes-amount">275</div>
+						</div>
+					</div>
 
-          <div class="row">
-            <div class="col-md-7">
-              <br /><br /><br /><br />
-              <div class="row">
-                <p style="text-align: justify">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Facere ducimus porro vero! Porro est, quas magni rem error
-                  velit nisi totam perspiciatis ipsam temporibus illum neque,
-                  libero unde natus hic amet ratione aperiam laboriosam officiis
-                  nulla soluta. Perferendis, consequuntur accusantium culpa,
-                  tempora, tenetur ullam ratione possimus nam odit veritatis
-                  facilis odio voluptate dignissimos. Odit architecto delectus
-                  fugit vitae in accusamus? Qui id culpa voluptatibus porro
-                  suscipit, velit quisquam unde aliquam accusantium ab in soluta
-                  laboriosam odit commodi quam doloribus fuga dicta.
-                </p>
-              </div>
-            </div>
+					<div class="col-md-2">
+						<div class="save-button">
+							<label class="save-container">
+								<input type="checkbox"/>
+								<svg height="24px" id="Layer_1" version="1.2" viewbox="0 0 24 24" width="24px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+									<g>
+										<g>
+											<path d="M9.362,9.158c0,0-3.16,0.35-5.268,0.584c-0.19,0.023-0.358,0.15-0.421,0.343s0,0.394,0.14,0.521    c1.566,1.429,3.919,3.569,3.919,3.569c-0.002,0-0.646,3.113-1.074,5.19c-0.036,0.188,0.032,0.387,0.196,0.506    c0.163,0.119,0.373,0.121,0.538,0.028c1.844-1.048,4.606-2.624,4.606-2.624s2.763,1.576,4.604,2.625    c0.168,0.092,0.378,0.09,0.541-0.029c0.164-0.119,0.232-0.318,0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191    s2.353-2.14,3.919-3.566c0.14-0.131,0.202-0.332,0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375,0.122-0.453,0.294C10.671,6.26,9.362,9.158,9.362,9.158z"></path>
+										</g>
+									</g>
+								</svg>
+								Save
+							</label>
+						</div>
+					</div>
 
-            <div class="col-md-5">
-              <br /><br /><br /><br />
-              <div class="row">
-                <div class="col-md-6">
-                  <p style="text-align: justify" class="ps-3">Activities:</p>
-                  <ul>
-                    <li class="event-info">
-                      <i class="fa-solid fa-person-swimming fa-2xl"></i>
-                      Swimming
-                    </li>
-                    <br />
-                    <li class="event-info">
-                      <i class="fa-solid fa-person-hiking fa-2xl"></i> Hiking
-                    </li>
-                    <br />
-                    <li class="event-info">
-                      <i class="fa-solid fa-person-biking fa-2xl"></i> Biking
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-md-6">
-                  <p style="text-align: justify" class="ps-3">
-                    Natural Features:
-                  </p>
-                  <ul>
-                    <li class="event-info">
-                      <i class="fa-solid fa-tree fa-2xl"></i> Forest
-                    </li>
-                    <br />
-                    <li class="event-info">
-                      <i class="fa-solid fa-mountain fa-2xl"></i> Mountains
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-md-2">
+						<div class="share-button">
+							<span>Share</span>
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
 
-          <br /><br />
+					<div class="col-md-6"></div>
+				</div>
 
-          <div class="row">
-            <div class="col-md-4">
-              <div class="weather-map-placement rounded-4">
-                <div class="weather">
-                  <br />
-                  <h2 id="city">Weather in</h2>
-                  <h5 id="country"></h5>
-                  <div class="weather-icon">
-                    <img id="weather-icon" src="" />
-                  </div>
-                  <h1 id="temp"></h1>
-                  <h2 id="text"></h2>
-                  <div class="details row">
-                    <div class="col">
-                      <div class="row">
-                        <div class="col">
-                          <img
-                            style="transform: scale(0.7)"
-                            src="/assets/images/EventPageImages/weather-app-img/images/humidity.png"
-                          />
-                        </div>
+				<div class="row">
+					<div class="col-md-6">
+						<br/>
+						<img class="rounded-5 card" src="/assets/images/EventPageImages/01.jpg" style="max-width: 100%; max-height: 100%"/>
+					</div>
 
-                        <div class="col">
-                          <div id="humidity" class="humidity-wind-text"></div>
-                          <p style="margin-left: -50px">Humidity</p>
-                        </div>
-                      </div>
-                    </div>
+					<div class="col-md-6">
+						<br/>
 
-                    <div class="col">
-                      <div class="row">
-                        <div class="col">
-                          <img
-                            style="transform: scale(0.7)"
-                            src="
-                          /assets/images/EventPageImages/weather-app-img/images/wind.png"
-                          />
-                        </div>
+						<div class="row">
+							<div class="col-md-6">
+								<img class="rounded-4 card" src="/assets/images/EventPageImages/02.jpg" style="max-width: 100%; max-height: 100%"/>
+							</div>
+							<div class="col-md-6">
+								<img class="rounded-4 card" src="/assets/images/EventPageImages/05.jpg" style="max-width: 100%; max-height: 100%"/>
+							</div>
+						</div>
 
-                        <div class="col">
-                          <div id="wind" class="humidity-wind-text"></div>
-                          <p style="margin-left: -50px">Wind Speed</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+						<br/>
 
-                  <br />
-                </div>
-              </div>
-            </div>
+						<div class="row">
+							<div class="col-md-6">
+								<img class="rounded-4 card" src="/assets/images/EventPageImages/03.jpg" style="max-width: 100%; max-height: 100%"/>
+							</div>
+							<div class="col-md-6">
+								<img class="rounded-4 card" src="/assets/images/EventPageImages/04.jpg" style="max-width: 100%; max-height: 100%"/>
+							</div>
+						</div>
+					</div>
+				</div>
 
-            <div class="col-md-8">
-              <div id="map" class="weather-map-placement rounded-4"></div>
-            </div>
-          </div>
+				<div class="row">
+					<div class="col-md-7">
+						<br/><br/><br/><br/>
+						<div class="row">
+							<p style="text-align: justify">
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+								                  Facere ducimus porro vero! Porro est, quas magni rem error
+								                  velit nisi totam perspiciatis ipsam temporibus illum neque,
+								                  libero unde natus hic amet ratione aperiam laboriosam officiis
+								                  nulla soluta. Perferendis, consequuntur accusantium culpa,
+								                  tempora, tenetur ullam ratione possimus nam odit veritatis
+								                  facilis odio voluptate dignissimos. Odit architecto delectus
+								                  fugit vitae in accusamus? Qui id culpa voluptatibus porro
+								                  suscipit, velit quisquam unde aliquam accusantium ab in soluta
+								                  laboriosam odit commodi quam doloribus fuga dicta.
+							</p>
+						</div>
+					</div>
 
-          <br /><br /><br />
-          <div class="row">
-            <div class="col-md-5">
-              <div class="inputGroup">
-                <input type="date" required="required" autocomplete="off" />
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="inputGroup">
-                <input
-                  type="number"
-                  min="1"
-                  max="10"
-                  required="required"
-                  autocomplete="off"
-                />
-                <label for="guests" name="guest"
-                  ><span class="fas fa-regular fa-user"> </span> Add
-                  guests</label
-                >
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="inputGroup">
-                <button type="button" class="btn btn-success p-3 m-1">
-                  Book now!
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+					<div class="col-md-5">
+						<br/><br/><br/><br/>
+						<div class="row">
+							<div class="col-md-6">
+								<p style="text-align: justify" class="ps-3">Activities:</p>
+								<ul>
+									<li class="event-info">
+										<i class="fa-solid fa-person-swimming fa-2xl"></i>
+										Swimming
+									</li>
+									<br/>
+									<li class="event-info">
+										<i class="fa-solid fa-person-hiking fa-2xl"></i>
+										Hiking
+									</li>
+									<br/>
+									<li class="event-info">
+										<i class="fa-solid fa-person-biking fa-2xl"></i>
+										Biking
+									</li>
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<p style="text-align: justify" class="ps-3">
+									Natural Features:
+								</p>
+								<ul>
+									<li class="event-info">
+										<i class="fa-solid fa-tree fa-2xl"></i>
+										Forest
+									</li>
+									<br/>
+									<li class="event-info">
+										<i class="fa-solid fa-mountain fa-2xl"></i>
+										Mountains
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        <div class="col-md-1"></div>
-      </div>
+				<br/><br/>
 
-      <div class="row">
-        <!-- /* footer */ -->
-        <footer class="footer p-3">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-5">
-                <h4>
-                  About us
-                  <div class="underline"></div>
-                </h4>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Expedita nihil ipsam rerum tenetur magnam necessitatibus autem
-                  non corrupti. Odio aut commodi vero corrupti dignissimos eius
-                  laboriosam non vel beatae nisi.
-                </p>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h4>
-                      Contact us
-                      <div class="underline"></div>
-                    </h4>
-                    <div class="row social-icon">
-                      <div class="col-md-1">
-                        <a href="https://www.facebook.com"
-                          ><i class="fab fa-brands fa-facebook fa-xl"></i
-                        ></a>
-                      </div>
-                      <div class="col-md-1">
-                        <a href="https://www.instagram.com"
-                          ><i class="fab fa-brands fa-instagram fa-xl"></i
-                        ></a>
-                      </div>
-                      <div class="col-md-1">
-                        <a href="https://www.whatsapp.com">
-                          <i class="fa-brands fa-whatsapp fa-xl"></i
-                        ></a>
-                      </div>
-                      <div class="col-md-1">
-                        <a href="https://www.twitter.com">
-                          <i class="fa-brands fa-twitter fa-xl"></i
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <span class="right"
-                  ><i class="far fa-sharp fa-regular fa-copyright"></i> 2023
-                  Glamping. All rights reserved.</span
-                >
-              </div>
-              <div class="col-md-3">
-                <ul class="list">
-                  <h4 class="mb-2">Useful links</h4>
-                  <li class="my-3"><a href="">Events</a></li>
-                  <li class="my-3"><a href="">why us</a></li>
-                  <li class="my-3"><a href="">About us</a></li>
-                  <li class="my-3"><a href="">See more</a></li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <h4 class="mb-3">Newsletter</h4>
-                <form action="farahtoulugi@hotmail.fr">
-                  <i class="far fa-regular fa-envelope"></i>
-                  <input
-                    type="email"
-                    placeholder="Enter your email address"
-                    required
-                  />
-                  <button type="submit">
-                    <i class="far fa-regular fa-paper-plane"></i>
-                  </button>
-                </form>
-                <h4>Office</h4>
-                <p class="p-0 m-0">Insat</p>
-                <p class="p-0 m-0">Centre Urbain Nord , Tunis</p>
-                <p class="p-0 m-1">
-                  <i class="far fa-regular fa-at me-2"> </i>
-                  Glamping.Support@gmail.com
-                </p>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
-    </div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="weather-map-placement rounded-4">
+							<div class="weather">
+								<br/>
+								<h2 id="city">Weather in</h2>
+								<h5 id="country"></h5>
+								<div class="weather-icon">
+									<img id="weather-icon" src=""/>
+								</div>
+								<h1 id="temp"></h1>
+								<h2 id="text"></h2>
+								<div class="details row">
+									<div class="col">
+										<div class="row">
+											<div class="col">
+												<img style="transform: scale(0.7)" src="/assets/images/EventPageImages/weather-app-img/images/humidity.png"/>
+											</div>
+
+											<div class="col">
+												<div id="humidity" class="humidity-wind-text"></div>
+												<p style="margin-left: -50px">Humidity</p>
+											</div>
+										</div>
+									</div>
+
+									<div class="col">
+										<div class="row">
+											<div class="col">
+												<img style="transform: scale(0.7)" src="
+												                          /assets/images/EventPageImages/weather-app-img/images/wind.png"/>
+											</div>
+
+											<div class="col">
+												<div id="wind" class="humidity-wind-text"></div>
+												<p style="margin-left: -50px">Wind Speed</p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<br/>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-8">
+						<div id="map" class="weather-map-placement rounded-4"></div>
+					</div>
+				</div>
+
+				<br/><br/><br/>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="inputGroup">
+							<input type="date" required="required" autocomplete="off"/>
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="inputGroup">
+							<input type="number" min="1" max="10" required="required" autocomplete="off"/>
+							<label for="guests" name="guest">
+								<span class="fas fa-regular fa-user"></span>
+								Add
+							  guests</label>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="inputGroup">
+							<button type="button" class="btn btn-success p-3 m-1">
+								Book now!
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-1"></div>
+		</div>
+
+		<div
+			class="row">
+			<!-- /* footer */ -->
+			<footer class="footer p-3">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-5">
+							<h4>
+								About us
+								<div class="underline"></div>
+							</h4>
+							<p>
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+								                  Expedita nihil ipsam rerum tenetur magnam necessitatibus autem
+								                  non corrupti. Odio aut commodi vero corrupti dignissimos eius
+								                  laboriosam non vel beatae nisi.
+							</p>
+							<div class="row">
+								<div class="col-md-12">
+									<h4>
+										Contact us
+										<div class="underline"></div>
+									</h4>
+									<div class="row social-icon">
+										<div class="col-md-1">
+											<a href="https://www.facebook.com">
+												<i class="fab fa-brands fa-facebook fa-xl"></i>
+											</a>
+										</div>
+										<div class="col-md-1">
+											<a href="https://www.instagram.com">
+												<i class="fab fa-brands fa-instagram fa-xl"></i>
+											</a>
+										</div>
+										<div class="col-md-1">
+											<a href="https://www.whatsapp.com">
+												<i class="fa-brands fa-whatsapp fa-xl"></i>
+											</a>
+										</div>
+										<div class="col-md-1">
+											<a href="https://www.twitter.com">
+												<i class="fa-brands fa-twitter fa-xl"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<span class="right">
+								<i class="far fa-sharp fa-regular fa-copyright"></i>
+								2023
+								                  Glamping. All rights reserved.</span>
+						</div>
+						<div class="col-md-3">
+							<ul class="list">
+								<h4 class="mb-2">Useful links</h4>
+								<li class="my-3">
+									<a href="">Events</a>
+								</li>
+								<li class="my-3">
+									<a href="">why us</a>
+								</li>
+								<li class="my-3">
+									<a href="">About us</a>
+								</li>
+								<li class="my-3">
+									<a href="">See more</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-4">
+							<h4 class="mb-3">Newsletter</h4>
+							<form action="farahtoulugi@hotmail.fr">
+								<i class="far fa-regular fa-envelope"></i>
+								<input type="email" placeholder="Enter your email address" required/>
+								<button type="submit">
+									<i class="far fa-regular fa-paper-plane"></i>
+								</button>
+							</form>
+							<h4>Office</h4>
+							<p class="p-0 m-0">Insat</p>
+							<p class="p-0 m-0">Centre Urbain Nord , Tunis</p>
+							<p class="p-0 m-1">
+								<i class="far fa-regular fa-at me-2"></i>
+								Glamping.Support@gmail.com
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
 
 {% endblock %}

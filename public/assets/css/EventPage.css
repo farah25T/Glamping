@@ -1,3 +1,14 @@
+@font-face {
+  font-family: Play;
+  src: url(../fonts/Play/Play-Bold.ttf);
+  src: url(../fonts/Play/Play-Regular.ttf);
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url(../fonts/Poppins/Poppins-Regular.ttf);
+}
+
 body {
   font-family: Poppins;
   background-color: rgb(243, 242, 239);
@@ -310,112 +321,140 @@ footer {
 }
 
 /* header styles */
-
-.head-block {
+.header {
   position: fixed;
-  width: 100vw;
-  height: 10vh;
-  background: #e0e0e0;
-  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-  /* background-color: inherit; */
   top: 0;
-  right: 0;
   left: 0;
-  z-index: 9999;
-}
-.bouton {
-  border-radius: 0.25rem;
-  text-transform: uppercase;
-  font-style: normal;
-  font-weight: 400;
-  padding-left: 25px;
-  padding-right: 25px;
-  color: #fff;
-  -webkit-clip-path: polygon(
-    0 0,
-    0 0,
-    100% 0,
-    100% 0,
-    100% calc(100% - 15px),
-    calc(100% - 15px) 100%,
-    15px 100%,
-    0 100%
-  );
-  clip-path: polygon(
-    0 0,
-    0 0,
-    100% 0,
-    100% 0,
-    100% calc(100% - 15px),
-    calc(100% - 15px) 100%,
-    15px 100%,
-    0 100%
-  );
-  height: 40px;
-  font-size: 0.7rem;
-  line-height: 14px;
-  letter-spacing: 1.2px;
-  transition: 0.2s 0.1s;
-  background-image: linear-gradient(90deg, #1c3a13, #4d6347);
-  border: 0 solid;
-  overflow: hidden;
-}
-
-.bouton:hover {
-  cursor: pointer;
-  transition: all 0.3s ease-in;
-  padding-right: 30px;
-  padding-left: 30px;
-}
-
-.bouton:active {
-  background-color: #1c3a13;
-}
-.cta {
-  border: none;
-  background: none;
-  position: relative;
-}
-
-.hover-underline-animation {
-  position: relative;
-  color: black;
-  padding-bottom: 20px;
-  font-family: "Play", sans-serif;
-}
-
-.hover-underline-animation:after {
-  content: "";
-  position: absolute;
-  font-family: "Play", sans-serif;
   width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #000000;
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+  padding: 20px 10%;
+  background: rgb(243, 242, 239);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
 }
-
-.cta:hover .hover-underline-animation:after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-  font-family: "Play", sans-serif;
-}
-
-.row {
-  padding: 1%;
-}
-
 .logo {
-  padding-left: 30px;
-  font-family: "Poppins", sans-serif;
+  font-size: 35px;
   color: #e14807;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  animation: slideRight 1s ease forwards;
+  opacity: 0;
+}
+.navbar .btn {
+  margin-left: 35px;
+  background-color: #326423;
+}
+.navbar a {
+  font-size: 18px;
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
   font-weight: 400;
+  margin-left: 35px;
+  animation: slideTop 0.5s ease forwards;
+  opacity: 0;
+  animation-delay: calc(0.2s * var(--clr));
+}
+.header .navbar a.btn{
+  color: #fff;
+}
+.navbar a:hover,
+.navbar a.active {
+  color: #ef6e12;
+}
+/* animation */
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideTop {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideBottom {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes Zoom {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* Description */
+.titre {
+  font-family: "Poppins", sans-serif;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: #582707;
+  margin-top: 150px;
+}
+.descri {
+  font-family: "Play", sans-serif;
+  font-size: 30px;
+  color: #582707;
+}
+body {
+  background-color: rgb(243, 242, 239);
+}
+/* navbare */
+.navbare {
+ position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 920px;
+  height: 120px;
+  box-shadow: 20px 20px 60px rgb(124, 124, 124);
+  background-color:#fff ;
+ 
 }
 
-/* input style */
+.navbare .btn {
+  background-color: #326423;
+    line-height: 14px;
+  letter-spacing: 1.2px;
+}
+
+/* navbare input style */
 .inputGroup {
   font-family: "Segoe UI", sans-serif;
   margin: 1em 0 1em 0;
@@ -457,11 +496,3 @@ footer {
   border-color: #1c3a13;
 }
 
-.inputGroup button {
-  text-transform: uppercase;
-  font-weight: 400;
-  font-size: 0.8rem;
-  line-height: 14px;
-  letter-spacing: 1.2px;
-  font-style: normal;
-}
