@@ -34,7 +34,7 @@
   opacity: 0;
   animation-delay: calc(0.2s * var(--clr));
 }
-.header .navbar a.btn{
+.header .navbar a.btn {
   color: #fff;
 }
 .navbar a:hover,
@@ -114,20 +114,19 @@ body {
 }
 /* navbare */
 .navbare {
- position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 920px;
   height: 120px;
   box-shadow: 20px 20px 60px rgb(124, 124, 124);
-  background-color:#fff ;
- 
+  background-color: #fff;
 }
 
 .navbare .btn {
   background-color: #326423;
-    line-height: 14px;
+  line-height: 14px;
   letter-spacing: 1.2px;
 }
 
@@ -179,7 +178,7 @@ body {
   height: 600px;
   max-height: 600px;
 }
-.carousel .carousel-item{
+.carousel .carousel-item {
   height: 600px;
 }
 .carousel h5 {
@@ -194,12 +193,10 @@ body {
   backdrop-filter: blur(2px);
 }
 
-
-
 footer {
   width: 100%;
   height: auto;
-  background: linear-gradient(30deg, #f3f2ef, #FFF3E2);
+  background: linear-gradient(30deg, #f3f2ef, #fff3e2);
   margin-top: 30px;
   bottom: 0;
   font-size: 20px;
@@ -219,9 +216,8 @@ footer {
 .footer a {
   text-decoration: none;
   color: #212529;
-  font-family: 'Ubuntu Condensed', sans-serif;
+  font-family: "Ubuntu Condensed", sans-serif;
   font-size: large;
-
 }
 .footer form {
   display: flex;
@@ -245,12 +241,12 @@ footer {
   background: transparent;
   cursor: pointer;
 }
-.footer p{
+.footer p {
   font-family: "Poppins", sans-serif;
   font-size: small;
 }
 
-.footer .social-icon a:hover i{
+.footer .social-icon a:hover i {
   transform: scale(1.2);
 }
 
@@ -277,7 +273,6 @@ footer {
 
 .flip-card-front,
 .flip-card-back {
-  box-shadow: 0 8px 14px 0 ;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -287,8 +282,18 @@ footer {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-
-
+.flip-card-front img,
+.flip-card-back {
+  border-radius: 15px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
 
 .flip-card-back {
   color: white;
@@ -314,8 +319,7 @@ footer {
 .Clamping p {
   text-align: center;
   font-size: 30px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", "Arial",
-  "sans-serif";
+  font-family: "Franklin Gothic Medium", "Arial Narrow", "Arial", "sans-serif";
   padding: 30px;
 }
 

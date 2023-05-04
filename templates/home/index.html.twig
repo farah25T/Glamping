@@ -4,7 +4,7 @@
 {% endblock %}
 {% block stylesheets %}
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"/>
-	<link rel="stylesheet" href="/assets/css/home.css"/>
+<link rel="stylesheet" href="{{ asset('assets/css/Home.css') }}">
 
 	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
@@ -15,7 +15,7 @@
  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
      crossorigin=""></script>
-<script src="/assets/js/homepage/map.js"> </script>
+<script src="{{ asset('assets/js/homepage/map.js') }}"> </script>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 {% endblock %}
@@ -108,7 +108,7 @@
 			<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
 				<div class="carousel-inner rounded-5">
 					<div class="carousel-item active" data-bs-interval="10000">
-						<img src="/assets/images/login.jpg" class="d-block w-100" alt="new events"/>
+						<img src="{{ asset('assets/images/login.jpg') }}" class="d-block w-100" alt="new events"/>
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Discover our newest events</h5>
 							<p>
@@ -119,7 +119,7 @@
 					</div>
 
 					<div class="carousel-item" data-bs-interval="10000">
-						<img src="/assets/images/tables.jpg" class="d-block w-100" alt="new events"/>
+						<img src="{{ asset('assets/images/tables.jpg') }}" class="d-block w-100" alt="new events"/>
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Hurry up !!</h5>
 							<p>
@@ -130,7 +130,7 @@
 					</div>
 
 					<div class="carousel-item" data-bs-interval="10000">
-						<img src="assets/images/camp.jpg" class="d-block w-100" alt="new events"/>
+						<img src={{ asset('assets/images/camp.jpg') }} class="d-block w-100" alt="new events"/>
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Discover our most liked events</h5>
 							<p>
@@ -158,7 +158,7 @@
                                 <img
                                         style="border-radius: 15px ;
 "
-                                        src="assets/images/Card_Home_Page/10.png" style="box-shadow: none;" alt="10"
+                                        src="{{ asset('assets/images/Card_Home_Page/10.png') }}" style="box-shadow: none;" alt="10"
                                 />
                               
                             </div>
@@ -167,7 +167,7 @@
                                         class="alert alert-light"
                                         role="alert"
                                         style="
-                      background-color: rgb(225, 217, 196);
+                      background-color: #f6a266;
 
                       font-family: 'Play', sans-serif;
                     "
@@ -186,8 +186,8 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <img
-                                        style="border-radius: 15px"
-                                       src="assets/images/Card_Home_Page/11.png"
+                                        
+                                        src="{{ asset('assets/images/Card_Home_Page/11.png') }}" 
                                         alt="11"
                                 />
                                
@@ -198,7 +198,7 @@
                                         role="alert"
                                         style="
                       font-family: 'Play', sans-serif;
-                      background-color: rgb(225, 217, 196, 0.7);
+                      background-color: #f6a266;
                     "
                                 >
                                     <div class="style_ecriture">
@@ -216,7 +216,7 @@
                             <div class="flip-card-front">
                                 <img
                                         
-                                        src="assets/images/Card_Home_Page/9.png"
+                                         src="{{ asset('assets/images/Card_Home_Page/9.png') }}" 
                                         alt="9"
                                 />
                                
@@ -227,7 +227,7 @@
                                         class="alert alert-light"
                                         role="alert"
                                         style="
-                      background-color: rgb(225, 217, 196);
+                      background-color: #f6a266;
 
                       font-family: 'Play', sans-serif;
                     "
@@ -270,7 +270,7 @@
         <div class="row">
             <div class="col">
                 <div class="card-catalogue">
-                 <img class="img-catalogue" src="assets/images/Card_Home_Page/20.png" alt="20" />
+                 <img class="img-catalogue"  src="{{ asset('assets/images/Card_Home_Page/20.png') }}" alt="20" />
                     <div
                             class="card-description"
                             style="background-color: rgb(175, 195, 90)"
@@ -287,7 +287,7 @@
             </div>
             <div class="col">
                 <div class="card-catalogue">
-                    <img class="img-catalogue" src="assets/images/Card_Home_Page/21.png" alt="21" />
+                    <img class="img-catalogue"  src="{{ asset('assets/images/Card_Home_Page/21.png') }}"  alt="21" />
                     <div
                             class="card-description"
                             style="background-color: rgb(23, 128, 125)"
