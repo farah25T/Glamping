@@ -13,9 +13,6 @@ class AppFixtures extends Fixture
         
         $event = new Event();
 
-        $event.set
-        
-
-        $manager->flush();
+       
     }
 }
