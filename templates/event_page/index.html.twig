@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Event Page
+{% block title %}
+{{ event.name }}
 {% endblock %}
 
 {% block javascripts %}
@@ -75,11 +76,11 @@
 				</div>
 
 				<div class="row">
-					<h1 class="eventname">Camping Pré Fixe</h1>
+					<h1 class="eventname"> {{ event.name }} </h1>
 				</div>
 
 				<div class="row">
-					<p>100% · 23 reviews · France, Occitanie</p>
+					<p>100% · 23 reviews · {{ event.country}}, {{event.city}}</p>
 				</div>
 
 				<div class="row">
