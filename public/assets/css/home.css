@@ -193,64 +193,8 @@ body {
   backdrop-filter: blur(2px);
 }
 
-footer {
-  width: 100%;
-  height: auto;
-  background: linear-gradient(30deg, #f3f2ef, #fff3e2);
-  margin-top: 30px;
-  bottom: 0;
-  font-size: 20px;
-  padding: 10px;
-  font-family: "Poppins", sans-serif;
-}
-.footer i {
-  size: 30px;
-}
-
-.footer .list-group {
-  background-color: inherit;
-}
-.footer ul li {
-  list-style: none;
-}
-.footer a {
-  text-decoration: none;
-  color: #212529;
-  font-family: "Ubuntu Condensed", sans-serif;
-  font-size: large;
-}
-.footer form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #000000;
-  margin-bottom: 30px;
-  width: 80%;
-}
-.footer form input {
-  width: 100%;
-  background: transparent;
-  color: #000000;
-  border: 0;
-  outline: none;
-  padding: 10px;
-}
-.footer form button {
-  outline: none;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-.footer p {
-  font-family: "Poppins", sans-serif;
-  font-size: small;
-}
-
-.footer .social-icon a:hover i {
-  transform: scale(1.2);
-}
-
 .flip-card {
+  
   margin-top: 10%;
   background-color: transparent;
   width: 100%;

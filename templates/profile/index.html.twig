@@ -4,11 +4,11 @@
 	{{user.name}}
 {% endblock %}
 {% block stylesheets %}
-	<link rel="stylesheet" href="/assets/css/profile.css"/>
+	<link rel="stylesheet" href="{{asset('assets/css/profile.css')}}"/>
 {% endblock %}
 {% block javascripts %}
 	<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-	<script src="/assets/js/profile.js"></script>
+	<script src="{{asset('assets/js/profile.js')}}"></script>
 
 {% endblock %}
 
@@ -30,7 +30,7 @@
 				log out
 			</a>
 			<a href="#" style="--clr: 4">
-				{{user.name}}
+				{{ user.name }}
 
 			</a>
 		</nav>
@@ -63,7 +63,7 @@
 					<i class="fa-brands fa-twitter fa-xl"></i>
 				</a>
 			</div>
-			<button class="btn">Your Events</button>
+			<button class="btn"><a  style="color:inherit; text-decoration:none;"href="{{path('app_event_user')}}" style="text-decoration: none">Your Events</a></button>
 			<button class="btn">Settings
 			</button>
 		</div>
