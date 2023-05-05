@@ -4,10 +4,19 @@
 {% endblock %}
 {% block stylesheets %}
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"/>
-	<link rel="stylesheet" href="/assets/css/home.css"/>
+<link rel="stylesheet" href="{{ asset('assets/css/Home.css') }}">
+
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
 
 {% endblock %}
 {% block javascripts %}
+ <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+<script src="{{ asset('assets/js/homepage/map.js') }}"> </script>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 {% endblock %}
 
@@ -99,7 +108,7 @@
 			<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
 				<div class="carousel-inner rounded-5">
 					<div class="carousel-item active" data-bs-interval="10000">
-						<img src="/assets/images/login.jpg" class="d-block w-100" alt="new events"/>
+						<img src="{{ asset('assets/images/login.jpg') }}" class="d-block w-100" alt="new events"/>
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Discover our newest events</h5>
 							<p>
@@ -110,7 +119,7 @@
 					</div>
 
 					<div class="carousel-item" data-bs-interval="10000">
-						<img src="/assets/images/tables.jpg" class="d-block w-100" alt="new events"/>
+						<img src="{{ asset('assets/images/tables.jpg') }}" class="d-block w-100" alt="new events"/>
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Hurry up !!</h5>
 							<p>
@@ -121,7 +130,7 @@
 					</div>
 
 					<div class="carousel-item" data-bs-interval="10000">
-						<img src="assets/images/camp.jpg" class="d-block w-100" alt="new events"/>
+						<img src={{ asset('assets/images/camp.jpg') }} class="d-block w-100" alt="new events"/>
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Discover our most liked events</h5>
 							<p>
@@ -135,4 +144,364 @@
 		</div>
 	</div>
 
-</div>{% endblock %}
+
+
+
+ <div class="container-fluid Clamping">
+        <p>Clamping Is the Best way to find your Next Destination</p>
+        <div>
+            <div class="d-flex">
+                <div class="p-2 flex-fill m-4 taille">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img
+                                        style="border-radius: 15px ;
+"
+                                        src="{{ asset('assets/images/Card_Home_Page/10.png') }}" style="box-shadow: none;" alt="10"
+                                />
+                              
+                            </div>
+                            <div class="flip-card-back">
+                                 <div
+                                        class="alert alert-light"
+                                        role="alert"
+                                        style="
+                      background-color: #f6a266;
+
+                      font-family: 'Play', sans-serif;
+                    "
+                                >
+                                    <div class="style_ecriture">
+                                      <h2>  Why should I go Dessert camping ?</h2>
+                                      <h6> observe and learn about wildlife behavior and habitat</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 flex-fill m-4 taille">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img
+                                        
+                                        src="{{ asset('assets/images/Card_Home_Page/11.png') }}" 
+                                        alt="11"
+                                />
+                               
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                        class="alert alert-light"
+                                        role="alert"
+                                        style="
+                      font-family: 'Play', sans-serif;
+                      background-color: #f6a266;
+                    "
+                                >
+                                    <div class="style_ecriture">
+                                        <h2>Why should I go Wild camping ?</h2>
+                                        <h6>you can witness beautiful sunrises and sunsets</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 flex-fill m-4 taille">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img
+                                        
+                                         src="{{ asset('assets/images/Card_Home_Page/9.png') }}" 
+                                        alt="9"
+                                />
+                               
+                            </div>
+                            <div class="flip-card-back">
+                               
+								 <div
+                                        class="alert alert-light"
+                                        role="alert"
+                                        style="
+                      background-color: #f6a266;
+
+                      font-family: 'Play', sans-serif;
+                    "
+                                >
+                                    <div class="style_ecriture">
+                                     <h3>   Why should I go Beach camping ?</h3>
+                                       <h6> wake up to stunning ocean views </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Map  -->
+
+    <div class="container-sm" >
+         <div id="map" class="img-map" style="width : 1200px ;height:600px ; z-index:0;"></div>
+        <div class="map-card descri" style="font-size: 15px">
+            Get ready for the 2024 total solar eclipse. Find a spot to camp along
+            the path of totality.
+            <br />
+            <button type="button" class="button_card">Find a campsite</button>
+        </div>
+    </div>
+
+    <br /><br />
+    <br /><br /><br /><br />
+
+    <!--top 3 events in popularity  -->
+
+    <div class="container text-center">
+        <div class="descri" style="text-align: left">
+            Discover top 3 events in popularity
+        </div>
+        <br />
+        <div class="row">
+            <div class="col">
+                <div class="card-catalogue">
+                 <img class="img-catalogue"  src="{{ asset('assets/images/Card_Home_Page/20.png') }}" alt="20" />
+                    <div
+                            class="card-description"
+                            style="background-color: rgb(175, 195, 90)"
+                    >
+                        BEST OF 2023 Explore America's best Hipcamps to visit in 2023.
+                        <button
+                                class="button_card"
+                                style="width: 50%; margin-left: 40%; margin-top: 2%"
+                        >
+                            Visit now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card-catalogue">
+                    <img class="img-catalogue"  src="{{ asset('assets/images/Card_Home_Page/21.png') }}"  alt="21" />
+                    <div
+                            class="card-description"
+                            style="background-color: rgb(23, 128, 125)"
+                    >
+                        BEST OF 2023 Explore America's best Hipcamps to visit in 2023.
+                        <button
+                                class="button_card"
+                                style="
+                  width: 50%;
+                  height: 60%;
+                  margin-left: 40%;
+                  margin-top: 2%;
+                "
+                        >
+                            Visit now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card-catalogue">
+                    <img class="img-catalogue" src="assets/images/Card_Home_Page/16.png"alt="16" />
+                    <div class="card-description">
+                        BEST OF 2023 Explore America's best Hipcamps to visit in 2023.
+                        <button
+                                class="button_card"
+                                style="width: 50%; margin-left: 40%; margin-top: 2%"
+                        >
+                            Visit now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--   near to  you-->
+
+    <div class="container text-center">
+        <div class="descri" style="text-align: left">
+            Discover top spots near you
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="margin-top: 0px; position: relative">
+                            <img
+                                    style="margin-top: 20px"
+                                    class="img-near"
+                                    src="assets/images/Card_Home_Page/25.png"
+                                    alt="25"
+                            />
+                            <button
+                                    type="button"
+                                    class="bouton_near descri"
+                                    style="background-color: rgb(23, 128, 125)"
+                            >
+                                Available next weekend
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div style="margin-top: 0px; position: relative">
+                            <img
+                                    style="margin-top: 20px"
+                                    class="img-near"
+                                    src="assets/images/Card_Home_Page/24.png"
+                                    alt="24"
+                            />
+                            <button
+                                    type="button"
+                                    class="bouton_near descri"
+                                    style="background-color: rgb(175, 195, 90)"
+                            >
+                                Available this weekend
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="margin-top: 0px; position: relative">
+                            <img
+                                    style="margin-top: 20px"
+                                    class="img-near descri"
+                                   src="assets/images/Card_Home_Page/23.png"
+                                    alt="23"
+                            />
+                            <button
+                                    type="button"
+                                    class="bouton_near"
+                                    style="background-color: rgb(175, 195, 90)"
+                            >
+                                Available tonight
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style="margin-top: 0px; position: relative">
+                            <img
+                                    style="margin-top: 20px"
+                                    class="img-near"
+                                    src="assets/images/Card_Home_Page/22.png"
+                                    alt="25"
+                            />
+                            <button
+                                    type="button"
+                                    class="bouton_near descri"
+                                    style="background-color: rgb(23, 128, 125)"
+                            >
+                                Find a campsite
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- /* footer */ -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5">
+                    <h4>
+                        About us
+                        <div class="underline"></div>
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita
+                        nihil ipsam rerum tenetur magnam necessitatibus autem non
+                        corrupti. Odio aut commodi vero corrupti dignissimos eius
+                        laboriosam non vel beatae nisi.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>
+                                Contact us
+                                <div class="underline"></div>
+                            </h4>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <a href="https://www.facebook.com"
+                                    ><i class="fab fa-brands fa-facebook fa-xl"></i
+                                        ></a>
+                                </div>
+                                <div class="col-md-1">
+                                    <a href="https://www.instagram.com"
+                                    ><i class="fab fa-brands fa-instagram fa-xl"></i
+                                        ></a>
+                                </div>
+                                <div class="col-md-1">
+                                    <a href="https://www.whatsapp.com">
+                                        <i class="fa-brands fa-whatsapp fa-xl"></i
+                                        ></a>
+                                </div>
+                                <div class="col-md-1">
+                                    <a href="https://www.twitter.com">
+                                        <i class="fa-brands fa-twitter fa-xl"></i
+                                        ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="right"
+                    ><i class="far fa-sharp fa-regular fa-copyright"></i> 2023
+              Glamping. All rights reserved.</span
+                    >
+                </div>
+                <div class="col-md-3">
+                    <ul class="list">
+                        <h4 class="mb-2">Useful links</h4>
+                        <li class="my-3"><a href="">Events</a></li>
+                        <li class="my-3"><a href="">why us</a></li>
+                        <li class="my-3"><a href="">About us</a></li>
+                        <li class="my-3"><a href="">See more</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="mb-3">Newsletter</h4>
+                    <form action="farahtoulugi@hotmail.fr">
+                        <i class="far fa-regular fa-envelope"></i>
+
+                        <input
+                                type="email"
+                                placeholder="Enter your email address"
+                                required
+                        />
+                        <button type="submit">
+                            <i class="far fa-regular fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <h4>Office</h4>
+                    <p class="p-0 m-0">Insat</p>
+                    <p class="p-0 m-0">Centre Urbain Nord , Tunis</p>
+                    <p class="p-0 m-1">
+                        <i class="far fa-regular fa-at me-2"> </i>
+                        Glamping.Support@gmail.com
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+   
+
+
+
+
+
+{% endblock %}
