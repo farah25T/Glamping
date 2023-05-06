@@ -27,10 +27,8 @@ class AuthenticationController extends AbstractController
             if (isset($userIsFound)) {
                 if ($userIsFound->getPassword() == $password) {
                     $session->set('id', $userIsFound->getId());
-                    /*Ici j'ai ajouter un test car s'il trouve la variable my_event_page c'est que
-                    l'user a voulu entrer dans la page my event sans qu'il s'est authifier */
-                    if( $request->query->get('my_event_page'))
-                    return $this->redirectToRoute('app_event_user');
+                    if( $url=$request->query->get('url'))
+                    return $this->redirect($url);
                     else
                      return $this->redirectToRoute('app_home');
                 } else {

@@ -25,10 +25,11 @@
 
 			{% else %}
 
-				<a href="{{ path('app_authentication_signup') }}" style="--clr: 4">
+				<a href="{{ path('app_authentication_signup') }}?url={{ app.request.uri }}" style="--clr: 4">
 					Sign Up
 				</a>
-				<a class="btn btn-success " href="{{ path('app_authentication') }}">Sign In</a>
+<a class="btn btn-success " href="{{ path('app_authentication') }}?url={{ app.request.uri }}">Sign In</a>
+
 
 			{% endif %}
 
