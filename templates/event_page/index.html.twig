@@ -6,8 +6,7 @@
 
 {% block javascripts %}
 	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-	<script src="{{ asset('assets/js/EventPagejs/weatherscript.js') }}"></script>
-	<script src="{{ asset('assets/js/EventPagejs/mapscript.js') }}"></script>
+	<script src="{{ asset('assets/js/EventPagejs/weathermapscript.js') }}"></script>
 	<script src="{{ asset('assets/js/EventPagejs/likescript.js') }}"></script>
 {% endblock %}
 
@@ -82,9 +81,9 @@
 				</div>
 
 				<div class="row">
-					<p>100% · 23 reviews ·
+					<h4>
 						{{ event.country}},
-						{{event.city}}</p>
+						{{event.city}}</h4>
 				</div>
 
 				<div class="row">

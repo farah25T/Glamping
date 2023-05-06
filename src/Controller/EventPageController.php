@@ -22,12 +22,13 @@ class EventPageController extends AbstractController
 
 
     #[Route('/event/{id}', methods:['GET'], name: 'app_event_page')]
-    public function show($id): Response
+    public function show($id,Request $request): Response
     {
-        $user = $this->getUser();
+        $session = $request->getSession();
+        $user = null;
+        $userid = $session->get('id');
 
         $repository = $this->em->getRepository('App\Entity\Event');
-
         $event = $repository->find($id);
         
         if (!$event) {
@@ -36,53 +37,68 @@ class EventPageController extends AbstractController
             ]);
         }
 
+
         return $this->render('event_page/index.html.twig', [
             'event' => $event,
             'user' => $user
         ]);
+  
     }
 
-   
-// #[Route('/like', methods:['POST'], name: 'like_action')]
-// public function likeAction(Request $request, RouterInterface $router): JsonResponse
+
+// #[Route('/event/{id}/like', methods:['POST'], name: 'like_action')]
+// public function likeAction($id): JsonResponse
 // {
 
-//     $repository = $this->em->getRepository('App\Entity\Event');
-//     $event_id = $request->request->get('event_id');
-//     $event = $repository->find($event_id);
+
+//     $eventrepository = $this->em->getRepository('App\Entity\Event');
+//     $event = $eventrepository->find($id);
+//     $user = $this->getUser();
+    
 
 
 //     if (!$event) {
 //         throw $this->createNotFoundException('Event not found');
 //     }
 
-//     $user = $this->getUser();
-//     if (!$user) {
-//         // Redirect the user to the login page
-//         $loginUrl = $router->generate('app_login');
-//         return new JsonResponse(['error' => 'User not logged in', 'login_url' => $loginUrl], 401);
+//     $userrepository = $this->em->getRepository('App\Entity\User');
+//     $user = $userrepository->find();
+
+    
+
+//     $users = $event->getUsers();
+
+//     $isLiked = false;
+// foreach ($users as $u) {
+//     if ($u === $user) {
+//         $isLiked = true;
+//         $user = $u;
+//         break;
 //     }
+// }
 
-//     $likes = $event->getLikes();
-//     foreach ($likes as $like) {
-//         if ($like->getUser() === $user) {
-//             $entityManager->remove($like);
-//             $entityManager->flush();
+// if ($isLiked) {
 
-//             $likeCount = count($likes) - 1;
-//             $isLiked = false;
-//             return new JsonResponse(['like_count' => $likeCount, 'is_liked' => $isLiked]);
-//         }
-//     }
+//      // Unlike the event
+//      $event->removeUser($user);
+//      $this->em->flush();
+ 
+//      $likeCount = count($likes) - 1;
+//      $isLiked = false;
 
-//     $like = new Like();
-//     $like->setEvent($event);
+// } else {
+
+//     // Like the event
+//     $like = new event_user;
 //     $like->setUser($user);
+//     $like->setEvent($event);
+
 //     $entityManager->persist($like);
 //     $entityManager->flush();
 
 //     $likeCount = count($likes) + 1;
 //     $isLiked = true;
+// }
 //     return new JsonResponse(['like_count' => $likeCount, 'is_liked' => $isLiked]);
 // }
 
