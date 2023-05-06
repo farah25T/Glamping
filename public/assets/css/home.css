@@ -310,7 +310,10 @@ body {
 .img-map {
   margin-top: -5%;
   margin-left: 5%;
-  width: 90%;
+  width: 1200px;
+  height: 600px;
+  z-index: 0;
+
   border-radius: 10px;
 }
 .map-card {
