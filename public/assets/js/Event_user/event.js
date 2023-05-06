@@ -36,7 +36,7 @@ booked_bouton.addEventListener('click', (event) => {
 });
 
 var type = new Typed(".textlin", {
-    strings: ["Check  !", "Book  !", "Like  !"],
+    strings: ["Check  ", "Book  ", "Like  "],
     typeSpeed: 100,
     backSpeed: 100,
     backDelay: 1000,

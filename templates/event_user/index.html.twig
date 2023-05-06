@@ -20,8 +20,7 @@
             crossorigin="anonymous"
     ></script>
 
-{% endblock %} {% block body %} {% include 'header.html.twig' with {'user':
-    user} %}
+{% endblock %} {% block body %} {% include 'header.html.twig' with {'user':user} %}
 
     <div class="container-fluid" style="margin-top: 10%">
         <div class="row"  style="margin-left: 5% ; text-align: center">
@@ -43,13 +42,13 @@
                         <div class="row align-items-start">
                             <div class="col">
                                 <button type="button" class="bouton" id="liked_bouton">
-                                    event
+                                  Liked  event
                                     <i class="fa-solid fa-heart fa-sm" style="color: #e10e0e"></i>
                                 </button>
                             </div>
                             <div class="col">
                                 <button type="button" class="bouton" id="saved_bouton">
-                                    event <i class="fas fa-save" style="color: #f2eb07"></i>
+                                  Saved  event <i class="fas fa-save" style="color: #f2eb07"></i>
                                 </button>
                             </div>
                             <div class="col">
@@ -89,7 +88,7 @@
                     </div>
 
                 <!--********************** -->
-                <!-- Ici si le user click sur le bouton saved event ses evennement saved seront affiches -->
+                <!-- Ici si le user click sur le bouton saved ou liked ou booked event ses evennement saved seront affiches -->
 
                 <div class="row" id="liked" hidden>
                     <div class="col-md-12">
@@ -102,7 +101,7 @@
                                         <p class="text-title">Card title</p>
                                         <p class="text-body">Here are the details of the card</p>
                                     </div>
-                                    <button class="card-button">Book now</button>
+                                    <button class="card-button" >Book now</button>
                                 </div>
 
                             </div>

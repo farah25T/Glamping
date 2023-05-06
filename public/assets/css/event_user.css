@@ -50,21 +50,23 @@
 
 .bouton
 {
-
-   margin-top:5%;
+  font-size: 15px;
+   margin-top:10%;
     width: 70%;
     height: 70% ;
     background-color: rgb(243, 242, 239);
     border-radius: 10px;
     color:#ef6e12 ;
     border: 3px rgba(174, 197, 76, 0.4) solid;
+    height: 60px;
+
 }
 
 .choice
 {
     background-color: rgb(56, 105, 41,0.7);
     width: 80% ;
-    height: 10% ;
+    height: 20% ;
     margin-left:5% ;
     border-radius: 25px;
     display: none;
