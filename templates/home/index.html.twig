@@ -17,41 +17,9 @@
 {% endblock %}
 
 {% block body %}
-	<!-- header -->
-	<header class="header">
-		<a href="#" class="logo">Glamping</a>
-		<nav class="navbar">
-			<a href="#" style="--clr: 1" class="active">
-				Home
-			</a>
-			<a href="#" style="--clr: 2">
-				About Us
-			</a>
-			<a href="#" style="--clr: 3">
-				Catalogue
-			</a>
-			{% if (user) %}
+	{# header #}
+    {% include 'header.html.twig' with {'user': user} %}
 
-				<a href="{{ path('app_authentication_logout') }}" style="--clr: 3">
-                         log out
-				</a>
-                <a href="{{ path('app_profile')}}" style="--clr: 4">
-
-					{{user.name}}
-				</a>
-
-
-			{% else %}
-
-				<a href="{{ path('app_authentication_signup') }}" style="--clr: 4">
-					Sign Up
-				</a>
-				<a class="btn btn-success " href="{{ path('app_authentication') }}">Sign In</a>
-
-			{% endif %}
-
-		</nav>
-	</header>
 	<!-- description de notre site -->
 	<div class="container description">
 		<div class="title flex-column ">
