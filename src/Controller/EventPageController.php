@@ -15,7 +15,6 @@ use Symfony\Component\Routing\RouterInterface;
 class EventPageController extends AbstractController
 {
 
-
     private $em;
 	public function __construct(EntityManagerInterface $em
     ){
