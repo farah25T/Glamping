@@ -17,24 +17,42 @@ class EventPageController extends AbstractController
 
 
     private $em;
-	public function __construct(EntityManagerInterface $em){
+	public function __construct(EntityManagerInterface $em
+    ){
+
         $this->em = $em;
     }
 
-
     #[Route('/event/{id}', methods:['GET'], name: 'app_event_page')]
-    public function show($id,Request $request, EntityManagerInterface $entityManager): Response
+    public function show($id,Request $request): Response
     {
+        
+        
         $session = $request->getSession();
         $user = null;
-        $idUser = $session->get('id');
-        if (isset($idUser)) {
-            $user = $entityManager->getRepository(User::class)->find($idUser);
+        $userid = $session->get('id');
+
+        if (isset($userid)) {
+            $user = $this->em->getRepository(User::class)->find($userid);
         }
 
-        $repository = $this->em->getRepository('App\Entity\Event');
 
+        $repository = $this->em->getRepository('App\Entity\Event');
         $event = $repository->find($id);
+        $toggled = false;
+        $users = $event->getUsers();
+
+        if ($user){
+            foreach ($users as $u) {
+                if ($u->getId() === $user->getId())
+                { 
+                    $toggled = true;
+                    break;
+                }
+            }
+        }
+       
+        $likes = count($users);
         
         if (!$event) {
             return $this->redirectToRoute('app_home', [
@@ -42,59 +60,92 @@ class EventPageController extends AbstractController
             ]);
         }
 
+    else{
         return $this->render('event_page/index.html.twig', [
             'event' => $event,
-            'user' => $user
+            'user' => $user,
+            'likes' => $likes,
+            'toggled' => $toggled
         ]);
+      }
+  
     }
 
-   
-// #[Route('/like', methods:['POST'], name: 'like_action')]
-// public function likeAction(Request $request, RouterInterface $router): JsonResponse
-// {
-
-//     $repository = $this->em->getRepository('App\Entity\Event');
-//     $event_id = $request->request->get('event_id');
-//     $event = $repository->find($event_id);
 
 
-//     if (!$event) {
-//         throw $this->createNotFoundException('Event not found');
-//     }
+    #[Route('/event/{id}/like', methods:['POST'], name: 'like_action')]
+    public function likeAction($id,Request $request)
+    {
+        $session = $request->getSession();
+        $user = null;
+        $userid = $session->get('id');
+        if (isset($userid)) {
+            $user = $this->em->getRepository(User::class)->find($userid);
+        }
+        else{
+            return $this->redirectToRoute('app_authentication');
+        }
+        $repository = $this->em->getRepository('App\Entity\Event');
+        $event = $repository->find($id);
+        if (!$event) {
+            return $this->redirectToRoute('app_home', [
+                'user' => $user
+            ]);
+        }
 
-//     $user = $this->getUser();
-//     if (!$user) {
-//         // Redirect the user to the login page
-//         $loginUrl = $router->generate('app_login');
-//         return new JsonResponse(['error' => 'User not logged in', 'login_url' => $loginUrl], 401);
-//     }
+        $likes = $event->getUsers();
+        $isLiked = false;
+        foreach ($likes as $like) {
+         if ($like->getId() === $user->getId()) {
+          $isLiked = true;
+          break;
+         }
+         }
 
-//     $likes = $event->getLikes();
-//     foreach ($likes as $like) {
-//         if ($like->getUser() === $user) {
-//             $entityManager->remove($like);
-//             $entityManager->flush();
+    if (!$isLiked) {
+      // Like the event
+    $event->addUser($user);
+    $this->em->flush();
+    }
+    return new JsonResponse(["message"=>"ok"]);
 
-//             $likeCount = count($likes) - 1;
-//             $isLiked = false;
-//             return new JsonResponse(['like_count' => $likeCount, 'is_liked' => $isLiked]);
-//         }
-//     }
-
-//     $like = new Like();
-//     $like->setEvent($event);
-//     $like->setUser($user);
-//     $entityManager->persist($like);
-//     $entityManager->flush();
-
-//     $likeCount = count($likes) + 1;
-//     $isLiked = true;
-//     return new JsonResponse(['like_count' => $likeCount, 'is_liked' => $isLiked]);
-// }
+    }
 
 
+    #[Route('/event/{id}/dislike', methods:['POST'], name: 'dislike_action')]
+    public function dislikeAction($id,Request $request)
+    {
+        $session = $request->getSession();
+        $user = null;
+        $userid = $session->get('id');
+        if (isset($userid)) {
+            $user = $this->em->getRepository(User::class)->find($userid);
+        }
+        else{
+            return $this->redirectToRoute('app_authentication');
+        }
+        $repository = $this->em->getRepository('App\Entity\Event');
+        $event = $repository->find($id);
+        if (!$event) {
+            return $this->redirectToRoute('app_home', [
+                'user' => $user
+            ]);
+        }
 
+        $likes = $event->getUsers();
+        $isLiked = false;
+        foreach ($likes as $like) {
+         if ($like->getId() === $user->getId()) {
+          $isLiked = true;
+          break;
+    }
+}
 
-
-
+    if ($isLiked) {
+      // Like the event
+    $event->removeUser($user);
+    $this->em->flush();
+}
+    return new JsonResponse(["message"=>"ok"]);
+    }
 }
