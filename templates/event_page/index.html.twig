@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-{{ event.name }}
+	{{ event.name }}
 {% endblock %}
 
 {% block javascripts %}
@@ -38,17 +38,17 @@
 					<a href="#" style="--clr: 2">
 						About Us
 					</a>
-					<a href="{{ path('app_event_page') }}" style="--clr: 3">
+					<a href="#" style="--clr: 3">
 						Catalogue
 					</a>
-					{% if (app.user) %}
+					{% if (user) %}
 
 						<a href="{{ path('app_authentication_logout') }}" style="--clr: 3">
 							log out
 						</a>
 						<a href="{{ path('app_profile')}}" style="--clr: 4">
 
-							{{app.user.username}}
+							{{user.name}}
 						</a>
 
 
@@ -76,11 +76,15 @@
 				</div>
 
 				<div class="row">
-					<h1 class="eventname"> {{ event.name }} </h1>
+					<h1 class="eventname">
+						{{ event.name }}
+					</h1>
 				</div>
 
 				<div class="row">
-					<p>100% · 23 reviews · {{ event.country}}, {{event.city}}</p>
+					<p>100% · 23 reviews ·
+						{{ event.country}},
+						{{event.city}}</p>
 				</div>
 
 				<div class="row">
@@ -133,7 +137,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<br/>
-						<img class="rounded-5 card" src="/assets/images/EventPageImages/01.jpg" style="max-width: 100%; max-height: 100%"/>
+						<img class="rounded-5 card" src="{{ asset('assets/images/EventPageImages/Events/' ~ event.id ~ '/1.jpg') }}" style="max-width: 100%; max-height: 100%"/>
 					</div>
 
 					<div class="col-md-6">
@@ -141,10 +145,10 @@
 
 						<div class="row">
 							<div class="col-md-6">
-								<img class="rounded-4 card" src="/assets/images/EventPageImages/02.jpg" style="max-width: 100%; max-height: 100%"/>
+								<img class="rounded-4 card" src="{{ asset('assets/images/EventPageImages/Events/' ~ event.id ~ '/2.jpg') }}" style="max-width: 100%; max-height: 100%"/>
 							</div>
 							<div class="col-md-6">
-								<img class="rounded-4 card" src="/assets/images/EventPageImages/05.jpg" style="max-width: 100%; max-height: 100%"/>
+								<img class="rounded-4 card" src="{{ asset('assets/images/EventPageImages/Events/' ~ event.id ~ '/3.jpg') }}" style="max-width: 100%; max-height: 100%"/>
 							</div>
 						</div>
 
@@ -152,10 +156,10 @@
 
 						<div class="row">
 							<div class="col-md-6">
-								<img class="rounded-4 card" src="/assets/images/EventPageImages/03.jpg" style="max-width: 100%; max-height: 100%"/>
+								<img class="rounded-4 card" src="{{ asset('assets/images/EventPageImages/Events/' ~ event.id ~ '/4.jpg') }}" style="max-width: 100%; max-height: 100%"/>
 							</div>
 							<div class="col-md-6">
-								<img class="rounded-4 card" src="/assets/images/EventPageImages/04.jpg" style="max-width: 100%; max-height: 100%"/>
+								<img class="rounded-4 card" src="{{ asset('assets/images/EventPageImages/Events/' ~ event.id ~ '/5.jpg') }}" style="max-width: 100%; max-height: 100%"/>
 							</div>
 						</div>
 					</div>
@@ -165,18 +169,12 @@
 					<div class="col-md-7">
 						<br/><br/><br/><br/>
 						<div class="row">
-							<p style="text-align: justify">
-								Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-								                  Facere ducimus porro vero! Porro est, quas magni rem error
-								                  velit nisi totam perspiciatis ipsam temporibus illum neque,
-								                  libero unde natus hic amet ratione aperiam laboriosam officiis
-								                  nulla soluta. Perferendis, consequuntur accusantium culpa,
-								                  tempora, tenetur ullam ratione possimus nam odit veritatis
-								                  facilis odio voluptate dignissimos. Odit architecto delectus
-								                  fugit vitae in accusamus? Qui id culpa voluptatibus porro
-								                  suscipit, velit quisquam unde aliquam accusantium ab in soluta
-								                  laboriosam odit commodi quam doloribus fuga dicta.
+							<p style="text-align: justify">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo eveniet alias ea optio fugit nesciunt repudiandae praesentium ullam sequi dolorem. Asperiores quisquam perferendis autem amet commodi debitis nemo! Animi quidem, culpa sit ipsum consequuntur libero exercitationem odio ea fuga repudiandae voluptates officiis fugiat cupiditate rem temporibus quos, eligendi suscipit tenetur excepturi dolores autem accusamus eius! Asperiores iusto quod assumenda accusamus optio consequatur velit sunt reiciendis repellendus officia! Doloribus, vitae voluptatem!
+
 							</p>
+							<br>
+
+
 						</div>
 					</div>
 
@@ -184,37 +182,55 @@
 						<br/><br/><br/><br/>
 						<div class="row">
 							<div class="col-md-6">
-								<p style="text-align: justify" class="ps-3">Activities:</p>
+								<i class="fa-solid fa-calendar fa-lg">
+									dates:</i>
+								<br/>
 								<ul>
+									<br>
 									<li class="event-info">
-										<i class="fa-solid fa-person-swimming fa-2xl"></i>
-										Swimming
+										<p>Start date:
+											{{ event.getDateDebut().format('Y-m-d') }}
+										</p>
+
 									</li>
-									<br/>
 									<li class="event-info">
-										<i class="fa-solid fa-person-hiking fa-2xl"></i>
-										Hiking
+										<p>End date:
+											{{ event.getDateFin().format('Y-m-d') }}
+										</p>
 									</li>
-									<br/>
-									<li class="event-info">
-										<i class="fa-solid fa-person-biking fa-2xl"></i>
-										Biking
-									</li>
+
+
 								</ul>
+
+
 							</div>
 							<div class="col-md-6">
-								<p style="text-align: justify" class="ps-3">
-									Natural Features:
-								</p>
+								<i class="fa-solid fa-hand-holding-dollar fa-lg">
+									Price:
+									{{ event.price }}
+									TND
+								</i>
+								<br>
+								<br>
+								<i class="fa-solid fa-leaf fa-lg">
+									Natural features:
+								</i>
 								<ul>
-									<li class="event-info">
-										<i class="fa-solid fa-tree fa-2xl"></i>
-										Forest
-									</li>
+
 									<br/>
 									<li class="event-info">
-										<i class="fa-solid fa-mountain fa-2xl"></i>
-										Mountains
+
+										{% if event.place == 'desert' %}
+											<i class="fa-solid fa-island-tropical fa-2xl"></i>
+											Desert
+										{% elseif event.place == 'beach' %}
+											<i class="fa-solid fa-umbrella-beach fa-2xl"></i>
+											Beach
+										{% else %}
+											<i class="fa-solid fa-tree fa-2xl"></i>
+											Forest
+										{% endif %}
+
 									</li>
 								</ul>
 							</div>
@@ -254,7 +270,7 @@
 										<div class="row">
 											<div class="col">
 												<img style="transform: scale(0.7)" src="
-												                          /assets/images/EventPageImages/weather-app-img/images/wind.png"/>
+																																				                          /assets/images/EventPageImages/weather-app-img/images/wind.png"/>
 											</div>
 
 											<div class="col">
@@ -275,20 +291,19 @@
 					</div>
 				</div>
 
+
+				<br/><br/><br/>
 				<br/><br/><br/>
 				<div class="row">
-					<div class="col-md-5">
-						<div class="inputGroup">
-							<input type="date" required="required" autocomplete="off"/>
-						</div>
-					</div>
-					<div class="col-md-5">
+					<div class="col-md-3"></div>
+
+					<div class="col-md-4">
 						<div class="inputGroup">
 							<input type="number" min="1" max="10" required="required" autocomplete="off"/>
 							<label for="guests" name="guest">
 								<span class="fas fa-regular fa-user"></span>
 								Add
-							  guests</label>
+																							  guests</label>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -304,6 +319,9 @@
 			<div class="col-md-1"></div>
 		</div>
 
+
+		<br/><br/><br/>
+		<br/><br/><br/>
 		<div
 			class="row">
 			<!-- /* footer */ -->
@@ -317,9 +335,9 @@
 							</h4>
 							<p>
 								Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-								                  Expedita nihil ipsam rerum tenetur magnam necessitatibus autem
-								                  non corrupti. Odio aut commodi vero corrupti dignissimos eius
-								                  laboriosam non vel beatae nisi.
+																								                  Expedita nihil ipsam rerum tenetur magnam necessitatibus autem
+																								                  non corrupti. Odio aut commodi vero corrupti dignissimos eius
+																								                  laboriosam non vel beatae nisi.
 							</p>
 							<div class="row">
 								<div class="col-md-12">
@@ -354,7 +372,7 @@
 							<span class="right">
 								<i class="far fa-sharp fa-regular fa-copyright"></i>
 								2023
-								                  Glamping. All rights reserved.</span>
+																								                  Glamping. All rights reserved.</span>
 						</div>
 						<div class="col-md-3">
 							<ul class="list">
