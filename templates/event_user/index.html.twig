@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}
     {{app.user}}
 {% endblock %}
@@ -19,6 +18,10 @@
 {% endblock %}
 
 {% block body %}
+
+
+
+    {% include 'header.html.twig' with {'user': user} %}
 
     <div class="container-sm  p-4"  style="margin-top: 10%">
         <div class="row">
