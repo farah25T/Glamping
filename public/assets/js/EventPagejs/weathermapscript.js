@@ -22,7 +22,7 @@ const logJSONData = async (lat,lon) => {
 
     const { text, icon } = jsonData["current"]["condition"];
 
-    // console.log(jsonData);
+     console.log(jsonData);
     // console.log(name, region, country);
     // console.log(temp_c, wind_kph, humidity, cloud);
 

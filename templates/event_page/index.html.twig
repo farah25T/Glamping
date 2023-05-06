@@ -7,6 +7,7 @@
 	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 	<script src="{{ asset('assets/js/EventPagejs/weathermapscript.js') }}"></script>
 	<script src="{{ asset('assets/js/EventPagejs/likescript.js') }}"></script>
+	
 {% endblock %}
 
 
@@ -26,6 +27,7 @@
 	<div class="container-fluid">
 
 
+<br/><br/><br/><br/>
 		<div class="row">
 			<div class="col-md-1"></div>
 
@@ -51,9 +53,17 @@
 					<div class="col-md-2">
 						<div class="like-button">
 							<div class="heart-bg">
-								<div class="heart-icon"></div>
-							</div>
-							<div class="likes-amount">275</div>
+							{% if toggled %}
+								<div class="heart-icon liked"></div>
+
+							{% else %}
+															<div class="heart-icon"></div>
+
+							{% endif %}
+														</div>
+
+													<div class="likes-amount" id="likes"> {{ likes }} </div>
+
 						</div>
 					</div>
 
@@ -142,7 +152,7 @@
 						<br/><br/><br/><br/>
 						<div class="row">
 							<div class="col-md-6">
-								<i class="fa-solid fa-calendar fa-lg">
+								<i class="fa-solid fa-calendar">
 									dates:</i>
 								<br/>
 								<ul>
@@ -165,14 +175,14 @@
 
 							</div>
 							<div class="col-md-6">
-								<i class="fa-solid fa-hand-holding-dollar fa-lg">
+								<i class="fa-solid fa-hand-holding-dollar">
 									Price:
 									{{ event.price }}
 									TND
 								</i>
 								<br>
 								<br>
-								<i class="fa-solid fa-leaf fa-lg">
+								<i class="fa-solid fa-leaf">
 									Natural features:
 								</i>
 								<ul>
