@@ -1,13 +1,15 @@
 	<header class="header">
 		<a href="{{ path('app_home') }}" class="logo">Glamping</a>
 		<nav class="navbar">
-			<a href="#" style="--clr: 1" class="active">
+<a href="{{ path('app_home') }}" style="--clr: 1" class="active">
+
 				Home
 			</a>
-			<a href="#" style="--clr: 2">
+<a href="/#aboutus" style="--clr: 2">
+
 				About Us
 			</a>
-			<a href="#" style="--clr: 3">
+			<a href="/#catalogue" style="--clr: 3">
 				Catalogue
 			</a>
 			{% if (user) %}
@@ -23,10 +25,11 @@
 
 			{% else %}
 
-				<a href="{{ path('app_authentication_signup') }}" style="--clr: 4">
+				<a href="{{ path('app_authentication_signup') }}?url={{ app.request.uri }}" style="--clr: 4">
 					Sign Up
 				</a>
-				<a class="btn btn-success " href="{{ path('app_authentication') }}">Sign In</a>
+<a class="btn btn-success " href="{{ path('app_authentication') }}?url={{ app.request.uri }}">Sign In</a>
+
 
 			{% endif %}
 

@@ -8,42 +8,6 @@ body {
   background: rgb(243, 242, 239);
   color: #000;
 }
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 20px 10%;
-  background: transparent;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 100;
-}
-.logo {
-  font-size: 26px;
-  color: #e14807;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
-  animation: slideRight 1s ease forwards;
-  opacity: 0;
-}
-.navbar a {
-  font-size: 18px;
-  display: inline-block;
-  color: #000;
-  text-decoration: none;
-  font-weight: 500;
-  margin-left: 35px;
-  animation: slideTop 0.5s ease forwards;
-  opacity: 0;
-  animation-delay: calc(0.2s * var(--clr));
-}
-.navbar a:hover,
-.navbar a.active {
-  color: #ef6e12;
-}
 .home {
   position: relative;
   width: 100%;
