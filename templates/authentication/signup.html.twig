@@ -1,5 +1,4 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'base.html.twig'  %}
 {% block title %}
 	{{title}}
 {% endblock %}
@@ -13,11 +12,12 @@
 
 
 {% block body %}
+
 	<div class="background"></div>
 	<div class="container">
 		<div class="item">
-			<h2 class="logo">Glamping
-			</i>
+				<a href="{{ path('app_home') }}" ><h2 class="logo">Glamping
+		</h2></a>
 		</h2>
 		<div class="text-item">
 			<h2>Welcome !

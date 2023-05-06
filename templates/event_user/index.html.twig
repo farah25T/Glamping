@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}
     {{app.user}}
 {% endblock %}
@@ -20,27 +19,10 @@
 
 {% block body %}
 
-<header class="header">
-    <a href="{{ path('app_home')}}" class="logo">Glamping</a>
 
-    <nav class="navbar">
-        <a href="{{ path('app_home')}}" style="--clr: 1" class="active">
 
-            Home
-        </a>
-        <a href="#" style="--clr: 2">
-            about us
-        </a>
-        <a href="{{ path('app_authentication_logout')}}" style="--clr: 3">
+    {% include 'header.html.twig' with {'user': user} %}
 
-            log out
-        </a>
-        <a href="#" style="--clr: 4">
-        {{ user_name }}
-        </a>
-
-    </nav>
-</header>
     <div class="container-sm  p-4"  style="margin-top: 10%">
         <div class="row">
             <div class="col-md-12">
@@ -63,7 +45,7 @@
                                 lorem
                                 laudantium assumenda vitae, cum exercitationem aspernatur eveniet
                                 corporis magnam eligendi
-<br><br>
+                                <br><br>
                                 <div class="row" style="margin-top: 4%">
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -79,7 +61,7 @@
 
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="row">
                     <div class="col-md-6">
