@@ -249,9 +249,6 @@ body {
   height: 250px;
 }
 
-* {
-  color: #1c3a13;
-}
 
 .Clamping {
   margin: 10%;
@@ -313,7 +310,10 @@ body {
 .img-map {
   margin-top: -5%;
   margin-left: 5%;
-  width: 90%;
+  width: 1200px;
+  height: 600px;
+  z-index: 0;
+
   border-radius: 10px;
 }
 .map-card {
