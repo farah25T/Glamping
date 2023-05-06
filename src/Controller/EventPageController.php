@@ -23,13 +23,13 @@ class EventPageController extends AbstractController
 
 
     #[Route('/event/{id}', methods:['GET'], name: 'app_event_page')]
-    public function show(Request $request, EntityManagerInterface $entityManager): Response
+    public function show($id,Request $request, EntityManagerInterface $entityManager): Response
     {
         $session = $request->getSession();
         $user = null;
-        $id = $session->get('id');
-        if (isset($id)) {
-            $user = $entityManager->getRepository(User::class)->find($id);
+        $idUser = $session->get('id');
+        if (isset($idUser)) {
+            $user = $entityManager->getRepository(User::class)->find($idUser);
         }
 
         $repository = $this->em->getRepository('App\Entity\Event');
