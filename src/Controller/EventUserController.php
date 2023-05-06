@@ -24,7 +24,7 @@ class EventUserController extends AbstractController
 
         $userIsFound = $entityManager->getRepository(User::class)->findOneById($session->get('id'));
         return $this->render('event_user/index.html.twig', [
-            'user'=>$userIsFound,'j'=>$userIsFound
+            'user'=>$userIsFound
         ]);
     }
 }

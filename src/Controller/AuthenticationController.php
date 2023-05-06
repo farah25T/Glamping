@@ -71,7 +71,7 @@ class AuthenticationController extends AbstractController
                 $session->set('id', $user->getId());
                 return $this->redirectToRoute('app_home');
             } else {
-                $this->addFlash('erreur', 'this email is already used !');
+                $this->addFlash('erreur', 'this email is already used ! ');
             }
         }
 
