@@ -22,8 +22,6 @@ class AuthenticationController extends AbstractController
         }
         $email = $request->request->get('email');
         $password = $request->request->get('password');
-      
-
         if (isset($email) && isset($password) ) {
             $userIsFound = $entityManager->getRepository(User::class)->findOneByEmail($email);
             if (isset($userIsFound)) {
@@ -38,9 +36,10 @@ class AuthenticationController extends AbstractController
             }
         }
         return $this->render('authentication/index.html.twig', [
-            'title' => 'sign in'
+            'title' => 'sign in','user'=>null
         ]);
     }
+
     #[Route('/authentication/signup', name: 'app_authentication_signup')]
     public function signup(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -72,7 +71,7 @@ class AuthenticationController extends AbstractController
         }
 
         return $this->render('authentication/signup.html.twig', [
-            'title' => 'sign up'
+            'title' => 'sign up','user'=>null
         ]);
     }
     #[Route('/authentication/logout', name: 'app_authentication_logout')]

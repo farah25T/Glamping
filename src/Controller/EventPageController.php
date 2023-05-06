@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,9 +23,14 @@ class EventPageController extends AbstractController
 
 
     #[Route('/event/{id}', methods:['GET'], name: 'app_event_page')]
-    public function show($id): Response
+    public function show(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = $this->getUser();
+        $session = $request->getSession();
+        $user = null;
+        $id = $session->get('id');
+        if (isset($id)) {
+            $user = $entityManager->getRepository(User::class)->find($id);
+        }
 
         $repository = $this->em->getRepository('App\Entity\Event');
 

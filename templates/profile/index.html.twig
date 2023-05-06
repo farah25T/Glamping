@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}
 	{{user.name}}
 {% endblock %}
@@ -12,29 +11,9 @@
 
 {% endblock %}
 
+{% block header %}{% endblock %}
 {% block body %}
-
-	<header class="header">
-		<a href="{{ path('app_home')}}" class="logo">Glamping</a>
-
-		<nav class="navbar">
-			<a href="{{ path('app_home')}}" style="--clr: 1" class="active">
-
-				Home
-			</a>
-			<a href="#" style="--clr: 2">
-				about us
-			</a>
-			<a href="{{ path('app_authentication_logout') }}" style="--clr: 3">
-
-				log out
-			</a>
-			<a href="#" style="--clr: 4">
-				{{ user.name }}
-
-			</a>
-		</nav>
-	</header>
+{% include 'header.html.twig' with {'user': user} %}
 	<section class="home">
 		<div class="home-detail">
 			<h3>Welcome Back !</h3>
