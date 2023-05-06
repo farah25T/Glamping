@@ -14,13 +14,17 @@ use Symfony\Component\Security\Core\Security;
 class EventUserController extends AbstractController
 {
 
-    #[Route('/eventpage/user', name: 'app_event_user')]
+    #[Route('/event_user', name: 'app_event_user')]
     public function index(EntityManagerInterface $entityManager , SessionInterface $session): Response
     {
+        if($session->get('id')==0)
+        {
+            return ($this->redirectToRoute('app_authentication', ['my_event_page'=>true]));
+        }
 
         $userIsFound = $entityManager->getRepository(User::class)->findOneById($session->get('id'));
         return $this->render('event_user/index.html.twig', [
-            'user'=>$userIsFound,
+            'user'=>$userIsFound
         ]);
     }
 }

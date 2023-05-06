@@ -27,7 +27,12 @@ class AuthenticationController extends AbstractController
             if (isset($userIsFound)) {
                 if ($userIsFound->getPassword() == $password) {
                     $session->set('id', $userIsFound->getId());
-                    return $this->redirectToRoute('app_home');
+                    /*Ici j'ai ajouter un test car s'il trouve la variable my_event_page c'est que
+                    l'user a voulu entrer dans la page my event sans qu'il s'est authifier */
+                    if( $request->query->get('my_event_page'))
+                    return $this->redirectToRoute('app_event_user');
+                    else
+                     return $this->redirectToRoute('app_home');
                 } else {
                     $this->addFlash('erreur', 'your email or password is incorrect ! ');
                 }
@@ -66,7 +71,7 @@ class AuthenticationController extends AbstractController
                 $session->set('id', $user->getId());
                 return $this->redirectToRoute('app_home');
             } else {
-                $this->addFlash('erreur', 'this email is already used !');
+                $this->addFlash('erreur', 'this email is already used ! ');
             }
         }
 
