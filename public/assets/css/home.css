@@ -1,46 +1,20 @@
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 20px 10%;
-  background: rgb(243, 242, 239);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 100;
+html{
+  scroll-behavior: smooth;
 }
-.logo {
-  font-size: 35px;
-  color: #e14807;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  animation: slideRight 1s ease forwards;
+/* Hide the element by default */
+.hidden {
   opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
-.navbar .btn {
-  margin-left: 35px;
-  background-color: #326423;
+/* Reveal the element when the "revealed" class is added */
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  transition-delay: 0.1s;
 }
-.navbar a {
-  font-size: 18px;
-  display: inline-block;
-  color: #000;
-  text-decoration: none;
-  font-weight: 400;
-  margin-left: 35px;
-  animation: slideTop 0.5s ease forwards;
-  opacity: 0;
-  animation-delay: calc(0.2s * var(--clr));
-}
-.header .navbar a.btn {
-  color: #fff;
-}
-.navbar a:hover,
-.navbar a.active {
-  color: #ef6e12;
-}
+
 /* animation */
 @keyframes slideRight {
   0% {
