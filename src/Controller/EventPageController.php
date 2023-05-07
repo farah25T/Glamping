@@ -39,7 +39,6 @@ class EventPageController extends AbstractController
         $toggled = false;
 
         if ($event ){
-
             $users = $event->getUsers();
             if ($user){
                 foreach ($users as $u) {

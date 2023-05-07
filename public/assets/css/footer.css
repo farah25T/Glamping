@@ -60,7 +60,7 @@ footer {
 .footer .social-icon a:hover i{
     transform: scale(1.2);
 }
-.list{
+footer .list{
   margin-left: 10px;
  
 }
