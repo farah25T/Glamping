@@ -1,4 +1,4 @@
-.header {
+header.header {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@
   align-items: center;
   z-index: 100;
 }
-.logo {
+header > .logo {
   font-size: 35px;
   color: #e14807;
   font-weight: 600;
@@ -19,11 +19,11 @@
   animation: slideRight 1s ease forwards;
   opacity: 0;
 }
-.navbar .btn {
+header > .navbar .btn {
   margin-left: 35px;
   background-color: #326423;
 }
-.navbar a {
+header > .navbar a {
   font-size: 18px;
   display: inline-block;
   color: #000;
@@ -34,11 +34,11 @@
   opacity: 0;
   animation-delay: calc(0.2s * var(--clr));
 }
-.header .navbar a.btn {
+header.header .navbar a.btn {
   color: #fff;
 }
-.navbar a:hover,
-.navbar a.active {
+header > .navbar a:hover,
+header > .navbar a.active {
   color: #ef6e12;
 }
 /* animation */
