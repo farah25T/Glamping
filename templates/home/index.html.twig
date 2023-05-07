@@ -15,7 +15,14 @@
 <script src="{{ asset('assets/js/homepage/home.js') }}"></script>
 
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+    <script>
+
+        {% for i in event  %}
+        L.marker([{{ i.alt }}, {{ i.long }}]).addTo(map) .openPopup();
+        {% endfor %}
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -217,7 +224,7 @@
             Get ready for the 2024 total solar eclipse. Find a spot to camp along
             the path of totality.
             <br />
-            <button type="button" class="button_card">Find a campsite</button>
+            <button type="button" class="button_card"><a href="{{path('app_catalogue_page')}} "style="text-decoration: none ; color:inherit" >Find a campsite</a></button>
         </div>
     </div>
 
@@ -240,7 +247,7 @@
                             class="card-description"
                             style="background-color: rgb(175, 195, 90)"
                     >
-                        BEST OF 2023 Explore America's best Hipcamps to visit in 2023.
+                        BEST OF 2022 Explore Tunisia'sbest Hipcamps to visit in 2022.
                         <button
                                 class="button_card"
                                 style="width: 50%; margin-left: 40%; margin-top: 2%"
@@ -257,7 +264,7 @@
                             class="card-description"
                             style="background-color: rgb(23, 128, 125)"
                     >
-                        BEST OF 2023 Explore America's best Hipcamps to visit in 2023.
+                        BEST OF 2021 Explore Tunisia's best Hipcamps to visit in 2021.
                         <button
                                 class="button_card"
                                 style="
@@ -276,7 +283,7 @@
                 <div class="card-catalogue">
                     <img class="img-catalogue" src="assets/images/Card_Home_Page/16.png"alt="16" />
                     <div class="card-description">
-                        BEST OF 2023 Explore America's best Hipcamps to visit in 2023.
+                        BEST OF 2023 Explore Tunisia's best Hipcamps to visit in 2023.
                         <button
                                 class="button_card"
                                 style="width: 50%; margin-left: 40%; margin-top: 2%"
@@ -306,16 +313,19 @@
                             <img
                                     style="margin-top: 20px"
                                     class="img-near"
-                                    src="assets/images/Card_Home_Page/25.png"
+                                    src="{{ asset('assets/images/EventPageImages/Events/' ~ thisWeek ~ '/1.jpg') }}"
                                     alt="25"
                             />
+                            <a style="text-decoration: none ; color: inherit" href = {{path('app_event_page',{ 'id' : thisWeek })}}  >
+
                             <button
                                     type="button"
                                     class="bouton_near descri"
                                     style="background-color: rgb(23, 128, 125)"
                             >
-                                Available next weekend
+                                Available in this Week
                             </button>
+                            </a>
                         </div>
                     </div>
 
@@ -324,16 +334,18 @@
                             <img
                                     style="margin-top: 20px"
                                     class="img-near"
-                                    src="assets/images/Card_Home_Page/24.png"
+                                    src="{{ asset('assets/images/EventPageImages/Events/' ~ tonight ~ '/1.jpg') }}"
                                     alt="24"
                             />
+                            <a style="text-decoration: none ; color: inherit" href = {{path('app_event_page',{ 'id' : tonight })}}  >
                             <button
                                     type="button"
                                     class="bouton_near descri"
                                     style="background-color: rgb(175, 195, 90)"
+
                             >
-                                Available this weekend
-                            </button>
+                                Available tonight
+                            </button> </a>
                         </div>
                     </div>
                 </div>
@@ -343,16 +355,18 @@
                             <img
                                     style="margin-top: 20px"
                                     class="img-near descri"
-                                   src="assets/images/Card_Home_Page/23.png"
+                                    src="{{ asset('assets/images/EventPageImages/Events/' ~ NextWeek ~ '/1.jpg') }}"
                                     alt="23"
                             />
+                            <a style="text-decoration: none ; color: inherit" href = {{path('app_event_page',{ 'id' : NextWeek })}}  >
+
                             <button
                                     type="button"
                                     class="bouton_near"
                                     style="background-color: rgb(175, 195, 90)"
                             >
-                                Available tonight
-                            </button>
+                               Available next week
+                            </button></a>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -363,6 +377,8 @@
                                     src="assets/images/Card_Home_Page/22.png"
                                     alt="25"
                             />
+                            <a href="{{path('app_catalogue_page')}} "style="text-decoration: none ; color:inherit">
+
                             <button
                                     type="button"
                                     class="bouton_near descri"
@@ -370,6 +386,7 @@
                             >
                                 Find a campsite
                             </button>
+                            </a>
                         </div>
                     </div>
                 </div>

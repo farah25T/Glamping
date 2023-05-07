@@ -39,6 +39,46 @@ class EventRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function tonight (): ?Event
+  { $currentDate = new \DateTime();
+      $date = $currentDate->format('Y-m-d');
+      return $this->createQueryBuilder('e')
+          ->andWhere('e.date_debut = :date')
+          ->setParameter('date', $date)
+          ->setMaxResults(1)
+          ->getQuery()
+          ->getOneOrNullResult();
+   }
+    public function thisWeek (): ?Event
+    {
+        $currentDate = new \DateTime();
+        $date_inf = $currentDate->sub(new \DateInterval('P4D'))->format('Y-m-d');
+        $date_sup = $currentDate->add(new \DateInterval('P4D'))->format('Y-m-d');
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date_debut >= :date_inf')
+            ->andWhere('e.date_debut < :date_sup')
+            ->setParameter('date_inf', $date_inf)
+            ->setParameter('date_sup', $date_sup)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+    public function NextWeek (): ?Event
+    {
+        $currentDate = new \DateTime();
+        $date_inf = $currentDate->add(new \DateInterval('P7D'))->format('Y-m-d');
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date_debut >= :date_inf')
+            ->setParameter('date_inf', $date_inf)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+
+
+
 //    /**
 //     * @return Event[] Returns an array of Event objects
 //     */
