@@ -42,103 +42,47 @@
                         <div class="row align-items-start">
                             <div class="col">
                                 <button type="button" class="bouton" id="liked_bouton">
-                                  Liked  event
+                                    Liked  event
                                     <i class="fa-solid fa-heart fa-sm" style="color: #e10e0e"></i>
                                 </button>
                             </div>
                             <div class="col">
                                 <button type="button" class="bouton" id="saved_bouton">
-                                  Saved  event <i class="fas fa-save" style="color: #f2eb07"></i>
+                                    Saved  event <i class="fas fa-save" style="color: #f2eb07"></i>
                                 </button>
                             </div>
                             <div class="col">
                                 <button type="button" class="bouton" id="booked_bouton">
-                                    Booked event 
+                                    Booked event
                                     <i class="fa-solid fa-check" style="color: #209118"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
-                 </div>
-
-
-
-                <!-- Ici si le user click sur le bouton saved event ses evennement saved seront affiches -->
-                    <div class="row" id="saved" hidden>
-                        <div class="col-md-12">
-                            <div class="row row_ev">
-                                <div class="descri row">Event name</div>
-                                <div class="row">
-
-                                    <div class="card">
-                                        <div class="carad-details">
-                                            <p class="text-title">Card title</p>
-                                            <p class="text-body">Here are the details of the card</p>
-                                        </div>
-                                        <button class="card-button">Book now</button>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-
-                        </div>
-                    </div>
-
-                <!--********************** -->
-                <!-- Ici si le user click sur le bouton saved ou liked ou booked event ses evennement saved seront affiches -->
-
-                <div class="row" id="liked" hidden>
-                    <div class="col-md-12">
-                        <div class="row row_ev">
-                            <div class="descri row">Event name</div>
-                            <div class="row">
-
-                                <div class="card">
-                                    <div class="carad-details">
-                                        <p class="text-title">Card title</p>
-                                        <p class="text-body">Here are the details of the card</p>
-                                    </div>
-                                    <button class="card-button" >Book now</button>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-
-                    </div>
                 </div>
 
-                <!-- ************************ -->
 
-                <!-- Ici si le user click sur le bouton saved event ses evennement saved seront affiches -->
-                <div class="row" id="booked" hidden>
-                    <div class="col-md-12">
-                        <div class="row row_ev">
-                            <div class="descri row">Event name</div>
-                            <div class="row">
 
-                                <div class="card">
-                                    <div class="carad-details">
-                                        <p class="text-title">Card title</p>
-                                        <p class="text-body">Here are the details of the card</p>
-                                    </div>
-                                    <button class="card-button">Book now</button>
-                                </div>
+            <!-- Ici si le user click sur le bouton saved event ses evennement saved seront affiches -->
+            <div class="row" id="saved" hidden>
 
-                            </div>
-                        </div>
+            </div>
 
-                    </div>
-                    <div class="row">
+            <!--********************** -->
+            <!-- Ici si le user click sur le bouton  liked  event ses evennement saved seront affiches -->
 
-                    </div>
-                </div>
+            <div class="row" id="liked" hidden>
 
+
+            </div>
+
+            <!-- ************************ -->
+
+            <!-- Ici si le user click sur le booked saved event ses evennement saved seront affiches -->
+            <div class="row" id="booked" hidden>
+
+
+            </div>
 
                 <!--********************** -->
 
@@ -146,6 +90,29 @@
         </div>
     </div>
     </div>
+    </div>
+
+
+
+
+
+
+    <div class="col-md-12 " hidden id="hidden" style="margin-left: 10%" >
+        <div class="row row_ev "   >
+            <div class="descri row">Event name</div>
+            <div class="row">
+
+                <div class="card">
+                    <div class="carad-details">
+                        <p class="text-title">Card title</p>
+                        <p class="text-body">Here are the details of the card</p>
+                    </div>
+                    <button class="card-button">Book now</button>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 {% endblock %}
 
