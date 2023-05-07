@@ -1,0 +1,124 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(243, 242, 239);
+  scroll-behavior: smooth;
+  font-family: Poppins;
+}
+.container-fluid {
+  height: 100%;
+  width: 100%;
+}
+
+.row {
+  padding: 0%;
+}
+.navbare {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  padding: 0;
+  margin: 0;
+}
+
+.inputGroup {
+  font-family: "Segoe UI", sans-serif;
+  margin: 1em 0 1em 0;
+  width: 100%;
+  position: relative;
+  align-self: center;
+}
+
+.inputGroup input {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 2px solid rgb(200, 200, 200);
+  background-color: inherit;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  left: 0;
+  padding: 0.8em;
+  margin-left: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgb(100, 100, 100);
+  font-family: "Play";
+  font-weight: bold;
+}
+
+.inputGroup :is(input:focus, input:valid) ~ label {
+  transform: translateY(-50%) scale(0.9);
+  margin: 0em;
+  margin-left: 1.2em;
+  padding: 0.4em;
+  background-color: rgb(243, 242, 239);
+}
+
+.inputGroup :is(input:focus, input:valid) {
+  border-color: #1c3a13;
+}
+
+.inputGroup button {
+  text-transform: uppercase;
+  font-weight: 550;
+  font-size: 1rem;
+  line-height: 60%;
+  letter-spacing: 1px;
+  font-style: normal;
+  width: 100%;
+}
+#map {
+  height: 650px;
+  width: 100%;
+  z-index: 0;
+}
+.card {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* adjust the height as needed */
+  width: 100%; /* adjust the width as needed */
+  transition: all 0.2s;
+}
+.cardRow {
+  width: 100%;
+  min-height: 200px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+.pagin {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+.card:hover {
+  transform: scale(1.03);
+}
+
+.container svg {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 50px;
+  transition: all 0.3s;
+  fill: #666;
+}
+
+.container svg:hover {
+  transform: scale(1.1);
+}
+
+.container input:checked ~ svg {
+  fill: #e3474f;
+}
+.col-md-6 {
+  padding: 0.5%;
+}

@@ -1,6 +1,5 @@
-const logJSONData = async (lat,lon) => {
+const logJSONData = async (lat, lon) => {
   const apiKey = "afd601e5785c4a6c912155303232604";
-  
 
   const weathericon = document.getElementById("weather-icon");
   const cityelement = document.getElementById("city");
@@ -12,7 +11,7 @@ const logJSONData = async (lat,lon) => {
 
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}`
+      `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}`
     );
     const jsonData = await response.json();
 
@@ -21,10 +20,6 @@ const logJSONData = async (lat,lon) => {
     const { temp_c, wind_kph, humidity, cloud } = jsonData["current"];
 
     const { text, icon } = jsonData["current"]["condition"];
-
-     console.log(jsonData);
-    // console.log(name, region, country);
-    // console.log(temp_c, wind_kph, humidity, cloud);
 
     weathericon.src = icon;
     cityelement.innerText += " " + name;
@@ -40,53 +35,39 @@ const logJSONData = async (lat,lon) => {
   }
 };
 
-
-
 // Get the current URL path
 const currentPath = window.location.pathname;
 
 // Split the path into an array of endpoints
-const endpoints = currentPath.split('/');
+const endpoints = currentPath.split("/");
 
 // Get the last endpoint
 const lastEndpoint = endpoints[endpoints.length - 1];
 
-// Print the last endpoint to the console
-//console.log(lastEndpoint);
-
-
-fetch(`http://127.0.0.1:8000/api/${lastEndpoint}`)
-  .then(response => response.json())
-  .then(data => {
-   
-    console.log(data);
-
-    const  lat  = data["latitude"];
-    const  lon  = data["longitude"];
-
+fetch(`https://127.0.0.1:8000/api/${lastEndpoint}`)
+  .then((response) => response.json())
+  .then((data) => {
+    const lat = data["latitude"];
+    const lon = data["longitude"];
 
     const name = data["name"];
     const city = data["city"];
     const country = data["country"];
 
+    var map = L.map("map").setView([lat, lon], 13);
 
-    var map = L.map('map').setView([lat, lon], 13);
-
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
-    
-    L.marker([lat, lon]).addTo(map)
-        .bindPopup(name + ', ' + country + ', ' + city)
-        .openPopup();
 
+    L.marker([lat, lon])
+      .addTo(map)
+      .bindPopup(name + ", " + country + ", " + city)
+      .openPopup();
 
-
-    logJSONData(lat,lon)
-
+    logJSONData(lat, lon);
   })
-  .catch(error => {
-    console.error(error);
+  .catch((error) => {
+    console.log(error);
   });
-
-

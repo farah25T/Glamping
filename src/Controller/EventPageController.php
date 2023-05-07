@@ -15,7 +15,6 @@ use Symfony\Component\Routing\RouterInterface;
 class EventPageController extends AbstractController
 {
 
-
     private $em;
 	public function __construct(EntityManagerInterface $em
     ){
@@ -27,7 +26,6 @@ class EventPageController extends AbstractController
     public function show($id,Request $request): Response
     {
         
-        
         $session = $request->getSession();
         $user = null;
         $userid = $session->get('id');
@@ -36,38 +34,35 @@ class EventPageController extends AbstractController
             $user = $this->em->getRepository(User::class)->find($userid);
         }
 
-
         $repository = $this->em->getRepository('App\Entity\Event');
         $event = $repository->find($id);
         $toggled = false;
-        $users = $event->getUsers();
 
-        if ($user){
-            foreach ($users as $u) {
-                if ($u->getId() === $user->getId())
-                { 
-                    $toggled = true;
-                    break;
+        if ($event ){
+            $users = $event->getUsers();
+            if ($user){
+                foreach ($users as $u) {
+                    if ($u->getId() === $user->getId())
+                    { 
+                        $toggled = true;
+                        break;
+                    }
                 }
             }
+            $likes = count($users);
+            return $this->render('event_page/index.html.twig', [
+                'event' => $event,
+                'user' => $user,
+                'likes' => $likes,
+                'toggled' => $toggled
+            ]);
         }
-       
-        $likes = count($users);
         
         if (!$event) {
             return $this->redirectToRoute('app_home', [
                 'user' => $user
             ]);
         }
-
-    else{
-        return $this->render('event_page/index.html.twig', [
-            'event' => $event,
-            'user' => $user,
-            'likes' => $likes,
-            'toggled' => $toggled
-        ]);
-      }
   
     }
 
@@ -85,8 +80,10 @@ class EventPageController extends AbstractController
         else{
             return $this->redirectToRoute('app_authentication');
         }
+
         $repository = $this->em->getRepository('App\Entity\Event');
         $event = $repository->find($id);
+
         if (!$event) {
             return $this->redirectToRoute('app_home', [
                 'user' => $user
@@ -148,4 +145,7 @@ class EventPageController extends AbstractController
 }
     return new JsonResponse(["message"=>"ok"]);
     }
+
+
+
 }
