@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Settings{% endblock %}
+{% block stylesheets %} <link rel="stylesheet" href="/assets/css/settings.css" /> {% endblock %}
+{% block body %}
+
+{% include 'header.html.twig' with {'user': user} %}
+
+    <section class="main">
+      <h1 class="title">Your Informations</h1>
+      <form action="">
+        <div class="main-box">
+          <div class="input-box">
+            <span class="text">Full Name</span>
+            <input type="text" placeholder="Please enter your name" required />
+          </div>
+          <div class="input-box">
+            <span class="text">User Name</span>
+            <input type="text" placeholder="User Name" value="{{user.name}}" required />
+          </div>
+          <div class="input-box">
+            <span class="text">Email</span>
+            <input type="email" placeholder="Email" value="{{user.email}}" required />
+          </div>
+          <div class="input-box">
+            <span class="text">Phone Number </span>
+            <input
+              type="tel"
+              placeholder="Please enter your phone"
+              pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"
+              required
+            />
+          </div>
+          <div class="input-box">
+            <span class="text">Password</span>
+            <input type="text" placeholder="Please enter your pass" required />
+          </div>
+          <div class="input-box">
+            <span class="text">Confirm Password </span>
+            <input
+              type="password"
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
+        </div>
+        <div class="container">
+          <input type="radio" name="gender" id="circle-1" />
+          <input type="radio" name="gender" id="circle-2" />
+
+          <input type="radio" name="gender" id="circle-3" />
+
+          <span class="gender">Gender</span>
+          <div class="category">
+            <label for="circle-1">
+              <span class="circle one"></span>
+              <span class="male">Male</span>
+            </label>
+            <label for="circle-2">
+              <span class="circle two"></span>
+              <span class="female">Female</span>
+            </label>
+            <label for="circle-3">
+              <span class="circle three"></span>
+              <span class="other">Other</span>
+            </label>
+          </div>
+        </div>
+        <div class="btn">
+          <input type="submit" name="" id="" value="Update" />
+        </div>
+      </form>
+    </section>
+  
+{% endblock %}
