@@ -10,7 +10,7 @@ header.header {
   align-items: center;
   z-index: 100;
 }
-header > .logo {
+header .logo {
   font-size: 35px;
   color: #e14807;
   font-weight: 600;
@@ -19,11 +19,11 @@ header > .logo {
   animation: slideRight 1s ease forwards;
   opacity: 0;
 }
-header > .navbar .btn {
+header .navbar .btn {
   margin-left: 35px;
   background-color: #326423;
 }
-header > .navbar a {
+header .navbar a {
   font-size: 18px;
   display: inline-block;
   color: #000;
@@ -37,8 +37,8 @@ header > .navbar a {
 header.header .navbar a.btn {
   color: #fff;
 }
-header > .navbar a:hover,
-header > .navbar a.active {
+header .navbar a:hover,
+header .navbar a.active {
   color: #ef6e12;
 }
 /* animation */
