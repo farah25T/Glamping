@@ -182,7 +182,9 @@ img {
 .popup img {
   animation-delay: 0s;
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+   width: 300px;
+  height: 300px;
 }
  input[type="file"] {
     display: none;
