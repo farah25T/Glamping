@@ -29,6 +29,9 @@ body{
   max-width: 800px;
   padding:30px 40px;
   border-radius:1rem ;
+  animation: Zoom 1.5s ease forwards;
+  animation-delay: 1s;
+  opacity: 0;
 }
 .title{
   position: relative;
@@ -133,3 +136,13 @@ form .btn input:hover{
   background-color: #ef6e12;
 }
 
+@keyframes Zoom {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
