@@ -11,14 +11,14 @@ const event_id = ep[ep.length - 1];
 
 heartIcon.addEventListener("click", async () => {
   if (!heartIcon.classList.contains("liked")) {
-    fetch(`https://127.0.0.1:8000/event/${event_id}/like`, {
+    fetch(`http://127.0.0.1:8000/event/${event_id}/like`, {
       method: "POST",
       mode:"no-cors"
     })
       .then((response) => {
         if (response.redirected) {
           // handle redirection
-          window.location.replace("https://127.0.0.1:8000/authentication");
+          window.location.replace("http://127.0.0.1:8000/authentication");
         } 
         else{
           likes++;
@@ -27,13 +27,13 @@ heartIcon.addEventListener("click", async () => {
         }
       });  
   } else {
-    fetch(`https://127.0.0.1:8000/event/${event_id}/dislike`, {
+    fetch(`http://127.0.0.1:8000/event/${event_id}/dislike`, {
       method: "POST"
     })
       .then((response) => {
         if (response.redirected) {
           // handle redirection
-          window.location.replace("https://127.0.0.1:8000/authentication");
+          window.location.replace("http://127.0.0.1:8000/authentication");
         } 
         else{
           likes--;
