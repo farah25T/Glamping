@@ -23,7 +23,7 @@ class EventPageController extends AbstractController
     }
 
     #[Route('/event/{id}', methods:['GET'], name: 'app_event_page')]
-    public function show($id,Request $request): Response
+    public function show($id,Request $request)
     {
         
         $session = $request->getSession();
