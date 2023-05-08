@@ -1,0 +1,185 @@
+body{
+    background:#eee;
+}
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: 1rem;
+}
+
+.text-reset {
+    --bs-text-opacity: 1;
+    color: inherit!important;
+}
+
+.container{
+    margin-top: 100px;
+}
+
+
+/* footer styles */
+
+footer {
+    width: 100%;
+    height: auto;
+    background: linear-gradient(30deg, #f3f2ef, #fff3e2);
+    margin-top: 30px;
+    font-style: bold;
+    bottom: 0;
+    font-size: 20px;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+  }
+  .footer i {
+    size: 30px;
+  }
+  
+  .footer .list-group {
+    background-color: inherit;
+  }
+  .footer ul li {
+    list-style: none;
+  }
+  .footer a {
+    text-decoration: none;
+    color: #212529;
+    font-family: "Ubuntu Condensed", sans-serif;
+    font-size: large;
+  }
+  .footer form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000000;
+    margin-bottom: 30px;
+    width: 80%;
+  }
+  .footer form input {
+    width: 100%;
+    background: transparent;
+    color: #000000;
+    border: 0;
+    outline: none;
+    padding: 10px;
+  }
+  .footer form button {
+    outline: none;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .footer p {
+    font-family: "Poppins", sans-serif;
+    font-size: small;
+  }
+  
+  .footer .social-icon a:hover i {
+    transform: scale(1.2);
+  }
+  
+  /* header styles */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 10%;
+    background: rgb(243, 242, 239);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+  }
+  .logo {
+    font-size: 35px;
+    color: #e14807;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    animation: slideRight 1s ease forwards;
+    opacity: 0;
+  }
+  .navbar .btn {
+    margin-left: 35px;
+    background-color: #326423;
+  }
+  .navbar a {
+    font-size: 18px;
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+    font-weight: 400;
+    margin-left: 35px;
+    animation: slideTop 0.5s ease forwards;
+    opacity: 0;
+    animation-delay: calc(0.2s * var(--clr));
+  }
+  .header .navbar a.btn{
+    color: #fff;
+  }
+  .navbar a:hover,
+  .navbar a.active {
+    color: #ef6e12;
+  }
+  /* animation */
+  @keyframes slideRight {
+    0% {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slideLeft {
+    0% {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slideTop {
+    0% {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slideBottom {
+    0% {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes Zoom {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  

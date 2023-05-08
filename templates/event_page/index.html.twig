@@ -7,6 +7,8 @@
 	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 	<script src="{{ asset('assets/js/EventPagejs/weathermapscript.js') }}"></script>
 	<script src="{{ asset('assets/js/EventPagejs/likescript.js') }}"></script>
+	<script src="{{ asset('assets/js/EventPagejs/alertmessage.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
 
 {% endblock %}
 
@@ -265,6 +267,10 @@
 
 
 				<br/><br/><br/>
+				<div id="errorBox" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:none;">
+					<span id="errorMsg"></span>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
 				<div class="row">
 					
 
@@ -276,14 +282,17 @@
 								<p class="book-text-title">Are you ready to be a part of our wonderful adventure?</p>
 								<br/>
 								<div class="book-input-group">
-									<input required="" type="number" max="10" min="1" name="number" autocomplete="off" class="book-input">
-									<label class="book-user-label">Guest number</label>
+									<input required="" type="number" max="{{ event.getNbrGuestsMax() }}" min="1" name="number" autocomplete="off" class="book-input "  id="guests" data-max-guests="{{ event.getNbrGuestsMax() }}">
+									<label  class="book-user-label">Guest number</label>
 								</div>
 								<br/>
 							</div>
-							<button class="book-card-button">Book now</button>
+							{% if user %}
+								<a href="{{ path('booking_app', {'event': event.id}) }}" class="book-card-button" id="btn">Book now</a>
+							{% else %}
+								<a href="{{ path('app_authentication', {'event': event.id}) }}" class="book-card-button" id="btn">Book now</a>
+							{% endif %}
 						</div>
-
 					</div>
 
 
