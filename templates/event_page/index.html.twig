@@ -281,9 +281,12 @@
 								</div>
 								<br/>
 							</div>
-							<button class="book-card-button">Book now</button>
+							{% if user %}
+								<a href="{{ path('booking_app', {'event': event.id}) }}" class="book-card-button">Book now</a>
+							{% else %}
+								<a href="{{ path('app_authentication', {'event': event.id}) }}" class="book-card-button">Book now</a>
+							{% endif %}
 						</div>
-
 					</div>
 
 
