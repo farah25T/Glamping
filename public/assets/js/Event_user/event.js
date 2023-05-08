@@ -11,11 +11,14 @@ const saved_bouton = document.querySelector('#saved_bouton');
 const liked = document.querySelector('#liked');
 const liked_bouton = document.querySelector('#liked_bouton');
 const saved_card = document.querySelector('#hidden');
-
+const booked_card = document.querySelector('#bookedd');
+const liked_card = document.querySelector('.likedd');
 
 
 
 console.log(saved_card)
+
+console.log(booked_card)
 
 
 
@@ -30,9 +33,29 @@ saved_bouton.addEventListener('click', function() {
 
 
     if (!liked.hasAttribute('hidden'))
-        liked.toggleAttribute('hidden');
+    {
+        const temp_card = document.querySelectorAll('.liked')
+        p=0
+        while(temp_card[p])
+        {
+            temp_card[p].remove();
+            p++;
+        }
+        liked.hidden=true;
+
+    }
     if (!booked.hasAttribute('hidden'))
-        booked.toggleAttribute('hidden');
+    {
+        const temp_card = document.querySelectorAll('.booked')
+        p=0
+        while(temp_card[p])
+        {
+            temp_card[p].remove();
+            p++;
+        }
+        booked.hidden=true;
+
+    }
    if(saved.hasAttribute('hidden'))
    {saved.removeAttribute('hidden');
        fetch('/event_saved')
@@ -97,7 +120,7 @@ liked_bouton.addEventListener('click', function() {
     }
     if (!booked.hasAttribute('hidden'))
     {
-        const temp_card = document.querySelectorAll('.saved_card_eff')
+        const temp_card = document.querySelectorAll('.booked')
         p=0
         while(temp_card[p])
         {
@@ -110,20 +133,27 @@ liked_bouton.addEventListener('click', function() {
 
     if(liked.hasAttribute('hidden'))
     {liked.removeAttribute('hidden');
-        fetch('/event_saved')
+        fetch('/event_liked')
             .then(response => response.json())
             .then(response => {
-                p=0;
+                     p=0;
+
                 while( response[p])
                 {
-                    const card$p = saved_card.cloneNode(true);
+                    const card$p = liked_card.cloneNode(true);
+                    console.log(liked_card)
+                    console.log(card$p)
                     Event_name= card$p.querySelector('.descri')
 
                     Event_name.innerHTML =response[p].name
 
+                    Image_event = card$p.querySelector('.img');
+                    console.log(Image_event)
+                    Image_event.setAttribute('src', "assets/images/EventPageImages/Events/"+response[p].image+"/1.jpg");
+                    Price_event = card$p.querySelector('.price');
+                    Price_event.innerHTML="<br>Price Par Personne  =  "+response[p].price+"<br> Date Debut = "+response[p].date+"<br>Place = "+response[p].place;
 
-                    card$p.setAttribute('class','saved_card_eff' )
-                    console.log(card$p);
+                    card$p.setAttribute('class','liked' )
                     card$p.removeAttribute('hidden')
                     liked.appendChild(card$p);
                     p+=1;
@@ -139,7 +169,7 @@ liked_bouton.addEventListener('click', function() {
     }
     else
     {
-        const temp_card = document.querySelectorAll('.saved_card_eff')
+        const temp_card = document.querySelectorAll('.liked')
         p=0
         while(temp_card[p])
         {
@@ -166,7 +196,7 @@ booked_bouton.addEventListener('click', function() {
 
     if (!liked.hasAttribute('hidden'))
     {
-        const temp_card = document.querySelectorAll('.saved_card_eff')
+        const temp_card = document.querySelectorAll('.liked')
         p=0
         while(temp_card[p])
         {
@@ -197,13 +227,20 @@ booked_bouton.addEventListener('click', function() {
                 p=0;
                 while( response[p])
                 {
-                    const card$p = saved_card.cloneNode(true);
+                    const card$p = booked_card.cloneNode(true);
+
                     Event_name= card$p.querySelector('.descri')
 
                     Event_name.innerHTML =response[p].name
+                   Price_event = card$p.querySelector('.price');
+                   Price_event.innerHTML="Your Guests Number="+response[p].guests_Number+"<br>ToTal Price =  "+response[p].price*response[p].guests_Number+"<br> Date Debut = "+response[p].date;
 
 
-                    card$p.setAttribute('class','saved_card_eff' )
+
+                    Image_event = card$p.querySelector('.img');
+                    Image_event.setAttribute('src', "assets/images/EventPageImages/Events/"+response[p].image+"/1.jpg");
+
+                    card$p.setAttribute('class','booked' )
 
                     card$p.removeAttribute('hidden')
                     booked.appendChild(card$p);
@@ -220,7 +257,7 @@ booked_bouton.addEventListener('click', function() {
     }
     else
     {
-        const temp_card = document.querySelectorAll('.saved_card_eff')
+        const temp_card = document.querySelectorAll('.booked')
         p=0
         while(temp_card[p])
         {

@@ -91,7 +91,20 @@ body
     margin-bottom: 9%;
 
 }
+.card_title
+{   text-align: left;
+    margin: 3%;
+    font-size: 20px;
 
+}
+.price
+{
+    text-align: center;
+    padding-top: 10%;
+    font-size: 15px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", "Arial", "sans-serif";
+    color: #e88137;
+}
 @keyframes appear-zoom {
     0% {
         opacity: 0;
@@ -116,3 +129,10 @@ body
     animation-delay: 2s;
     opacity: 0;
 }
+
+
+
+
+
+
+

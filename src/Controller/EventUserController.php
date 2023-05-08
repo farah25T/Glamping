@@ -36,7 +36,7 @@ class EventUserController extends AbstractController
 
 
 
-    #[Route('/event_saved', name: 'event_saved')]
+    #[Route('/event_liked', name: 'event_liked')]
     public function liked(EntityManagerInterface $entityManager, SessionInterface $session): JsonResponse
     {
         $userIsFound = $entityManager->getRepository(User::class)->findOneById($session->get('id'));
@@ -52,6 +52,10 @@ class EventUserController extends AbstractController
         foreach ($events as $event) {
             $responseData[] = [
                 'name' => $event->getName(),
+                'image' => $event->getId(),
+                'date'=>$event->getDateDebut()->format('Y-m-d'),
+                'price'=>$event->getPrice(),
+                'place'=>$event->getPlace()
 
             ];
         }
@@ -60,7 +64,29 @@ class EventUserController extends AbstractController
     }
 
 
+    #[Route('/event_saved', name: 'event_saved')]
+    public function saved(EntityManagerInterface $entityManager, SessionInterface $session): JsonResponse
+    {
+        $userIsFound = $entityManager->getRepository(User::class)->findOneById($session->get('id'));
 
+        if (!$userIsFound) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        $events = $userIsFound->getEvents();
+
+
+        $responseData = [];
+        foreach ($events as $event) {
+            $responseData[] = [
+                'name' => $event->getName(),
+
+
+            ];
+        }
+
+        return new JsonResponse($responseData);
+    }
 
 
     #[Route('/event_booked', name: 'event_booked')]
@@ -71,16 +97,18 @@ class EventUserController extends AbstractController
         if (!$userIsFound) {
             throw $this->createNotFoundException('User not found');
         }
+
+
         $bookingRepository = $entityManager->getRepository(Booking::class)->findBy((['id_user' => $userIsFound]));
-
-
 
         $bookedEventsArray = [];
         foreach ($bookingRepository as $event) {
             $bookedEventsArray[] = [
                 'name' => $entityManager->getRepository(Event::class)->findOneBy((['id' =>  $event->getIdEvent()->getId()]))->getName(),
-                'image'=>$entityManager->getRepository(Event::class)->findOneBy((['id' =>  $event->getIdEvent()->getId()]))->getName(),
-
+                'image'=>$entityManager->getRepository(Event::class)->findOneBy((['id' =>  $event->getIdEvent()->getId()]))->getId(),
+                'price'=>$entityManager->getRepository(Event::class)->findOneBy((['id' =>  $event->getIdEvent()->getId()]))->getPrice (),
+                'guests_Number'=>$event->getNbrGuests(),
+                'date'=> $entityManager->getRepository(Event::class)->findOneBy((['id' =>  $event->getIdEvent()->getId()]))->getDateDebut()->format('Y-m-d'),
             ];
         }
 
