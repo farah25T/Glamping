@@ -1,0 +1,256 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Booking Details
+{% endblock %}
+
+{% block javascripts %}
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+
+
+{% endblock %}
+
+
+{% block stylesheets %}
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"/>
+
+	<link rel="stylesheet" href="{{ asset('/assets/css/booking.css') }}"/>
+
+
+{% endblock %}
+
+{% block body %}
+	{% include 'header.html.twig' with {'user': user} %}
+	<div
+		class="container">
+		<!-- Title -->
+		<div class="d-flex justify-content-between align-items-center py-3">
+			<h2 class="h5 mb-0">
+				<a href="#" class="text-muted"></a>
+				Order #16123222</h2>
+		</div>
+
+		<!-- Main content -->
+		<div class="row">
+			<div
+				class="col-lg-8">
+				<!-- Details -->
+				<div class="card mb-4">
+					<div class="card-body">
+						<div class="mb-3 d-flex justify-content-between">
+							<div>
+								<span class="me-3">22-11-2021</span>
+								<span class="me-3">#16123222</span>
+								<span class="me-3">Cash</span>
+								<span class="badge rounded-pill bg-info">Booking Details</span>
+							</div>
+						</div>
+						<table class="table table-borderless">
+							<tbody>
+								<tr>
+									<td>
+										<div class="d-flex mb-2">
+											<div class="flex-shrink-0">
+												<img src="{{ asset('assets/images/EventPageImages/Events/' ~ event.id ~ '/1.jpg') }}" alt="event_image" width="75" height="50" class="img-fluid">
+											</div>
+											<div class="flex-lg-grow-1 ms-3">
+												<h6 class="small mb-0">
+													<a href="{{ path('app_event_page', {'event': event.id,'id':user.id})}}" class="text-reset text-warning hover">{{ event.name}}</a>
+												</h6>
+											</div>
+										</div>
+									</td>
+									<td>1</td>
+									<td class="text-end">{{event.price}}
+										TND</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="2">Subtotal</td>
+									<td class="text-end">TND</td>
+								</tr>
+								<tr>
+									<td colspan="2">Additional Costs</td>
+									<td class="text-end">20 TND</td>
+								</tr>
+								<tr class="fw-bold">
+									<td colspan="2">TOTAL</td>
+									<td class="text-end">TND</td>
+								</tr>
+							</tfoot>
+                            <br> <br>
+						</table>
+					</div>
+				</div>
+                
+				<!-- Payment -->
+				<div class="card mb-4">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-lg-6">
+								<h3 class="h6">Payment Method</h3>
+								<p>Cash<br>
+									Total: TND
+									<span class="badge bg-danger rounded-pill">Unpaid</span>
+								</p>
+							</div>
+							<div class="col-lg-6">
+								<h3 class="h6">Client Name</h3>
+								<address>
+									<strong>{{user.name}}</strong><br>
+									Guests<br>
+								</div>
+                                <br> <br>
+							</div>
+						</div>
+					</div>
+				</div>
+                
+				<div
+					class="col-lg-4">
+					<!-- Customer Notes -->
+					<div class="card mb-4">
+						<div class="card-body">
+							<h3 class="h6">Conditions</h3>
+							<p>Please ensure to pay fees in The day of the events in our locals.If you want to cancel the booking KKKcontactKKK us 3 days before the start of the event.</p>
+						</div>
+					</div>
+					<div
+						class="card mb-4">
+						<!-- Event details -->
+						<div class="card-body">
+							<h3 class="h6">Event Details</h3>
+							<p>
+								<strong>Title:</strong>
+								<span title="{{event.name}}">{{event.name}}</span>
+							</p>
+							<p>
+								<strong>Country:</strong>
+								<span title="{{event.country}}">{{event.country}}</span>
+							</p>
+							<p>
+								<strong>City:</strong>
+								<span title="{{event.city}}">{{event.city}}</span>
+							</p>
+							<p>
+								<strong>Place:</strong>
+								<span title="{{event.place}}">{{event.place}}</span>
+							</p>
+							<p>
+								<strong>Price:</strong>
+								<span title="{{event.price}}">{{event.price}}
+									TND</span>
+							</p>
+							<p>
+								<strong>Date:</strong>
+								<span title="From {{ event.getDateDebut().format('Y-m-d') }} to {{ event.getDateFin().format('Y-m-d') }}">From
+									{{ event.getDateDebut().format('Y-m-d') }}
+									to
+									{{ event.getDateFin().format('Y-m-d') }}</span>
+							</p>
+                            <p>
+								<strong>Additional items:</strong>
+								<span>Tent,Sleeping Bag,Camping Clothes</span>
+							</p>
+                            <p>
+								<strong>Additional items Cost:</strong>
+								<span>20 TND</span>
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- /* footer */ -->
+	<footer class="footer p-3">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-5">
+					<h4>
+						About us
+						<div class="underline"></div>
+					</h4>
+					<p>
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+																																				                  Expedita nihil ipsam rerum tenetur magnam necessitatibus autem
+																																				                  non corrupti. Odio aut commodi vero corrupti dignissimos eius
+																																				                  laboriosam non vel beatae nisi.
+					</p>
+					<div class="row">
+						<div class="col-md-12">
+							<h4>
+								Contact us
+								<div class="underline"></div>
+							</h4>
+							<div class="row social-icon">
+								<div class="col-md-1">
+									<a href="https://www.facebook.com">
+										<i class="fab fa-brands fa-facebook fa-xl"></i>
+									</a>
+								</div>
+								<div class="col-md-1">
+									<a href="https://www.instagram.com">
+										<i class="fab fa-brands fa-instagram fa-xl"></i>
+									</a>
+								</div>
+								<div class="col-md-1">
+									<a href="https://www.whatsapp.com">
+										<i class="fa-brands fa-whatsapp fa-xl"></i>
+									</a>
+								</div>
+								<div class="col-md-1">
+									<a href="https://www.twitter.com">
+										<i class="fa-brands fa-twitter fa-xl"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<span class="right">
+						<i class="far fa-sharp fa-regular fa-copyright"></i>
+						2023
+																																				                  Glamping. All rights reserved.</span>
+				</div>
+				<div class="col-md-3">
+					<ul class="list">
+						<h4 class="mb-2">Useful links</h4>
+						<li class="my-3">
+							<a href="">Events</a>
+						</li>
+						<li class="my-3">
+							<a href="">why us</a>
+						</li>
+						<li class="my-3">
+							<a href="">About us</a>
+						</li>
+						<li class="my-3">
+							<a href="">See more</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<h4 class="mb-3">Newsletter</h4>
+					<form action="farahtoulugi@hotmail.fr">
+						<i class="far fa-regular fa-envelope"></i>
+						<input type="email" placeholder="Enter your email address" required/>
+						<button type="submit">
+							<i class="far fa-regular fa-paper-plane"></i>
+						</button>
+					</form>
+					<h4>Office</h4>
+					<p class="p-0 m-0">Insat</p>
+					<p class="p-0 m-0">Centre Urbain Nord , Tunis</p>
+					<p class="p-0 m-1">
+						<i class="far fa-regular fa-at me-2"></i>
+						Glamping.Support@gmail.com
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div></div>{% endblock %}

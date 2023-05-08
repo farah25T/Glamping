@@ -15,7 +15,7 @@ class AuthenticationController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $session = $request->getSession();
-      
+        $event = $request->query->get('event');
         $id = $session->get('id');
         if (isset($id)) {
             return ($this->redirectToRoute('app_home'));
@@ -28,9 +28,12 @@ class AuthenticationController extends AbstractController
                 if ($userIsFound->getPassword() == $password) {
                     $session->set('id', $userIsFound->getId());
                     if( $url=$request->query->get('url'))
-                    return $this->redirect($url);
-                    else
-                     return $this->redirectToRoute('app_home');
+                    return $this->redirect($url); 
+                    else if ($event) {
+                        return $this->redirectToRoute('booking_app', ['event' => $event]);
+                    } 
+                    else {
+                     return $this->redirectToRoute('app_home');}
                 } else {
                     $this->addFlash('erreur', 'your email or password is incorrect ! ');
                 }
