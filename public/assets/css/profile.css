@@ -142,6 +142,7 @@ img {
 }
 
 .popup-content {
+  
   position: absolute;
   top: 50%;
   left: 50%;
@@ -167,6 +168,8 @@ img {
   width: 30px;
   height: 30px;
   cursor: pointer;
+    transition: 0.5s ease;
+
 }
 .close-btn:hover {
   background: white;
@@ -175,6 +178,8 @@ img {
 }
 /*the popup content */
 .popup h2 {
+   animation: slideTop 1s ease forwards;
+  opacity: 0;
   margin-bottom: 20px;
   font-size: 32px;
   font-weight: 700;
@@ -217,6 +222,8 @@ img {
     justify-content: space-between;
     align-items: center;
     gap:50px;
+     animation: Zoom 1s ease forwards;
+  opacity: 0;
   }
 
 @keyframes slideRight {

@@ -40,7 +40,20 @@ body{
   color:#faf9F6;
   margin-bottom: 10px;
 }
-.title::before{
+.back{
+   position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 20px;
+  font-weight: 500;
+  color:#faf9F6;
+  text-decoration: none;
+   transition: all .40s ease;
+}
+.back:hover{
+  color:#000;
+}
+.title::before,.back::before{
 position:absolute;
 content: '';
 left: 0;
