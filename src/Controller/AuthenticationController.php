@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Event;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,6 @@ class AuthenticationController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $session = $request->getSession();
-        $event = $request->query->get('event');
         $id = $session->get('id');
         if (isset($id)) {
             return ($this->redirectToRoute('app_home'));
@@ -29,9 +29,6 @@ class AuthenticationController extends AbstractController
                     $session->set('id', $userIsFound->getId());
                     if( $url=$request->query->get('url'))
                     return $this->redirect($url); 
-                    else if ($event) {
-                        return $this->redirectToRoute('booking_app', ['event' => $event]);
-                    } 
                     else {
                      return $this->redirectToRoute('app_home');}
                 } else {
