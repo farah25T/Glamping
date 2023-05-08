@@ -75,6 +75,15 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+    public function findMaxNbrGuests(): ?int
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('MAX(e.nbr_guests_max) as max_guests');
+
+        $result = $qb->getQuery()->getOneOrNullResult();
+
+        return $result['max_guests'];
+    }
 
 
 
