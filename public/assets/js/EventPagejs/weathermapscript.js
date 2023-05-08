@@ -11,7 +11,7 @@ const logJSONData = async (lat, lon) => {
 
   try {
     const response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}`
+      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}`
     );
     const jsonData = await response.json();
 
@@ -44,7 +44,7 @@ const endpoints = currentPath.split("/");
 // Get the last endpoint
 const lastEndpoint = endpoints[endpoints.length - 1];
 
-fetch(`https://127.0.0.1:8000/api/${lastEndpoint}`)
+fetch(`http://127.0.0.1:8000/api/${lastEndpoint}`)
   .then((response) => response.json())
   .then((data) => {
     const lat = data["latitude"];

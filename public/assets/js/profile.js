@@ -16,3 +16,13 @@
        var popup = document.getElementById("popup");
        popup.style.display = "none";
      }
+const fileInput = document.getElementById("user_image");
+const submitButton = document.getElementById("submit-btn");
+
+fileInput.addEventListener("change", () => {
+  if (fileInput.value) {
+    submitButton.disabled = false;
+  } else {
+    submitButton.disabled = true;
+  }
+});

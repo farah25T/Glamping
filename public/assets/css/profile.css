@@ -142,11 +142,10 @@ img {
 }
 
 .popup-content {
-  
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 600PX;
+  width: 600px;
   transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 25px;
@@ -168,8 +167,7 @@ img {
   width: 30px;
   height: 30px;
   cursor: pointer;
-    transition: 0.5s ease;
-
+  transition: 0.5s ease;
 }
 .close-btn:hover {
   background: white;
@@ -178,7 +176,7 @@ img {
 }
 /*the popup content */
 .popup h2 {
-   animation: slideTop 1s ease forwards;
+  animation: slideTop 1s ease forwards;
   opacity: 0;
   margin-bottom: 20px;
   font-size: 32px;
@@ -188,18 +186,18 @@ img {
   animation-delay: 0s;
   margin: 0;
   margin-bottom: 40px;
-   width: 300px;
+  width: 300px;
   height: 300px;
 }
- input[type="file"] {
-    display: none;
-  }
+input[type="file"] {
+  display: none;
+}
 
-  /* Style the label element to look like a button */
-  .file-input-label {
-    display: inline-block;
-    padding: 8px 16px;
-    background: #ef6e12;
+/* Style the label element to look like a button */
+.file-input-label {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #ef6e12;
   color: rgb(243, 242, 239);
   border: none;
   outline: none;
@@ -209,22 +207,24 @@ img {
   letter-spacing: 1px;
   transition: 0.5s ease;
   cursor: pointer;
+  margin-right: 20px;
+}
+ #submit-btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
-
-  /* Style the label element on hover */
-  .file-input-label:hover {
-     background: white;
+/* Style the label element on hover */
+.file-input-label:hover {
+  background: white;
   color: #ef6e12;
   border: 1px solid #ef6e12;
-  }
-  .boutons{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap:50px;
-     animation: Zoom 1s ease forwards;
+}
+.boutons {
+  display: flex;
+  align-items: center;
+  animation: Zoom 1s ease forwards;
   opacity: 0;
-  }
+}
 
 @keyframes slideRight {
   0% {
