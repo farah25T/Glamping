@@ -29,6 +29,9 @@ body{
   max-width: 800px;
   padding:30px 40px;
   border-radius:1rem ;
+  animation: Zoom 1.5s ease forwards;
+  animation-delay: 1s;
+  opacity: 0;
 }
 .title{
   position: relative;
@@ -37,7 +40,20 @@ body{
   color:#faf9F6;
   margin-bottom: 10px;
 }
-.title::before{
+.back{
+   position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 20px;
+  font-weight: 500;
+  color:#faf9F6;
+  text-decoration: none;
+   transition: all .40s ease;
+}
+.back:hover{
+  color:#000;
+}
+.title::before,.back::before{
 position:absolute;
 content: '';
 left: 0;
@@ -133,3 +149,13 @@ form .btn input:hover{
   background-color: #ef6e12;
 }
 
+@keyframes Zoom {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
