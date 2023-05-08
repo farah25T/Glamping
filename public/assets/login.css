@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,500&display=swap');
 
 
 
@@ -19,7 +18,7 @@ body{
   
 }
 .background{
-    background: url(images/login.jpg) no-repeat;
+    background: url(images/UNION\ STANDARD.jpeg) no-repeat;
     background-position: center;
     background-size:cover ;
     height: 100vh;
@@ -36,7 +35,7 @@ body{
     width: 75%;
     height: 550px;
     margin-top: 20px;
-    background: url(images/login.jpg) no-repeat;
+    background: rgba(117, 157, 117, 0.5) no-repeat;
     background-position: center;
     background-size:cover ;
     border-radius: 20px;
