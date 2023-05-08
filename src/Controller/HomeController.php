@@ -37,9 +37,20 @@ class HomeController extends AbstractController
         /*    **************     */
 
         /*Recuperer les events available tonight  */
-        $available_tonight = $entityManager->getRepository(Event::class)->tonight()->getId();
-        $available_thisWeek= $entityManager->getRepository(Event::class)->thisWeek()->getId();
-        $available_NextWeek= $entityManager->getRepository(Event::class)->NextWeek()->getId();
+      if( $entityManager->getRepository(Event::class)->tonight())
+                 $available_tonight = $entityManager->getRepository(Event::class)->tonight()->getId();
+    else
+                  $available_tonight = 1;
+     if( $entityManager->getRepository(Event::class)->thisWeek())
+                  $available_thisWeek = $entityManager->getRepository(Event::class)->thisWeek()->getId();
+     else
+                   $available_thisWeek = 2;
+     if( $entityManager->getRepository(Event::class)->NextWeek())
+                   $available_NextWeek = $entityManager->getRepository(Event::class)->NextWeek()->getId();
+      else
+                    $available_NextWeek = 3;
+       
+       
 
 
        /*   ************* */

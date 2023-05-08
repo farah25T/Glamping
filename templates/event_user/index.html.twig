@@ -20,9 +20,12 @@
             crossorigin="anonymous"
     ></script>
 
-{% endblock %} {% block body %} {% include 'header.html.twig' with {'user':user} %}
+{% endblock %} 
+{% block body %} 
+<body style="    background-color:  rgb(243, 242, 239);" >
+{% include 'header.html.twig' with {'user':user} %}
 
-    <div class="container-fluid" style="margin-top: 10%">
+    <div class="container-fluid" style="margin-top: 10%;">
         <div class="row"  style="margin-left: 5% ; text-align: center">
             <div class="col-md-5">
                 <div class="profile-photo">
@@ -93,10 +96,6 @@
     </div>
 
 
-
-
-
-
     <div class="col-md-12 " hidden id="hidden" style="margin-left: 10%" >
         <div class="row row_ev "   >
             <div class="descri row">Event name</div>
@@ -114,5 +113,7 @@
         </div>
 
     </div>
+   
+</body>
 {% endblock %}
 

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Booking;
+use App\Entity\Event;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,6 +59,34 @@ class EventUserController extends AbstractController
         return new JsonResponse($responseData);
     }
 
+
+
+
+
+    #[Route('/event_booked', name: 'event_booked')]
+    public function booked(EntityManagerInterface $entityManager, SessionInterface $session): JsonResponse
+    {
+        $userIsFound = $entityManager->getRepository(User::class)->findOneById($session->get('id'));
+
+        if (!$userIsFound) {
+            throw $this->createNotFoundException('User not found');
+        }
+        $bookingRepository = $entityManager->getRepository(Booking::class)->findBy((['id_user' => $userIsFound]));
+
+
+
+        $bookedEventsArray = [];
+        foreach ($bookingRepository as $event) {
+            $bookedEventsArray[] = [
+                'name' => $entityManager->getRepository(Event::class)->findOneBy((['id' =>  $event->getIdEvent()->getId()]))->getName(),
+                'image'=>$entityManager->getRepository(Event::class)->findOneBy((['id' =>  $event->getIdEvent()->getId()]))->getName(),
+
+            ];
+        }
+
+        return $this->json($bookedEventsArray);
+
+    }
 
 
 

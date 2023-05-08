@@ -96,7 +96,17 @@ liked_bouton.addEventListener('click', function() {
 
     }
     if (!booked.hasAttribute('hidden'))
-        booked.toggleAttribute('hidden');
+    {
+        const temp_card = document.querySelectorAll('.saved_card_eff')
+        p=0
+        while(temp_card[p])
+        {
+            temp_card[p].remove();
+            p++;
+        }
+        booked.hidden=true;
+
+    }
 
     if(liked.hasAttribute('hidden'))
     {liked.removeAttribute('hidden');
@@ -150,14 +160,80 @@ liked_bouton.addEventListener('click', function() {
 
 
 
+booked_bouton.addEventListener('click', function() {
 
-booked_bouton.addEventListener('click', (event) => {
+
+
     if (!liked.hasAttribute('hidden'))
-        liked.toggleAttribute('hidden');
+    {
+        const temp_card = document.querySelectorAll('.saved_card_eff')
+        p=0
+        while(temp_card[p])
+        {
+            temp_card[p].remove();
+            p++;
+        }
+        liked.hidden=true;
+
+    }
     if (!saved.hasAttribute('hidden'))
-        saved.toggleAttribute('hidden');
-    booked.toggleAttribute('hidden');
+    {
+        const temp_card = document.querySelectorAll('.saved_card_eff')
+        p=0
+        while(temp_card[p])
+        {
+            temp_card[p].remove();
+            p++;
+        }
+        saved.hidden=true;
+
+    }
+
+    if(booked.hasAttribute('hidden'))
+    {booked.removeAttribute('hidden');
+        fetch('/event_booked')
+            .then(response => response.json())
+            .then(response => {
+                p=0;
+                while( response[p])
+                {
+                    const card$p = saved_card.cloneNode(true);
+                    Event_name= card$p.querySelector('.descri')
+
+                    Event_name.innerHTML =response[p].name
+
+
+                    card$p.setAttribute('class','saved_card_eff' )
+
+                    card$p.removeAttribute('hidden')
+                    booked.appendChild(card$p);
+                    p+=1;
+                }
+
+
+            })
+            .catch(error => {
+
+                    console.error('Error:', error);
+                }
+            );
+    }
+    else
+    {
+        const temp_card = document.querySelectorAll('.saved_card_eff')
+        p=0
+        while(temp_card[p])
+        {
+            temp_card[p].remove();
+            p++;
+        }
+        booked.hidden=true;
+    }
+
+
 });
+
+
 
 
 
