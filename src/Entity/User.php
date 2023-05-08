@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use Symfony\Component\HttpFoundation\File\File;
+
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -29,6 +32,10 @@ class User
 
     #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Booking::class, orphanRemoval: true)]
     private Collection $bookings;
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private $imageFilename;
+
+    private $imageFile;
 
     public function __construct()
     {
@@ -131,6 +138,27 @@ class User
             }
         }
 
+        return $this;
+    }
+    public function getImageFilename(): ?string
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(?string $imageFilename): self
+    {
+        $this->imageFilename = $imageFilename;
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): self
+    {
+        $this->imageFile = $imageFile;
         return $this;
     }
 }

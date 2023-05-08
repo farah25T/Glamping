@@ -20,12 +20,15 @@
             crossorigin="anonymous"
     ></script>
 
-{% endblock %} {% block body %} {% include 'header.html.twig' with {'user':user} %}
+{% endblock %} 
+{% block body %} 
+<body style="    background-color:  rgb(243, 242, 239);" >
+{% include 'header.html.twig' with {'user':user} %}
 
-    <div class="container-fluid" style="margin-top: 10%">
+    <div class="container-fluid" style="margin-top: 10%;">
         <div class="row"  style="margin-left: 5% ; text-align: center">
             <div class="col-md-5">
-                <div class="profile-photo">
+                <div class="profile-photo" style="margin: auto">
                     <img src="/assets/images/Vector Art.jpeg" alt="profile photo" />
                 </div>
                 <div class="home-detail">
@@ -42,103 +45,47 @@
                         <div class="row align-items-start">
                             <div class="col">
                                 <button type="button" class="bouton" id="liked_bouton">
-                                  Liked  event
+                                    Liked  event
                                     <i class="fa-solid fa-heart fa-sm" style="color: #e10e0e"></i>
                                 </button>
                             </div>
                             <div class="col">
                                 <button type="button" class="bouton" id="saved_bouton">
-                                  Saved  event <i class="fas fa-save" style="color: #f2eb07"></i>
+                                    Saved  event <i class="fas fa-save" style="color: #f2eb07"></i>
                                 </button>
                             </div>
                             <div class="col">
                                 <button type="button" class="bouton" id="booked_bouton">
-                                    Booked event 
+                                    Booked event
                                     <i class="fa-solid fa-check" style="color: #209118"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
-                 </div>
-
-
-
-                <!-- Ici si le user click sur le bouton saved event ses evennement saved seront affiches -->
-                    <div class="row" id="saved" hidden>
-                        <div class="col-md-12">
-                            <div class="row row_ev">
-                                <div class="descri row">Event name</div>
-                                <div class="row">
-
-                                    <div class="card">
-                                        <div class="carad-details">
-                                            <p class="text-title">Card title</p>
-                                            <p class="text-body">Here are the details of the card</p>
-                                        </div>
-                                        <button class="card-button">Book now</button>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-
-                        </div>
-                    </div>
-
-                <!--********************** -->
-                <!-- Ici si le user click sur le bouton saved ou liked ou booked event ses evennement saved seront affiches -->
-
-                <div class="row" id="liked" hidden>
-                    <div class="col-md-12">
-                        <div class="row row_ev">
-                            <div class="descri row">Event name</div>
-                            <div class="row">
-
-                                <div class="card">
-                                    <div class="carad-details">
-                                        <p class="text-title">Card title</p>
-                                        <p class="text-body">Here are the details of the card</p>
-                                    </div>
-                                    <button class="card-button" >Book now</button>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-
-                    </div>
                 </div>
 
-                <!-- ************************ -->
 
-                <!-- Ici si le user click sur le bouton saved event ses evennement saved seront affiches -->
-                <div class="row" id="booked" hidden>
-                    <div class="col-md-12">
-                        <div class="row row_ev">
-                            <div class="descri row">Event name</div>
-                            <div class="row">
 
-                                <div class="card">
-                                    <div class="carad-details">
-                                        <p class="text-title">Card title</p>
-                                        <p class="text-body">Here are the details of the card</p>
-                                    </div>
-                                    <button class="card-button">Book now</button>
-                                </div>
+            <!-- Ici si le user click sur le bouton saved event ses evennement saved seront affiches -->
+            <div class="row" id="saved" hidden>
 
-                            </div>
-                        </div>
+            </div>
 
-                    </div>
-                    <div class="row">
+            <!--********************** -->
+            <!-- Ici si le user click sur le bouton  liked  event ses evennement saved seront affiches -->
 
-                    </div>
-                </div>
+            <div class="row" id="liked" hidden>
 
+
+            </div>
+
+            <!-- ************************ -->
+
+            <!-- Ici si le user click sur le booked saved event ses evennement saved seront affiches -->
+            <div class="row" id="booked" hidden>
+
+
+            </div>
 
                 <!--********************** -->
 
@@ -147,5 +94,70 @@
     </div>
     </div>
     </div>
+
+<!-- Saved Card --->
+    <div class="col-md-12 " hidden id="hidden" style="margin-left: 10%" >
+        <div class="row row_ev "   >
+            <div class="descri row">Event name</div>
+            <div class="row">
+
+                <div class="card">
+                    <div class="carad-details">
+                        <p class="text-title">Card title</p>
+                        <p class="text-body">Here are the details of the card</p>
+                    </div>
+                    <button class="card-button">Book now</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+<!-- booked Card --->
+<div class="col-md-12 " hidden id="bookedd" style="margin-left: 10%" >
+    <div class="row row_ev "   >
+        <div class="row">
+
+            <div class="card">
+                <div class="carad-details">
+                    <div class="descri row card_title">Event name</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <img class="img"  src="" style="height: 200px ; width :200px ; border-radius: 25px">
+                    </div>
+                    <div class="col price " >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Liked Card --->
+<div class="col-md-12 likedd" hidden  style="margin-left: 10%" >
+    <div class="row row_ev "   >
+        <div class="descri row">Event name</div>
+        <div class="row">
+
+            <div class="card">
+                <div class="row">
+                    <div class="col">
+                        <img class="img"  src="" style="height: 200px ; width :200px ; border-radius: 0px ; animation: none">
+                    </div>
+                    <div class="col price " >
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
 {% endblock %}
 
