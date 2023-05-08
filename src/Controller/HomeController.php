@@ -55,6 +55,7 @@ class HomeController extends AbstractController
 
        /*   ************* */
 
+       $maxGuests = $entityManager->getRepository(Event::class)->findMaxNbrGuests();
 
 
         if (isset($id)) {
@@ -65,7 +66,8 @@ class HomeController extends AbstractController
             'event'=>$responseData,
             'tonight'=>$available_tonight,
             'thisWeek'=>$available_thisWeek,
-            'NextWeek'=> $available_NextWeek
+            'NextWeek'=> $available_NextWeek,
+            'guests'=>$maxGuests,
 
 
         ]);
