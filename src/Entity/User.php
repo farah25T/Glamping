@@ -5,6 +5,8 @@ namespace App\Entity;
 use Symfony\Component\HttpFoundation\File\File;
 
 use App\Repository\UserRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,7 +34,10 @@ class User
 
     #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Booking::class, orphanRemoval: true)]
     private Collection $bookings;
+
+
     #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[Assert\Image]
     private $imageFilename;
 
     private $imageFile;
