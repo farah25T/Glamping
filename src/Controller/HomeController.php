@@ -30,7 +30,8 @@ class HomeController extends AbstractController
         foreach ($event as $events ) {
             $responseData[] = [
                 'long' => $events->getLongitude(),
-                'alt'=>$events->getLatitude()
+                'alt'=>$events->getLatitude(),
+                'image'=>$events->getId()
 
             ];
         }
