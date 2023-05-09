@@ -24,7 +24,15 @@ body{
 .container{
     margin-top: 100px;
 }
-
+.confirmation-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
 
 /* footer styles */
 
@@ -181,5 +189,3 @@ footer {
       opacity: 1;
     }
   }
-
-  
