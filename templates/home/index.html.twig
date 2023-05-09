@@ -22,9 +22,21 @@
 	<script>
 
 
-		{% for i in event %}
-L.marker([{{ i.alt }}, {{ i.long }}]).addTo(map).openPopup();{% endfor %}
-	</script>
+
+        var markerData = [
+            {% for i in event  %}
+            { coordinates: [{{ i.alt }}, {{ i.long }}], content: "<a href = ' {{path('app_event_page',{ 'id' : i.image })}} '><img src= {{ asset('assets/images/EventPageImages/Events/' ~ i.image ~ '/1.jpg') }} style = 'width : 150px ; height : 150px' ></a>" },
+            {% endfor %}
+        ];
+
+
+        for (var i = 0; i < markerData.length; i++) {
+            var marker = L.marker(markerData[i].coordinates).addTo(map);
+            marker.bindPopup(markerData[i].content).openPopup();
+        }
+
+    </script>
+
 {% endblock %}
 
 {% block body %}
