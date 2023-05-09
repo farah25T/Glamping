@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-	Booking Details
+	Booking Confirmed
 {% endblock %}
 
 {% block javascripts %}
@@ -42,7 +42,7 @@
 								<span class="me-3">{{ booking.getDate()|date('Y-m-d H:i:s') }}</span>
 								<span class="me-3">#{{booking.getId()}}</span>
 								<span class="me-3">Cash</span>
-								<span class="badge rounded-pill bg-info">Booking Details</span>
+								<span class="badge rounded-pill bg-success">Booking Confirmed</span>
 							</div>
 						</div>
 						<table class="table table-borderless">
@@ -112,7 +112,7 @@
 								<br>
 								<!-- Confirmation of booking button -->
 								<div class="col-lg-6">
-									<a href="{{ path('route_name') }}" class="btn btn-md btn-success confirmation-btn">Confirm Booking</a>
+									<a href="{{ path('booking_cancel') }}" class="btn btn-md btn-danger confirmation-btn">Cancel Booking</a>
 								</div>
 
 							</div>
