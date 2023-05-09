@@ -110,6 +110,8 @@ img {
   animation: Zoom 1s ease forwards;
   animation-delay: 2s;
   opacity: 0;
+  background-size: cover;
+  background-position: center;
 }
 .profile-photo .edit {
   color: #ef6e12;
