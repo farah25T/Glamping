@@ -65,7 +65,7 @@ L.marker([{{ i.alt }}, {{ i.long }}]).addTo(map).openPopup();{% endfor %}
 			<div class="container-fluid">
 				<form method="POST" action="{{ path('app_home') }}">
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="inputGroup">
 								<input type="text" id="location" name="location" required="required" autocomplete="off" pattern="[A-Za-z]+"/>
 								<label for="location">
@@ -74,7 +74,7 @@ L.marker([{{ i.alt }}, {{ i.long }}]).addTo(map).openPopup();{% endfor %}
 								</label>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<div class="inputGroup">
 								<input type="text" name="daterange" value="08/05/2023 - 10/05/2023" />
 							</div>
