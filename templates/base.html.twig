@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<title>
-			{% block title %}Welcome!
-			{% endblock %}
-		</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Welcome!
+      {% endblock %}
+    </title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon/apple-touch-icon.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon/favicon-32x32.png') }}" />
 
-		<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon/apple-touch-icon.png') }}">
-		<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon/favicon-16x16.png') }}" />
 
-		<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('assets/favicon/site.webmanifest') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pathway+Extreme:ital,wght@1,500&family=Play&family=Poppins&family=Ubuntu+Condensed&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('assets/css/bot.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}" />
 
-		<link rel="manifest" href="{{ asset('assets/favicon/site.webmanifest') }}">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-		<link rel="preconnect" href="https://fonts.googleapis.com"/>
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-		<link href="https://fonts.googleapis.com/css2?family=Pathway+Extreme:ital,wght@1,500&family=Play&family=Poppins&family=Ubuntu+Condensed&display=swap" rel="stylesheet"/>
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
 
-		<link rel="stylesheet" href="{{ asset('assets/css/header.css') }}"/>
-		<link
-		rel="stylesheet" href="{{ asset('assets/css/footer.css') }}"/>
+    {% endblock %}
+  </head>
+  <body>
+    {% block body %}
 
+    {% endblock %}
 
-		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-		{% block stylesheets %}{% endblock %}
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1%22%3E"></script>
+    <df-messenger intent="WELCOME" chat-title="Glamping" agent-id="ff6246ea-94b4-4518-a9c1-7db8a1dd98a8" language-code="en"></df-messenger>
+    {% block javascripts %}
 
-
-	</head>
-	<body>
-
-
-		{% block body %}{% endblock %}
-
-
-		{% block javascripts %}{% endblock %}
-
-	</body>
+    {% endblock %}
+  </body>
 </html>

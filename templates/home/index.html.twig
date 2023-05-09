@@ -4,20 +4,23 @@
 {% endblock %}
 {% block stylesheets %}
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"/>
-<link rel="stylesheet" href="{{ asset('assets/css/Home.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+	<link rel="stylesheet" href="{{ asset('assets/css/Home.css') }}">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
 {% endblock %}
 {% block javascripts %}
- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
-<script src="{{ asset('assets/js/homepage/map.js') }}"> </script>
-<script src="{{ asset('assets/js/homepage/home.js') }}"></script>
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+	<script src="{{ asset('assets/js/homepage/map.js') }}"></script>
+	<script src="{{ asset('assets/js/homepage/home.js') }}"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+	<script src="{{ asset('assets/js/homepage/search.js') }}"></script>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
-    <script>
+	<script>
+
 
 
         var markerData = [
@@ -33,11 +36,12 @@
         }
 
     </script>
+
 {% endblock %}
 
 {% block body %}
 	{# header #}
-    {% include 'header.html.twig' with {'user': user} %}
+	{% include 'header.html.twig' with {'user': user} %}
 
 	<!-- description de notre site -->
 	<div class="container description">
@@ -49,43 +53,45 @@
 	<!-- caroussel -->
 	<!-- carroussel container -->
 	<div
-		style="height: 30%; width: 70%" class="container " >
+		style="height: 30%; width: 70%" class="container ">
 		<!-- navbar -->
 		<nav class="navbare z-1 rounded-5 m-auto">
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="inputGroup">
-							<input type="text" required="required" autocomplete="off"/>
-							<label for="location">
-								<span class="fas fa-regular fa-location-dot"></span>
-								location</label>
+				<form method="POST" action="{{ path('app_home') }}">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="inputGroup">
+								<input type="text" id="location" name="location" required="required" autocomplete="off" pattern="[A-Za-z]+"/>
+								<label for="location">
+									<span class="fas fa-regular fa-location-dot"></span>
+									location
+								</label>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="inputGroup">
+								<input type="text" name="daterange" value="08/05/2023 - 10/05/2023" />
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="inputGroup">
+								<input type="number" id="guests" name="guests" min="1" max={{guests}} required="required" autocomplete="off"/>
+								<label for="guests">
+									<span class="fas fa-regular fa-user"></span>
+									Add guests
+								</label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="inputGroup">
+								<button type="submit" id='btn'class="btn btn-success p-3 m-1">Search</button>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
-						<div class="inputGroup">
-							<input type="date" required="required" autocomplete="off"/>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="inputGroup">
-							<input type="number" min="1" max="10" required="required" autocomplete="off"/>
-							<label for="guests" name="guest">
-								<span class="fas fa-regular fa-user"></span>
-								Add
-																																																																																																							                  guests</label>
-						</div>
-					</div>
-					<div class="col-md-2">
-						<div class="inputGroup">
-							<button type="button" class="btn btn-success p-3 m-1">
-								Search
-							</button>
-						</div>
-					</div>
-				</div>
+				</form>
 			</div>
 		</nav>
+
 		<!-- caroussel -->
 		<div class="carousel">
 			<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -96,7 +102,7 @@
 							<h5>Discover our newest events</h5>
 							<p>
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-																																																																																																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
+																																																																																																																																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
 							</p>
 						</div>
 					</div>
@@ -107,7 +113,7 @@
 							<h5>Hurry up !!</h5>
 							<p>
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-																																																																																																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
+																																																																																																																																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
 							</p>
 						</div>
 					</div>
@@ -118,7 +124,7 @@
 							<h5>Discover our most liked events</h5>
 							<p>
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-																																																																																																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
+																																																																																																																																							                  Dolores, eum ea asperiores animi iusto natus placeat?F
 							</p>
 						</div>
 					</div>
@@ -127,283 +133,217 @@
 		</div>
 	</div>
 
- <div class="container-fluid Clamping hidden" id="aboutus">
-        <p>Clamping Is the Best way to find your Next Destination</p>
-        <div>
-            <div class="d-flex">
-                <div class="p-2 flex-fill m-4 taille">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img
-                                        style="border-radius: 15px ;
-"
-                                        src="{{ asset('assets/images/Card_Home_Page/10.png') }}" style="box-shadow: none;" alt="10"
-                                />
+	<div class="container-fluid Clamping hidden" id="aboutus">
+		<p>Clamping Is the Best way to find your Next Destination</p>
+		<div>
+			<div class="d-flex">
+				<div class="p-2 flex-fill m-4 taille">
+					<div class="flip-card">
+						<div class="flip-card-inner">
+							<div class="flip-card-front">
+								<img style="border-radius: 15px ;
+																																				" src="{{ asset('assets/images/Card_Home_Page/10.png') }}" style="box-shadow: none;" alt="10"/>
 
-                            </div>
-                            <div class="flip-card-back">
-                                 <div
-                                        class="alert alert-light"
-                                        role="alert"
-                                        style="
-                      background-color: #f6a266;
+							</div>
+							<div class="flip-card-back">
+								<div class="alert alert-light" role="alert" style="
+																																								                      background-color: #f6a266;
+										
+																																								                      font-family: 'Play', sans-serif;
+																																								                    ">
+									<div class="style_ecriture">
+										<h2>
+											Why should I go Dessert camping ?</h2>
+										<h6>
+											observe and learn about wildlife behavior and habitat</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="p-2 flex-fill m-4 taille">
+					<div class="flip-card">
+						<div class="flip-card-inner">
+							<div class="flip-card-front">
+								<img src="{{ asset('assets/images/Card_Home_Page/11.png') }}" alt="11"/>
 
-                      font-family: 'Play', sans-serif;
-                    "
-                                >
-                                    <div class="style_ecriture">
-                                      <h2>  Why should I go Dessert camping ?</h2>
-                                      <h6> observe and learn about wildlife behavior and habitat</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-2 flex-fill m-4 taille">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img
+							</div>
+							<div class="flip-card-back">
+								<div class="alert alert-light" role="alert" style="
+																																								                      font-family: 'Play', sans-serif;
+																																								                      background-color: #f6a266;
+																																								                    ">
+									<div class="style_ecriture">
+										<h2>Why should I go Wild camping ?</h2>
+										<h6>you can witness beautiful sunrises and sunsets</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="p-2 flex-fill m-4 taille">
+					<div class="flip-card">
+						<div class="flip-card-inner">
+							<div class="flip-card-front">
+								<img src="{{ asset('assets/images/Card_Home_Page/9.png') }}" alt="9"/>
 
-                                        src="{{ asset('assets/images/Card_Home_Page/11.png') }}"
-                                        alt="11"
-                                />
+							</div>
+							<div class="flip-card-back">
 
-                            </div>
-                            <div class="flip-card-back">
-                                <div
-                                        class="alert alert-light"
-                                        role="alert"
-                                        style="
-                      font-family: 'Play', sans-serif;
-                      background-color: #f6a266;
-                    "
-                                >
-                                    <div class="style_ecriture">
-                                        <h2>Why should I go Wild camping ?</h2>
-                                        <h6>you can witness beautiful sunrises and sunsets</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-2 flex-fill m-4 taille">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img
+								<div class="alert alert-light" role="alert" style="
+																																								                      background-color: #f6a266;
+										
+																																								                      font-family: 'Play', sans-serif;
+																																								                    ">
+									<div class="style_ecriture">
+										<h3>
+											Why should I go Beach camping ?</h3>
+										<h6>
+											wake up to stunning ocean views
+										</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                                         src="{{ asset('assets/images/Card_Home_Page/9.png') }}"
-                                        alt="9"
-                                />
+	<!--  Map  -->
 
-                            </div>
-                            <div class="flip-card-back">
+	<div class="container-sm hidden">
 
-								 <div
-                                        class="alert alert-light"
-                                        role="alert"
-                                        style="
-                      background-color: #f6a266;
+		<div id="map" class="img-map"></div>
+		<div class="map-card descri" style="font-size: 15px">
+			Get ready for the 2024 total solar eclipse. Find a spot to camp along
+												            the path of totality.
+			<br/>
+			<button type="button" class="button_card">
+				<a href="{{path('app_catalogue_page')}} " style="text-decoration: none ; color:inherit">Find a campsite</a>
+			</button>
+		</div>
+	</div>
 
-                      font-family: 'Play', sans-serif;
-                    "
-                                >
-                                    <div class="style_ecriture">
-                                     <h3>   Why should I go Beach camping ?</h3>
-                                       <h6> wake up to stunning ocean views </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<br/><br/>
+	<br/><br/><br/><br/>
 
-    <!--  Map  -->
+	<!--top 3 events in popularity  -->
 
-<div class="container-sm hidden">
+	<div class="container text-center hidden" id="catalogue">
 
-        <div id="map" class="img-map" ></div>
-        <div class="map-card descri" style="font-size: 15px">
-            Get ready for the 2024 total solar eclipse. Find a spot to camp along
-            the path of totality.
-            <br />
-            <button type="button" class="button_card"><a href="{{path('app_catalogue_page')}} "style="text-decoration: none ; color:inherit" >Find a campsite</a></button>
-        </div>
-    </div>
+		<div class="descri" style="text-align: left">
+			Discover top 3 events in popularity
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col">
+				<div class="card-catalogue">
+					<img class="img-catalogue" src="{{ asset('assets/images/Card_Home_Page/20.png') }}" alt="20"/>
+					<div class="card-description" style="background-color: rgb(175, 195, 90)">
+						BEST OF 2022 Explore Tunisia'sbest Hipcamps to visit in 2022.
+						<button class="button_card" style="width: 50%; margin-left: 40%; margin-top: 2%">
+							Visit now
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card-catalogue">
+					<img class="img-catalogue" src="{{ asset('assets/images/Card_Home_Page/21.png') }}" alt="21"/>
+					<div class="card-description" style="background-color: rgb(23, 128, 125)">
+						BEST OF 2021 Explore Tunisia's best Hipcamps to visit in 2021.
+						<button class="button_card" style="
+																																                  width: 50%;
+																																                  height: 60%;
+																																                  margin-left: 40%;
+																																                  margin-top: 2%;
+																																                ">
+							Visit now
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card-catalogue">
+					<img class="img-catalogue" src="assets/images/Card_Home_Page/16.png" alt="16"/>
+					<div class="card-description">
+						BEST OF 2023 Explore Tunisia's best Hipcamps to visit in 2023.
+						<button class="button_card" style="width: 50%; margin-left: 40%; margin-top: 2%">
+							Visit now
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <br /><br />
-    <br /><br /><br /><br />
+	<!--   near to  you-->
 
-    <!--top 3 events in popularity  -->
+	<div class="container text-center ">
+		<div class="descri" style="text-align: left">
+			Discover top spots near you
+		</div>
+	</div>
 
-<div class="container text-center hidden" id="catalogue">
+	<div class="container-fluid hidden">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-6">
+						<div style="margin-top: 0px; position: relative">
+							<img style="margin-top: 20px" class="img-near" src="{{ asset('assets/images/EventPageImages/Events/' ~ thisWeek ~ '/1.jpg') }}" alt="25"/>
+							<a style="text-decoration: none ; color: inherit" href={{path('app_event_page',{ 'id' : thisWeek } )}}>
 
-        <div class="descri" style="text-align: left">
-            Discover top 3 events in popularity
-        </div>
-        <br />
-        <div class="row">
-            <div class="col">
-                <div class="card-catalogue">
-                 <img class="img-catalogue"  src="{{ asset('assets/images/Card_Home_Page/20.png') }}" alt="20" />
-                    <div
-                            class="card-description"
-                            style="background-color: rgb(175, 195, 90)"
-                    >
-                        BEST OF 2022 Explore Tunisia'sbest Hipcamps to visit in 2022.
-                        <button
-                                class="button_card"
-                                style="width: 50%; margin-left: 40%; margin-top: 2%"
-                        >
-                            Visit now
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card-catalogue">
-                    <img class="img-catalogue"  src="{{ asset('assets/images/Card_Home_Page/21.png') }}"  alt="21" />
-                    <div
-                            class="card-description"
-                            style="background-color: rgb(23, 128, 125)"
-                    >
-                        BEST OF 2021 Explore Tunisia's best Hipcamps to visit in 2021.
-                        <button
-                                class="button_card"
-                                style="
-                  width: 50%;
-                  height: 60%;
-                  margin-left: 40%;
-                  margin-top: 2%;
-                "
-                        >
-                            Visit now
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card-catalogue">
-                    <img class="img-catalogue" src="assets/images/Card_Home_Page/16.png"alt="16" />
-                    <div class="card-description">
-                        BEST OF 2023 Explore Tunisia's best Hipcamps to visit in 2023.
-                        <button
-                                class="button_card"
-                                style="width: 50%; margin-left: 40%; margin-top: 2%"
-                        >
-                            Visit now
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								<button type="button" class="bouton_near descri" style="background-color: rgb(23, 128, 125)">
+									Available in this Week
+								</button>
+							</a>
+						</div>
+					</div>
 
-    <!--   near to  you-->
+					<div class="col-md-6">
+						<div style="margin-top: 0px; position: relative">
+							<img style="margin-top: 20px" class="img-near" src="{{ asset('assets/images/EventPageImages/Events/' ~ tonight ~ '/1.jpg') }}" alt="24"/>
+							<a style="text-decoration: none ; color: inherit" href={{path('app_event_page',{ 'id' : tonight } )}}>
+								<button type="button" class="bouton_near descri" style="background-color: rgb(175, 195, 90)">
+									Available tonight
+								</button>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div style="margin-top: 0px; position: relative">
+							<img style="margin-top: 20px" class="img-near descri" src="{{ asset('assets/images/EventPageImages/Events/' ~ NextWeek ~ '/1.jpg') }}" alt="23"/>
+							<a style="text-decoration: none ; color: inherit" href={{path('app_event_page',{ 'id' : NextWeek } )}}>
 
-    <div class="container text-center ">
-        <div class="descri" style="text-align: left">
-            Discover top spots near you
-        </div>
-    </div>
+								<button type="button" class="bouton_near" style="background-color: rgb(175, 195, 90)">
+									Available next week
+								</button>
+							</a>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div style="margin-top: 0px; position: relative">
+							<img style="margin-top: 20px" class="img-near" src="assets/images/Card_Home_Page/22.png" alt="25"/>
+							<a href="{{path('app_catalogue_page')}} " style="text-decoration: none ; color:inherit">
 
-    <div class="container-fluid hidden">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div style="margin-top: 0px; position: relative">
-                            <img
-                                    style="margin-top: 20px"
-                                    class="img-near"
-                                    src="{{ asset('assets/images/EventPageImages/Events/' ~ thisWeek ~ '/1.jpg') }}"
-                                    alt="25"
-                            />
-                            <a style="text-decoration: none ; color: inherit" href = {{path('app_event_page',{ 'id' : thisWeek })}}  >
-
-                            <button
-                                    type="button"
-                                    class="bouton_near descri"
-                                    style="background-color: rgb(23, 128, 125)"
-                            >
-                                Available in this Week
-                            </button>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div style="margin-top: 0px; position: relative">
-                            <img
-                                    style="margin-top: 20px"
-                                    class="img-near"
-                                    src="{{ asset('assets/images/EventPageImages/Events/' ~ tonight ~ '/1.jpg') }}"
-                                    alt="24"
-                            />
-                            <a style="text-decoration: none ; color: inherit" href = {{path('app_event_page',{ 'id' : tonight })}}  >
-                            <button
-                                    type="button"
-                                    class="bouton_near descri"
-                                    style="background-color: rgb(175, 195, 90)"
-
-                            >
-                                Available tonight
-                            </button> </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div style="margin-top: 0px; position: relative">
-                            <img
-                                    style="margin-top: 20px"
-                                    class="img-near descri"
-                                    src="{{ asset('assets/images/EventPageImages/Events/' ~ NextWeek ~ '/1.jpg') }}"
-                                    alt="23"
-                            />
-                            <a style="text-decoration: none ; color: inherit" href = {{path('app_event_page',{ 'id' : NextWeek })}}  >
-
-                            <button
-                                    type="button"
-                                    class="bouton_near"
-                                    style="background-color: rgb(175, 195, 90)"
-                            >
-                               Available next week
-                            </button></a>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div style="margin-top: 0px; position: relative">
-                            <img
-                                    style="margin-top: 20px"
-                                    class="img-near"
-                                    src="assets/images/Card_Home_Page/22.png"
-                                    alt="25"
-                            />
-                            <a href="{{path('app_catalogue_page')}} "style="text-decoration: none ; color:inherit">
-
-                            <button
-                                    type="button"
-                                    class="bouton_near descri"
-                                    style="background-color: rgb(23, 128, 125)"
-                            >
-                                Find a campsite
-                            </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% include 'footer.html.twig' %}
+								<button type="button" class="bouton_near descri" style="background-color: rgb(23, 128, 125)">
+									Find a campsite
+								</button>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% include 'footer.html.twig' %}
 
 
 {% endblock %}

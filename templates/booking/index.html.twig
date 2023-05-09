@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-	Booking Details
+	Booking Confirmed
 {% endblock %}
 
 {% block javascripts %}
@@ -27,7 +27,7 @@
 		<div class="d-flex justify-content-between align-items-center py-3">
 			<h2 class="h5 mb-0">
 				<a href="#" class="text-muted"></a>
-				Order #16123222</h2>
+				Order #{{booking.getId()}}</h2>
 		</div>
 
 		<!-- Main content -->
@@ -42,7 +42,7 @@
 								<span class="me-3">{{ booking.getDate()|date('Y-m-d H:i:s') }}</span>
 								<span class="me-3">#{{booking.getId()}}</span>
 								<span class="me-3">Cash</span>
-								<span class="badge rounded-pill bg-info">Booking Details</span>
+								<span class="badge rounded-pill bg-success">Booking Confirmed</span>
 							</div>
 						</div>
 						<table class="table table-borderless">
@@ -96,7 +96,8 @@
 							<div class="col-lg-6">
 								<h3 class="h6">Payment Method</h3>
 								<p>Cash<br>
-									Total:{{ result }} TND
+									Total:{{ result }}
+									TND
 									<span class="badge bg-danger rounded-pill">Unpaid</span>
 								</p>
 							</div>
@@ -109,6 +110,11 @@
 								</div>
 								<br>
 								<br>
+								<!-- Confirmation of booking button -->
+								<div class="col-lg-6">
+									<a href="{{ path('booking_cancel') }}" class="btn btn-md btn-danger confirmation-btn">Cancel Booking</a>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -184,9 +190,9 @@
 					</h4>
 					<p>
 						Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-																																										                  Expedita nihil ipsam rerum tenetur magnam necessitatibus autem
-																																										                  non corrupti. Odio aut commodi vero corrupti dignissimos eius
-																																										                  laboriosam non vel beatae nisi.
+																																																                  Expedita nihil ipsam rerum tenetur magnam necessitatibus autem
+																																																                  non corrupti. Odio aut commodi vero corrupti dignissimos eius
+																																																                  laboriosam non vel beatae nisi.
 					</p>
 					<div class="row">
 						<div class="col-md-12">
@@ -221,7 +227,7 @@
 					<span class="right">
 						<i class="far fa-sharp fa-regular fa-copyright"></i>
 						2023
-																																										                  Glamping. All rights reserved.</span>
+																																																                  Glamping. All rights reserved.</span>
 				</div>
 				<div class="col-md-3">
 					<ul class="list">
