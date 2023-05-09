@@ -46,36 +46,58 @@ class BookingController extends AbstractController
 
             $session->set('last_booking_id', $booking->getId());
 
-            return $this->redirectToRoute('booking_confirmation');
+            return $this->redirectToRoute('booking_confirmed');
         }
     }
 
-#[Route('/Booking/confirmation', name: 'booking_confirmation')]
-public function confirmation(Request $request, EntityManagerInterface $entityManager): Response
-{
-    $session = $request->getSession();
-    $bookingId = $session->get('last_booking_id');
+    #[Route('/Booking/confirmed', name: 'booking_confirmed')]
+    public function confirmation(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $session = $request->getSession();
+        $bookingId = $session->get('last_booking_id');
 
-    if (!$bookingId) {
+        if (!$bookingId) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        $booking = $entityManager->getRepository(Booking::class)->find($bookingId);
+        $eventId = $booking->getIdEvent()->getId();
+        $event = $entityManager->getRepository(Event::class)->find($eventId);
+        $userId = $booking->getIdUser()->getId();
+        $user = $entityManager->getRepository(User::class)->find($userId);
+        $guestnbr = $booking->getNbrGuests();
+
+        if (!$booking) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('booking/index.html.twig', [
+            'booking' => $booking,
+            'event' => $event,
+            'user' => $user,
+            'guestnbr' => $guestnbr,
+        ]);
+    }
+    #[Route('/Booking/cancel', name: 'booking_cancel')]
+    public function cancel(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $session = $request->getSession();
+        $bookingId = $session->get('last_booking_id');
+
+        if (!$bookingId) {
+            return $this->redirectToRoute('app_home');
+        }
+        $booking = $entityManager->getRepository(Booking::class)->find($bookingId);
+
+        if (!$booking) {
+            return $this->redirectToRoute('app_home');
+        }
+        $event = $booking->getIdEvent();
+        $guests = $booking->getNbrGuests();
+        $event->setNbrGuestsMax($event->getNbrGuestsMax() + $guests);
+        $entityManager->remove($booking);
+        $entityManager->flush();
+        $session->remove('last_booking_id');
         return $this->redirectToRoute('app_home');
     }
-
-    $booking = $entityManager->getRepository(Booking::class)->find($bookingId);
-    $eventId=$booking->getIdEvent()->getId();
-    $event = $entityManager->getRepository(Event::class)->find($eventId);
-    $userId=$booking->getIdUser()->getId();
-    $user = $entityManager->getRepository(User::class)->find($userId);
-    $guestnbr=$booking->getNbrGuests();
-
-    if (!$booking) {
-        return $this->redirectToRoute('app_home');
-    }
-
-    return $this->render('booking/index.html.twig', [
-        'booking' => $booking,
-        'event' => $event,
-        'user' => $user,
-        'guestnbr' => $guestnbr,
-    ]);
-}
 }
