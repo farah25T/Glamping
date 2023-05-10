@@ -58,7 +58,7 @@
 		<nav class="navbare z-1 rounded-5 m-auto">
 			<div class="container-fluid">
 				<form method="POST" action="{{ path('app_home') }}">
-					<div class="row">
+					<div class="row m-2">
 						<div class="col-md-3">
 							<div class="inputGroup">
 								<input type="text" id="location" name="location" required="required" autocomplete="off" pattern="[A-Za-z]+"/>
@@ -71,6 +71,10 @@
 						<div class="col-md-4">
 							<div class="inputGroup">
 								<input type="text" name="daterange" value="08/05/2023 - 10/05/2023" />
+								<label for="daterange">
+									<i class="fa-regular fa-calendar-days"></i>
+									Select A Date
+								</label>
 							</div>
 						</div>
 						<div class="col-md-3">
