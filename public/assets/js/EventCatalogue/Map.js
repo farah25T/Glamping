@@ -1,7 +1,7 @@
 let map;
 const loadMarkers = () => {
   Markers.forEach(e => {
-    L.marker([e.x, e.y], { alt: e.alt }).bindPopup(e.popupText).addTo(map)
+    L.marker([e.x, e.y], { alt: e.alt }).bindPopup(e.popupText).closePopup().addTo(map)
   });
 }
 const CreateMap = (x, y, zoom) => {

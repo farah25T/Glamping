@@ -11,12 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UserController extends AbstractController
 {
-    // ...
-
    #[Route('/image', name: 'app_image', methods: ['POST'])]
 public function handleImageUpload(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
 {
@@ -83,4 +82,53 @@ public function handleImageUpload(Request $request, SluggerInterface $slugger, E
         }
         return $this->redirectToRoute('app_profile');
 
-}}
+}
+    #[Route('/user/update', name: 'app_user_update', methods: ['POST'])]
+    public function UserUpdate(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $session = $request->getSession();
+        $user = null;
+        $id = $session->get('id');
+
+        if (!isset($id)) {
+            return $this->redirectToRoute('app_authentication');
+        }
+        $user = $entityManager->getRepository(User::class)->find($id);
+        $userName=$request->request->get('username');
+        if(isset($userName)){
+            $address = $request->request->get('address');
+            $phone = $request->request->get('phone');
+            $fullName= $request->request->get('fullname');
+            $password= $request->request->get("password");
+            $gender=$request->request->get("gender");
+            $user->setName($userName);
+            $user->setFullName($fullName);
+            $user->setPhone($phone);
+            $user->setAddress($address);
+            $user->setGender($gender);
+            if(isset($password)){
+                $user->setPassword($password);
+            }
+            $entityManager->getRepository(User::class)->save($user,true);
+            return $this->redirectToRoute('app_profile');
+        }
+        $this->addFlash('erreur', 'UserName field is missing !');
+       return $this->redirectToRoute('app_authentication');
+    }
+    #[Route('/user/delete', name: 'app_user_delete')]
+    public function UserDelete(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $session = $request->getSession();
+        $user = null;
+        $id = $session->get('id');
+
+        if (!isset($id)) {
+            return $this->redirectToRoute('app_authentication');
+        }
+        $user = $entityManager->getRepository(User::class)->find($id);
+        $entityManager->getRepository(User::class)->remove($user, true);
+        return $this->redirectToRoute('app_authentication_logout');
+
+    }
+
+}
