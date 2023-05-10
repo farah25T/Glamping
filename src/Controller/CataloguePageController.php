@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Event;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +19,7 @@ class CataloguePageController extends AbstractController
     }
 
     #[Route('/catalogue', name: 'app_catalogue_page')]
-    public function index(Request $request ): Response
+    public function index(Request $request,EntityManagerInterface $entityManager ): Response
     {
         $session = $request->getsession();
         $user = null;
@@ -27,10 +27,12 @@ class CataloguePageController extends AbstractController
         if (isset($userid)) {
             $user = $this->em->getRepository(User::class)->find($userid);
         }
+        $maxGuests = $entityManager->getRepository(Event::class)->findMaxNbrGuests();
 
         return $this->render('catalogue_page/index.html.twig', [
             'controller_name' => 'CataloguePageController',
             'user' => $user,
+            'guests'=>$maxGuests,
         ]);
     }
 }
