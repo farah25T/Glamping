@@ -27,52 +27,50 @@ class HomeController extends AbstractController
         /*Recuperer les latititudes et longitudes pour les marker du map */
         $event = $entityManager->getRepository(Event::class)->findAll();
         $responseData = [];
-        foreach ($event as $events ) {
+        foreach ($event as $events) {
             $responseData[] = [
                 'long' => $events->getLongitude(),
-                'alt'=>$events->getLatitude(),
-                'image'=>$events->getId()
+                'alt' => $events->getLatitude(),
+                'image' => $events->getId()
 
             ];
         }
         /*    **************     */
 
         /*Recuperer les events available tonight  */
-      if( $entityManager->getRepository(Event::class)->tonight())
-                 $available_tonight = $entityManager->getRepository(Event::class)->tonight()->getId();
-    else
-                  $available_tonight = 1;
-     if( $entityManager->getRepository(Event::class)->thisWeek())
-                  $available_thisWeek = $entityManager->getRepository(Event::class)->thisWeek()->getId();
-     else
-                   $available_thisWeek = 2;
-     if( $entityManager->getRepository(Event::class)->NextWeek())
-                   $available_NextWeek = $entityManager->getRepository(Event::class)->NextWeek()->getId();
-      else
-                    $available_NextWeek = 3;
-       
-       
+        if ($entityManager->getRepository(Event::class)->tonight())
+            $available_tonight = $entityManager->getRepository(Event::class)->tonight()->getId();
+        else
+            $available_tonight = 1;
+        if ($entityManager->getRepository(Event::class)->thisWeek())
+            $available_thisWeek = $entityManager->getRepository(Event::class)->thisWeek()->getId();
+        else
+            $available_thisWeek = 2;
+        if ($entityManager->getRepository(Event::class)->NextWeek())
+            $available_NextWeek = $entityManager->getRepository(Event::class)->NextWeek()->getId();
+        else
+            $available_NextWeek = 3;
 
 
-       /*   ************* */
 
-       $maxGuests = $entityManager->getRepository(Event::class)->findMaxNbrGuests();
+
+        /*   ************* */
+
+        $maxGuests = $entityManager->getRepository(Event::class)->findMaxNbrGuests();
 
 
         if (isset($id)) {
             $user = $entityManager->getRepository(User::class)->find($id);
         }
         return $this->render('home/index.html.twig', [
-             'user' => $user,
-            'event'=>$responseData,
-            'tonight'=>$available_tonight,
-            'thisWeek'=>$available_thisWeek,
-            'NextWeek'=> $available_NextWeek,
-            'guests'=>$maxGuests,
+            'user' => $user,
+            'event' => $responseData,
+            'tonight' => $available_tonight,
+            'thisWeek' => $available_thisWeek,
+            'NextWeek' => $available_NextWeek,
+            'guests' => $maxGuests,
 
 
         ]);
     }
-    
-  
 }

@@ -9,47 +9,49 @@
     <section class="main">
       <h1 class="title">Your Informations</h1>
       <a href="{{ path('app_profile') }}" class="back"> Go Back  <i class="fa-solid fa-circle-chevron-right"></i></a>
-      <form action="">
+      <form action="{{ path('app_user_update') }}" method="post">
         <div class="main-box">
           <div class="input-box">
             <span class="text">Full Name</span>
-            <input type="text" placeholder="Please enter your name" required />
+            <input type="text" placeholder="Please enter your name" value="{{user.fullName}}" name="fullname"  />
           </div>
           <div class="input-box">
             <span class="text">User Name</span>
-            <input type="text" placeholder="User Name" value="{{user.name}}" required />
+            <input type="text" placeholder="User Name" value="{{user.name}}" name="username" required />
           </div>
           <div class="input-box">
-            <span class="text">Email</span>
-            <input type="email" placeholder="Email" value="{{user.email}}" required />
+            <span class="text">Address</span>
+            <input type="text" placeholder="your adress" value="{{user.address}}" name="address" />
           </div>
           <div class="input-box">
             <span class="text">Phone Number </span>
             <input
+              id="tel"
               type="tel"
-              placeholder="22-555-555"
-              pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"
-              required
+              placeholder="Please enter your phone"
+              value="{{user.phone}}"
+              name="phone"
             />
           </div>
           <div class="input-box">
             <span class="text">Password</span>
-            <input type="text" placeholder="Please enter your password" required />
+            <input type="text" placeholder="Please enter your pass" name="password" id="password" />
           </div>
           <div class="input-box">
             <span class="text">Confirm Password </span>
             <input
+              id="confirmpass"
               type="password"
               placeholder="Confirm your password"
-              required
             />
+            
           </div>
         </div>
         <div class="container">
-          <input type="radio" name="gender" id="circle-1" />
-          <input type="radio" name="gender" id="circle-2" />
+<input type="radio" name="gender" value="male" id="circle-1" {% if user.gender == 'male' %}checked{% endif %} />
+<input type="radio" name="gender" value="female" id="circle-2" {% if user.gender == 'female' %}checked{% endif %} />
+<input type="radio" name="gender" value="other" id="circle-3" {% if user.gender == 'other' %}checked{% endif %} />
 
-          <input type="radio" name="gender" id="circle-3" />
 
           <span class="gender">Gender</span>
           <div class="category">
@@ -68,9 +70,32 @@
           </div>
         </div>
         <div class="btn">
-          <input type="submit" name="" id="" value="Update" />
+          <input type="submit" name="" id="submit" value="Update" />
         </div>
+        <script> 
+        function containsOnlyNumbers(str) {
+            return /^\d+$/.test(str);
+          }
+               var confirm=document.getElementById("confirmpass");
+               var pass=document.getElementById("password");
+               var btn=document.getElementById("submit");
+               var phone=document.getElementById("tel");
+               pass.addEventListener("keydown",()=>{
+                if(pass.value){
+                  confirm.setAttribute("required",true);
+                }
+                else{
+                  confirm.setAttribute("required",false);
+                }
+               })
+               btn.addEventListener("click",(e)=>{
+                if(pass.value!== confirm.value && containsOnlyNumbers(phone.value))
+                  e.preventDefault();
+               })
+        </script>
       </form>
+
+      <a href="{{ path('app_user_delete') }}"><button>Delete</button></a>
     </section>
   
 {% endblock %}

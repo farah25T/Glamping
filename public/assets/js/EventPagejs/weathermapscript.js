@@ -65,7 +65,7 @@ fetch(`http://127.0.0.1:8000/api/${lastEndpoint}`)
       .addTo(map)
       .bindPopup(name + ", " + country + ", " + city)
       .openPopup();
-
+    console.log(lat,lon);
     logJSONData(lat, lon);
   })
   .catch((error) => {
