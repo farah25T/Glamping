@@ -57,11 +57,11 @@
 		<!-- navbar -->
 		<nav class="navbare z-1 rounded-5 m-auto">
 			<div class="container-fluid">
-				<form method="POST" action="{{ path('app_home') }}">
+				<form method="POST" action="{{ path('app_catalogue_page') }}">
 					<div class="row">
 						<div class="col-md-4">
 							<div class="inputGroup">
-								<input type="text" id="location" name="location" required="required" autocomplete="off" pattern="[A-Za-z]+"/>
+								<input type="text" id="location" name="location"  autocomplete="off" pattern="[A-Za-z]+"/>
 								<label for="location">
 									<span class="fas fa-regular fa-location-dot"></span>
 									location
@@ -75,7 +75,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="inputGroup">
-								<input type="number" id="guests" name="guests" min="1" max={{guests}} required="required" autocomplete="off"/>
+								<input type="number" id="guests" name="guests" min="1" max={{guests}}  autocomplete="off"/>
 								<label for="guests">
 									<span class="fas fa-regular fa-user"></span>
 									Add guests
