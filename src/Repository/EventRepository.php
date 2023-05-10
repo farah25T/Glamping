@@ -87,6 +87,20 @@ class EventRepository extends ServiceEntityRepository
 
 
 
+    public function findTopEventOfYear(int $year): ?Event
+    {
+        return $this->createQueryBuilder('e')
+            ->innerJoin('e.User', 'eu')
+            ->andWhere('YEAR(e.date_debut) = :year')
+            ->setParameter('year', $year)
+            ->groupBy('eu.event')
+            ->orderBy('COUNT(eu.user)', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+
 
 //    /**
 //     * @return Event[] Returns an array of Event objects
