@@ -1,37 +1,116 @@
-body{
-    background:#eee;
-}
-.card {
-    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
-}
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
-    border-radius: 1rem;
-}
-
-.text-reset {
-    --bs-text-opacity: 1;
-    color: inherit!important;
-}
-
-.container{
-    margin-top: 100px;
-}
-.confirmation-btn {
-  background-color: #28a745;
-  color: #fff;
+*{
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
   border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
+  scroll-behavior: smooth;
+}
+body{
+    background: rgb(243, 242, 239);
+    
+}
+.img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.5s ease-in-out;
+}
+.img::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    background: rgba(0,0,0,0.6);
+}
+
+
+.card {
+  box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid rgba(0, 0, 0, .125);
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  }
+  .card:hover .img{
+    transform: scale(1.1);
+  }
+
+  .text-reset {
+    --bs-text-opacity: 1;
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.container {
+    margin-top: 100px;
+    margin-bottom: 30px;
+    padding: 0 15px;
+}
+
+.confirmation-btn {
+    background-color: #e14807;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    transition: 0.5s ease-in-out;
+
+}
+
+h6 {
+    
+    text-align: center left;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+a{
   font-size: 18px;
-  cursor: pointer;
+  color: #e14807;
+  font-weight: 600;
+  text-decoration: none;
+}
+a:hover {
+    color:#ea5c20;
+    text-decoration: none;
+}
+.card-title {
+    margin-bottom: .75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+.card-text:last-child {
+    margin-bottom: 0;
 }
 
 /* footer styles */
