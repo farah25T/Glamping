@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Controller;
-
-use App\Entity\User;
+use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class CataloguePageController extends AbstractController
 {
@@ -19,7 +21,7 @@ class CataloguePageController extends AbstractController
     }
 
     #[Route('/catalogue', name: 'app_catalogue_page')]
-    public function index(Request $request ): Response
+    public function index(EventRepository $eventRepository , Request $request ): Response
     {
         $session = $request->getsession();
         $user = null;
@@ -27,10 +29,16 @@ class CataloguePageController extends AbstractController
         if (isset($userid)) {
             $user = $this->em->getRepository(User::class)->find($userid);
         }
+        $CurrPage = $request->query->getInt('page', 1);
+        $MaxPageCount = 6;
+        $queryB = $eventRepository->GetFilter_SortQueryBuilder();
+        $adapter = new QueryAdapter($queryB);
+        $pagerFanta = Pagerfanta::createForCurrentPageWithMaxPerPage($adapter,$CurrPage,$MaxPageCount);
 
         return $this->render('catalogue_page/index.html.twig', [
             'controller_name' => 'CataloguePageController',
             'user' => $user,
+            'pager' =>$pagerFanta,
         ]);
     }
 }

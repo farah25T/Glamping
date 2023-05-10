@@ -21,10 +21,10 @@ const CreateMap = (x, y, zoom) => {
 };
 
 const success = (position) => {
-  CreateMap(position.coords.latitude, position.coords.longitude, 8.5);
+  CreateMap(position.coords.latitude, position.coords.longitude, 6);
 };
 /* DEFAULT LOCATION IF USER DENIED GIVING HIS LOCATION */
-CreateMap(36.492166, 10.015555, 7);
+CreateMap(36.492166, 10.015555, 6);
 
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(success);
