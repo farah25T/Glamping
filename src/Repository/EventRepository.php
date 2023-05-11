@@ -86,20 +86,19 @@ class EventRepository extends ServiceEntityRepository
         return $result['max_guests'];
     }
 
-
-
-    public function findTopEventOfYear(int $year): ?Event
+  /*  public function findTopEventOfYear(int $year): ?Event
     {
-        return $this->createQueryBuilder('e')
-            ->innerJoin('e.User', 'eu')
+        return $this->createQueryBuilder('u')
+            ->innerJoin('u.events', 'e')
             ->andWhere('YEAR(e.date_debut) = :year')
             ->setParameter('year', $year)
-            ->groupBy('eu.event')
-            ->orderBy('COUNT(eu.user)', 'DESC')
+            ->groupBy('e')
+            ->orderBy('COUNT(u)', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
     }
+    */
 
 
 
