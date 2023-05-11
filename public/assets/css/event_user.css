@@ -59,7 +59,7 @@
     overflow: hidden;
 }
 .Title
-{
+{   margin-left: 40%;
     font-size: 32px;
     font-weight: 700;
     animation: slideTop 1s ease forwards;
@@ -95,7 +95,7 @@
 .price {
     font-weight: 900;
     font-size: 20px;
-    color: #a5d7b0;;
+    color: #ef6e12;;
 }
 
 .actual-price {

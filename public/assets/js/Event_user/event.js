@@ -63,6 +63,9 @@ fetch('/event_booked')
 
                const Event_name = card$p.querySelector('.descri');
                Event_name.innerHTML = response[p].name;
+               const Event_link = card$p.querySelector('a');
+               Event_link.setAttribute('href',"http://127.0.0.1:8000/event/"+response[p].image );
+
 
                const Price_event = card$p.querySelector('.price');
                Price_event.innerHTML = "Your Guests Number :   " + response[p].guests_Number + "<br>Total Price :" + response[p].price * response[p].guests_Number + "<br>Date Debut = " + response[p].date;
