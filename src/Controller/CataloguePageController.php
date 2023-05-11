@@ -38,10 +38,41 @@ class CataloguePageController extends AbstractController
         $pagerFanta = Pagerfanta::createForCurrentPageWithMaxPerPage($adapter,$CurrPage,$MaxPageCount);
         $maxGuests = $entityManager->getRepository(Event::class)->findMaxNbrGuests();
 
+        $responseData = [];
+
+        foreach($pagerFanta as $event)
+        {
+            $toggled = false;
+            if ($user){
+                $users = $event->getUsers();
+                foreach ($users as $u) {
+                    if ($u->getId() === $user->getId())
+                    { 
+                        $toggled = true;
+                        break;
+                    }
+                }
+            }
+            $responseData[] = [
+                'name' => $event->getName(),
+                'id' => $event->getId(),
+                'date_debut'=>$event->getDateDebut()->format('Y-m-d'),
+                'date_fin'=>$event->getDateFin()->format('Y-m-d'),
+                'price'=>$event->getPrice(),
+                'place'=>$event->getPlace(),
+                'city' =>$event->getCity(),
+                'latitude' =>$event->getLatitude(),
+                'longitude' =>$event->getLongitude(),
+                'toggled' => $toggled
+            ];
+        }
+
+
         return $this->render('catalogue_page/index.html.twig', [
             'controller_name' => 'CataloguePageController',
             'user' => $user,
-            'pager' =>$pagerFanta,
+            'pager' =>$responseData,
+            'fanta' =>$pagerFanta,
             'guests'=>$maxGuests,
         ]);
     }
