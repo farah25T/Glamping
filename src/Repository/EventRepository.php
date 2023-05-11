@@ -41,17 +41,18 @@ class EventRepository extends ServiceEntityRepository
     }
 
 
-    public function tonight (): ?Event
-  { $currentDate = new \DateTime();
-      $date = $currentDate->format('Y-m-d');
-      return $this->createQueryBuilder('e')
-          ->andWhere('e.date_debut = :date')
-          ->setParameter('date', $date)
-          ->setMaxResults(1)
-          ->getQuery()
-          ->getOneOrNullResult();
-   }
-    public function thisWeek (): ?Event
+    public function tonight(): ?Event
+    {
+        $currentDate = new \DateTime();
+        $date = $currentDate->format('Y-m-d');
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date_debut = :date')
+            ->setParameter('date', $date)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+    public function thisWeek(): ?Event
     {
         $currentDate = new \DateTime();
         $date_inf = $currentDate->sub(new \DateInterval('P4D'))->format('Y-m-d');
@@ -65,7 +66,7 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-    public function NextWeek (): ?Event
+    public function NextWeek(): ?Event
     {
         $currentDate = new \DateTime();
         $date_inf = $currentDate->add(new \DateInterval('P7D'))->format('Y-m-d');
@@ -129,34 +130,74 @@ class EventRepository extends ServiceEntityRepository
 
 
 
-//    /**
-//     * @return Event[] Returns an array of Event objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Event[] Returns an array of Event objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('e')
+    //            ->andWhere('e.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('e.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Event
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Event
+    //    {
+    //        return $this->createQueryBuilder('e')
+    //            ->andWhere('e.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 
-    public function GetFilter_SortQueryBuilder():QueryBuilder
+    public function GetFilter_SortQueryBuilder(array $queryparams): QueryBuilder
     {
+
         $qb = $this->createQueryBuilder('event');
-        return $qb; 
+        if (array_key_exists('Search', $queryparams)) {
+            $tokens = explode($queryparams['Search'], " ");
+            foreach ($tokens as $token) {
+                $qb->andWhere('event.name LIKE :word')
+                    ->setParameter('word', '%' . $token . '%');
+            }
+        }
+        if (array_key_exists('minPrice', $queryparams)) {
+            $MinPrice = (int)$queryparams['minPrice'];
+            $qb->andWhere('event.price >= :price')
+                ->setParameter('price', $MinPrice);
+        }
+        if (array_key_exists('maxPrice', $queryparams)) {
+            $MaxPrice = (int)$queryparams['maxPrice'];
+            $qb->andWhere('event.price <= :price')
+                ->setParameter('price', $MaxPrice);
+        }
+        if (array_key_exists('location', $queryparams)) {
+            $tokens = explode($queryparams["location"], " ");
+            foreach ($tokens as $token) {
+                $qb->andWhere('event.city LIKE :word')
+                    ->setParameter('word', '%' . $token . '%');
+            }
+            foreach ($tokens as $token) {
+                $qb->andWhere('event.country LIKE :word')
+                    ->setParameter('word', '%' . $token . '%');
+            }
+        }
+        if (array_key_exists('sort', $queryparams)) {
+            switch ($queryparams["sort"]) {
+                case "PriceAsc":
+                    $qb->orderBy('event.price','ASC');
+                    break;
+                case "PriceDesc":
+                    $qb->orderBy('event.price', 'DESC');
+                    break;
+            }
+        }
+
+        return $qb;
     }
 }
