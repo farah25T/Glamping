@@ -74,9 +74,7 @@
             </label>
           </div>
         </div>
-        <div class="btn">
-          <input type="submit" name="" id="submit" value="Update" />
-        </div>
+          <button class="btn" type="submit" name="" id="submit" >Update</button>
         <script> 
         function containsOnlyNumbers(str) {
             return /^\d+$/.test(str);
@@ -94,7 +92,7 @@
                 }
                })
                btn.addEventListener("click",(e)=>{
-                if(pass.value!== confirm.value && containsOnlyNumbers(phone.value))
+                if(pass.value!== confirm.value || containsOnlyNumbers(phone.value))
                   e.preventDefault();
                })
         </script>
