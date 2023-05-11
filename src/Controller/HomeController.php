@@ -51,8 +51,19 @@ class HomeController extends AbstractController
         else
             $available_NextWeek = 3;
 
-
-
+         /*   if ($entityManager->getRepository(Event::class)->findTopEventOfYear(2021))
+            $best_2021 = $entityManager->getRepository(Event::class)->findTopEventOfYear(2021)->getId();
+        else
+            $best_2021 = 4;
+            if ($entityManager->getRepository(Event::class)->findTopEventOfYear(2022))
+            $best_2022 = $entityManager->getRepository(Event::class)->findTopEventOfYear(2022)->getId();
+        else
+            $best_2022 = 5;
+            if ($entityManager->getRepository(Event::class)->findTopEventOfYear(2023))
+            $best_2023 = $entityManager->getRepository(Event::class)->findTopEventOfYear(2023)->getId();
+        else
+            $best_2023 = 6;
+            */
 
         /*   ************* */
 
@@ -69,6 +80,8 @@ class HomeController extends AbstractController
             'thisWeek' => $available_thisWeek,
             'NextWeek' => $available_NextWeek,
             'guests' => $maxGuests,
+
+
 
 
         ]);
