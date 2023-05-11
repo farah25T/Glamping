@@ -35,21 +35,36 @@ class HomeController extends AbstractController
 
             ];
         }
+        $best_2021=22;
+        $available_tonight = 1;
+        $available_thisWeek = 2;
+        $available_NextWeek = 3;
+        $best_2023=25;
+        $best_2022=18;
+
         /*    **************     */
 
         /*Recuperer les events available tonight  */
         if ($entityManager->getRepository(Event::class)->tonight())
             $available_tonight = $entityManager->getRepository(Event::class)->tonight()->getId();
-        else
-            $available_tonight = 1;
+
         if ($entityManager->getRepository(Event::class)->thisWeek())
             $available_thisWeek = $entityManager->getRepository(Event::class)->thisWeek()->getId();
-        else
-            $available_thisWeek = 2;
+
         if ($entityManager->getRepository(Event::class)->NextWeek())
             $available_NextWeek = $entityManager->getRepository(Event::class)->NextWeek()->getId();
-        else
-            $available_NextWeek = 3;
+
+// Find the top by date
+
+            if ($entityManager->getRepository(Event::class)->findTopEventOfYear2021())
+            $best_2021 = $entityManager->getRepository(Event::class)->findTopEventOfYear2021()->getId();
+
+
+            if ($entityManager->getRepository(Event::class)->findTopEventOfYear2022())
+            $best_2022 = $entityManager->getRepository(Event::class)->findTopEventOfYear2022()->getId();
+
+            if ($entityManager->getRepository(Event::class)->findTopEventOfYear2023())
+            $best_2023 = $entityManager->getRepository(Event::class)->findTopEventOfYear2023()->getId();
 
 
 
@@ -69,6 +84,11 @@ class HomeController extends AbstractController
             'thisWeek' => $available_thisWeek,
             'NextWeek' => $available_NextWeek,
             'guests' => $maxGuests,
+            'b2023'=>$best_2023,
+            'b2021'=>$best_2021,
+            'b2022'=>$best_2022
+
+
 
 
         ]);

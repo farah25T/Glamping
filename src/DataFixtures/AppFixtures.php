@@ -465,44 +465,7 @@ class AppFixtures extends Fixture
         $event25->setLongitude(9.642165622744162);
         $manager->persist($event25);
 
-        // create first user
-        $user1 = new User();
-        $user1->setName('farah');
-        $user1->setPassword('aaaa');
-        $user1->setEmail('farah@gmail.com');
-
-        $manager->persist($user1);
-
-        // create second user
-        $user2 = new User();
-        $user2->setName('nour');
-        $user2->setPassword('bbbb');
-        $user2->setEmail('nour@gmail.com');
-        $manager->persist($user2);
-
-        // create third user
-        $user3 = new User();
-        $user3->setName('raed');
-        $user3->setPassword('rrrr');
-        $user3->setEmail('raed@gmail.com');
-        $manager->persist($user3);
-
-        // create forth user
-        $user4 = new User();
-        $user4->setName('ahmed');
-        $user4->setPassword('mmmm');
-        $user4->setEmail('ahmed@gmail.com');
-        $manager->persist($user4);
-
-        // create FIFTH user
-        $user5 = new User();
-        $user5->setName('donia');
-        $user5->setPassword('dddd');
-        $user5->setEmail('donia@gmail.com');
-        $manager->persist($user5);
-
-        // flush changes to database
-        $manager->flush();
+        
 
     }
 }

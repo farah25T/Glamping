@@ -10,11 +10,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -41,6 +43,8 @@ class User
     private $imageFilename;
 
     private $imageFile;
+    private $roles = [];
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $phone = null;
@@ -226,4 +230,39 @@ class User
 
         return $this;
     }
+    public function getRoles(): array
+    {
+        // A user could have multiple roles, so we return an array
+        // For example:
+        // return ['ROLE_USER'];
+
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        // This method was introduced in Symfony 5.3 and it's used by Symfony to 
+        // get a unique identifier for the user, which can be used in things like
+        // logs. Normally, you can return the username or email.
+
+        // return $this->username;
+        // or 
+         return $this->email;
+    }
+
+    // ...
+
 }

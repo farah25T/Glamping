@@ -87,20 +87,46 @@ class EventRepository extends ServiceEntityRepository
         return $result['max_guests'];
     }
 
-
-
-    public function findTopEventOfYear(int $year): ?Event
+  public function findTopEventOfYear2023(): ?Event
     {
         return $this->createQueryBuilder('e')
-            ->innerJoin('e.User', 'eu')
-            ->andWhere('YEAR(e.date_debut) = :year')
-            ->setParameter('year', $year)
-            ->groupBy('eu.event')
-            ->orderBy('COUNT(eu.user)', 'DESC')
+            ->innerJoin('e.users', 'eu')
+            ->andWhere("e.date_debut >= '2023-01-01' ")
+            ->andWhere("e.date_debut <=  '2023-12-31'")
+            ->groupBy('e')
+            ->orderBy('COUNT(eu.id)', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
     }
+    public function findTopEventOfYear2022(): Event
+    {
+        return $this->createQueryBuilder('e')
+            ->innerJoin('e.users', 'eu')
+            ->andWhere("e.date_debut >= '2022-01-01' ")
+            ->andWhere("e.date_debut <=  '2022-12-31'")
+            ->groupBy('e')
+            ->orderBy('COUNT(eu.id)', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findTopEventOfYear2021(): ?Event
+    {
+        return $this->createQueryBuilder('e')
+            ->innerJoin('e.users', 'eu')
+            ->andWhere("e.date_debut >= '2021-01-01' ")
+            ->andWhere("e.date_debut <=  '2021-12-31'")
+            ->groupBy('e')
+            ->orderBy('COUNT(eu.id)', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+
+
 
 
 

@@ -131,11 +131,9 @@ form input[type="radio"] {
   display: none;
 }
 form .btn {
+  
   height: 50px;
   margin: 20px 0;
-}
-form .btn input {
-  height: 100%;
   width: 100%;
   background: rgba(255, 255, 255, 0.1);
   color: #faf9f6;
@@ -146,7 +144,7 @@ form .btn input {
   cursor: pointer;
   transition: all 0.4s ease;
 }
-form .btn input:hover {
+form .btn:hover {
   background-color: #ef6e12;
 }
 /* PopUP CODE */

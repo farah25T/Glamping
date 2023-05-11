@@ -64,29 +64,7 @@ class EventUserController extends AbstractController
     }
 
 
-    #[Route('/event_saved', name: 'event_saved')]
-    public function saved(EntityManagerInterface $entityManager, SessionInterface $session): JsonResponse
-    {
-        $userIsFound = $entityManager->getRepository(User::class)->findOneById($session->get('id'));
-
-        if (!$userIsFound) {
-            throw $this->createNotFoundException('User not found');
-        }
-
-        $events = $userIsFound->getEvents();
-
-
-        $responseData = [];
-        foreach ($events as $event) {
-            $responseData[] = [
-                'name' => $event->getName(),
-
-
-            ];
-        }
-
-        return new JsonResponse($responseData);
-    }
+   
 
 
     #[Route('/event_booked', name: 'event_booked')]
