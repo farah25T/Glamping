@@ -98,7 +98,7 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-    public function findTopEventOfYear2022(): Event
+    public function findTopEventOfYear2022(): ?Event
     {
         return $this->createQueryBuilder('e')
             ->innerJoin('e.users', 'eu')
