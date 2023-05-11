@@ -13,28 +13,8 @@ LikeToggles.forEach((like) => {
   like.addEventListener("click", (event) => {
     const fullid = event.target.id;
     const id = fullid.split("-")[1];
-    console.log(id);
-    console.log(`${protocol}://127.0.0.1:8000/event/${id}/dislike`);
-    console.log(event.target.checked);
-    if (event.target.checked) {
+    if (!event.target.checked) {
       fetch(`${protocol}://127.0.0.1:8000/event/${id}/dislike`, {
-        method: "POST",
-      })
-        .then((response) => {
-          if (response.redirected) {
-            // handle redirection
-            event.target.checked = true;
-            window.location.assign(
-              `${protocol}://127.0.0.1:8000/authentication`
-            );
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          event.target.checked = true;
-        });
-    } else {
-      fetch(`${protocol}://127.0.0.1:8000/event/${id}/like`, {
         method: "POST",
       })
         .then((response) => {
@@ -49,6 +29,23 @@ LikeToggles.forEach((like) => {
         .catch((err) => {
           console.log(err);
           event.target.checked = false;
+        });
+    } else {
+      fetch(`${protocol}://127.0.0.1:8000/event/${id}/like`, {
+        method: "POST",
+      })
+        .then((response) => {
+          if (response.redirected) {
+            // handle redirection
+            event.target.checked = true;
+            window.location.assign(
+              `${protocol}://127.0.0.1:8000/authentication`
+            );
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          event.target.checked = true;
         });
     }
   });
