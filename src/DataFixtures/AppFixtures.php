@@ -465,7 +465,6 @@ class AppFixtures extends Fixture
         $event25->setLongitude(9.642165622744162);
         $manager->persist($event25);
 
-        
-
+        $manager->flush();
     }
 }
