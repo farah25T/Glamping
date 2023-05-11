@@ -54,7 +54,7 @@
           {% endif %} <div class="boutons">
             <form action="{{ path('app_image') }}" method="post" enctype="multipart/form-data">
               <label for="user_image" class="file-input-label">Choose A File</label>
-              <input id="user_image" type="file" name="user_image" />
+              <input id="user_image" type="file" name="user_image" accept="image/jpeg, image/png, image/gif" />
               <button id="submit-btn" type="submit" class="file-input-label" disabled>Update</button>
             </form>
 

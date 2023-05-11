@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Validation;
 
 class UserController extends AbstractController
 {
@@ -29,7 +31,17 @@ public function handleImageUpload(Request $request, SluggerInterface $slugger, E
 
     $uploadedImage = $request->files->get('user_image');
 
-    if ($uploadedImage) {
+        // Validate the file
+        $validator = Validation::createValidator();
+        $constraints = [
+            new File([
+                'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif'],
+                'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, GIF).',
+            ]),
+        ];
+
+        $errors = $validator->validate($uploadedImage, $constraints);
+    if ($uploadedImage && count($errors) == 0) {
         $originalFilename = pathinfo($uploadedImage->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $slugger->slug($originalFilename);
         $newFilename = $safeFilename . '-' . uniqid() . '.' . $uploadedImage->guessExtension();

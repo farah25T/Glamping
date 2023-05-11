@@ -11,35 +11,31 @@ const event_id = ep[ep.length - 1];
 
 heartIcon.addEventListener("click", async () => {
   if (!heartIcon.classList.contains("liked")) {
-    fetch(`http://127.0.0.1:8000/event/${event_id}/like`, {
+    fetch(`http://localhost:8000/event/${event_id}/like`, {
       method: "POST",
-      mode:"no-cors"
-    })
-      .then((response) => {
-        if (response.redirected) {
-          // handle redirection
-          window.location.replace("http://127.0.0.1:8000/authentication");
-        } 
-        else{
-          likes++;
-          heartIcon.classList.toggle("liked");
-          likesAmount.innerText = likes;
-        }
-      });  
+      mode: "no-cors",
+    }).then((response) => {
+      if (response.redirected) {
+        // handle redirection
+        window.location.replace("http://localhost:8000/authentication");
+      } else {
+        likes++;
+        heartIcon.classList.toggle("liked");
+        likesAmount.innerText = likes;
+      }
+    });  
   } else {
-    fetch(`http://127.0.0.1:8000/event/${event_id}/dislike`, {
-      method: "POST"
-    })
-      .then((response) => {
-        if (response.redirected) {
-          // handle redirection
-          window.location.replace("http://127.0.0.1:8000/authentication");
-        } 
-        else{
-          likes--;
-          heartIcon.classList.toggle("liked");
-          likesAmount.innerText = likes;
-        }
-      }); 
+    fetch(`http://localhost:8000/event/${event_id}/dislike`, {
+      method: "POST",
+    }).then((response) => {
+      if (response.redirected) {
+        // handle redirection
+        window.location.replace("http://localhost:8000/authentication");
+      } else {
+        likes--;
+        heartIcon.classList.toggle("liked");
+        likesAmount.innerText = likes;
+      }
+    }); 
   }
 });
