@@ -11,13 +11,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Validation;
 
 class UserController extends AbstractController
 {
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
    #[Route('/image', name: 'app_image', methods: ['POST'])]
 public function handleImageUpload(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
 {
@@ -119,7 +125,8 @@ public function handleImageUpload(Request $request, SluggerInterface $slugger, E
             $user->setAddress($address);
             $user->setGender($gender);
             if(isset($password)){
-                $user->setPassword($password);
+                $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
+                $user->setPassword($hashedPassword);
             }
             $entityManager->getRepository(User::class)->save($user,true);
             return $this->redirectToRoute('app_profile');
