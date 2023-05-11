@@ -7,8 +7,10 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
 	<script src="{{ asset('assets/js/EventCatalogue/Map.js') }}"></script>
 	<script src="{{ asset('assets/js/EventCatalogue/Date.js') }}"></script>
+	<script src="{{ asset('assets/js/EventCatalogue/Like.js') }}"></script>
 {% endblock %}
 {% block stylesheets %}
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"/>
@@ -23,7 +25,7 @@
 {% block body %}
 	{% include 'header.html.twig' with {'user': user} %}
 	<br/>
-    <br/>
+	<br/>
 	<div class="container-fluid">
 		<br/>
 		<br/>
@@ -45,7 +47,7 @@
 						</div>
 						<div class="col-md-2">
 							<div class="inputGroup">
-								<input name="minPrice" type="number" min="0" autocomplete="off" />
+								<input name="minPrice" type="number" min="0" required="true" autocomplete="off"/>
 								<label for="minPrice" name="minPrice">
 									<span class="fas fa-solid fa-euro-sign"></span>
 									Minimum Price
@@ -54,7 +56,7 @@
 						</div>
 						<div class="col-md-2">
 							<div class="inputGroup">
-								<input name="maxPrice" type="number" min="0" autocomplete="off" />
+								<input name="maxPrice" type="number" min="0" required="true" autocomplete="off"/>
 								<label for="maxPrice" name="maxPrice">
 									<span class="fas fa-solid fa-euro-sign"></span>
 									Maximum Price
@@ -75,7 +77,7 @@
 					<div class="row gx-2 align-items-center justify-content-evenly" style="padding: 1%; padding-top: 0">
 						<div class="col-md-4">
 							<div class="inputGroup">
-								<input name="location" type="text"  autocomplete="off"/>
+								<input name="location" type="text" required="true" autocomplete="off"/>
 								<label for="location">
 									<span class="fas fa-regular fa-location-dot" pattern="[A-Za-z]+"></span>
 									location
@@ -84,7 +86,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="inputGroup">
-								<input type="text" name="daterange" value="08/05/2023 - 10/05/2023" />
+								<input type="text" name="daterange" value="08/05/2023 - 10/05/2023"/>
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -126,485 +128,124 @@
 							<option value="Relevence" selected>Relevence</option>
 							<option value="PriceAsc">PriceAsc</option>
 							<option value="PriceDesc">PriceDesc</option>
-							<option value="Most Crowded">Most Crowded</option>
-							<option value="Least Crowded">Least Crowded</option>
-							<option value="NearestLocatino">Nearest location</option>
-							<option value="FarthestLocatino">Farthest locatino</option>
-							<option value="ClosestTime">Closest Time</option>
-							<option value="FarthestTime">Farthest Time</option>
+							<option value="MostCrowded">Most Crowded</option>
+							<option value="LeastCrowded">Least Crowded</option>
+							<option value="NearestLocation">Nearest location</option>
 						</select>
 					</div>
 				</div>
-				<!-- cardRow : 
-																		 class used to make sure these rows have the same height 
-																		 even if they don't contain any card.	
-															-->
-				<!--First Row of Cards-->
-				<div
-					class="row align-items-center justify-content-evenly cardRow">
-					<!--card1-->
-					<div class="col-md-6">
-						<div class="card">
-							<div class="flex w-full f-full overflow-hidden bg-white shadow-lg">
-								<div class="w-2/5 bg-cover bg-landscape">
-									<img src="{{ asset('assets/images/ali.jpg') }}" alt="camp" class="w-full h-full object-cover"/>
-								</div>
-								<div class="w-3/5 p-4">
-									<div class="flex justify-between items-start">
-										<div class="flex-auto">
-											<h3 class="text-2md font-bold text-gray-900">
-												Camping Area
-											</h3>
-										</div>
-										<div class="flex-auto w-64"></div>
-										<div class="flex-auto w-32">
-											<div class="con-like">
-												<input title="like" type="checkbox" class="like"/>
-												<div class="checkmark">
-													<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-													</svg>
-													<svg viewbox="0 0 24 24" class="filled" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-													</svg>
-													<svg class="celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-														<polygon points="10,10 20,20" class="poly"></polygon>
-														<polygon points="10,50 20,50" class="poly"></polygon>
-														<polygon points="20,80 30,70" class="poly"></polygon>
-														<polygon points="90,10 80,20" class="poly"></polygon>
-														<polygon points="90,50 80,50" class="poly"></polygon>
-														<polygon points="80,80 70,70" class="poly"></polygon>
-													</svg>
+				{% for item in pager %}
+					{% if (loop.index is odd) %}
+						<div class="row align-items-center justify-content-evenly cardRow">
+						{% endif %}
+						<div class="col-md-6" style="height:100%">
+							<div class="card">
+								<div class="flex w-full f-full overflow-hidden bg-white shadow-lg">
+									<div class="w-2/5 bg-cover bg-landscape">
+										<img src="{{ asset('assets/images/EventPageImages/Events/' ~ item.id ~ '/1.jpg') }}" alt="camp" class="w-full h-full object-cover"/>
+									</div>
+									<div class="w-3/5 p-4">
+										<div class="flex justify-between items-start">
+											<div class="flex-auto">
+												<h3 class="text-2md font-bold text-gray-900">
+													{{ item.name }}
+												</h3>
+											</div>
+											<div class="flex-auto w-64"></div>
+											<div class="flex-auto w-32">
+												<div class="con-like">
+													{% if item.toggled %}
+														<input title="like" type="checkbox" checked class="like" id="like-{{ item.id }}"/>
+													{% else %}
+														<input title="like" type="checkbox" class="like" id="like-{{ item.id }}"/>
+													{% endif %}
+													<div class="checkmark">
+														<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+															<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
+														</svg>
+														<svg viewbox="0 0 24 24" class="filled" xmlns="http://www.w3.org/2000/svg">
+															<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
+														</svg>
+														<svg class="celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+															<polygon points="10,10 20,20" class="poly"></polygon>
+															<polygon points="10,50 20,50" class="poly"></polygon>
+															<polygon points="20,80 30,70" class="poly"></polygon>
+															<polygon points="90,10 80,20" class="poly"></polygon>
+															<polygon points="90,50 80,50" class="poly"></polygon>
+															<polygon points="80,80 70,70" class="poly"></polygon>
+														</svg>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<p class="mt-2 text-sm text-gray-600">
-										Enjoy a Thrilling Experience !
-									</p>
-
-									<div class="flex mt-2 item-center">
-										<div class="flex items-center">
-											<svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<title>Rating star</title>
-												<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-											</svg>
-											<p class="ml-2 text-sm font-bold text-gray-900 dark:text-dark">
-												4.95
-											</p>
-											<span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-											<a href="#" class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-dark">73 reviews</a>
+										<p class="mt-2 text-sm text-gray-600">
+											Enjoy a Thrilling Experience in
+											{{ item.place }}
+											!
+										</p>
+										<div class="flex mt-auto item-center">
+											<h2 class="text-md text-black">
+												Debut :
+											</h2>
+											<h2 class="text-md text-black">
+												{{ item.date_debut  }}
+											</h2>
 										</div>
-									</div>
-									<div class="flex justify-between mt-3 item-center">
-										<h1 class="text-md font-bold text-gray-700">$220</h1>
-										<button class="px-2.5 py-1.5 text-xs font-small text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-											Book Now
-										</button>
+										<div class="flex mt-auto item-center">
+											<h2 class="text-md text-black">
+												Fin :
+											</h2>
+											<h2 class="text-md text-black">
+												{{ item.date_fin  }}
+											</h2>
+										</div>
+										<div class="flex justify-between mt-3 item-center">
+											<h1 class="text-md font-bold text-gray-700">
+												<span class="fas fa-solid fa-euro-sign"></span>
+												{{ item.price }}</h1>
+											<button id="book-{{ item.id }}" class="px-2.5 py-1.5 text-xs font-small text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+												Book Now
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!--card2-->
-					<div class="col-md-6">
-						<div class="card">
-							<div class="flex w-full f-full overflow-hidden bg-white shadow-lg">
-								<div class="w-2/5 bg-cover bg-landscape">
-									<img src="{{ asset('assets/images/ali.jpg') }}" alt="camp" class="w-full h-full object-cover"/>
-								</div>
-								<div class="w-3/5 p-4">
-									<div class="flex justify-between items-start">
-										<div class="flex-auto">
-											<h3 class="text-2md font-bold text-gray-900">
-												Camping Area
-											</h3>
-										</div>
-										<div class="flex-auto w-64"></div>
-										<div class="flex-auto w-32">
-											<div class="con-like">
-												<input title="like" type="checkbox" class="like"/>
-												<div class="checkmark">
-													<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-													</svg>
-													<svg viewbox="0 0 24 24" class="filled" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-													</svg>
-													<svg class="celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-														<polygon points="10,10 20,20" class="poly"></polygon>
-														<polygon points="10,50 20,50" class="poly"></polygon>
-														<polygon points="20,80 30,70" class="poly"></polygon>
-														<polygon points="90,10 80,20" class="poly"></polygon>
-														<polygon points="90,50 80,50" class="poly"></polygon>
-														<polygon points="80,80 70,70" class="poly"></polygon>
-													</svg>
-												</div>
-											</div>
-										</div>
-									</div>
-									<p class="mt-2 text-sm text-gray-600">
-										Enjoy a Thrilling Experience !
-									</p>
-
-									<div class="flex mt-2 item-center">
-										<div class="flex items-center">
-											<svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<title>Rating star</title>
-												<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-											</svg>
-											<p class="ml-2 text-sm font-bold text-gray-900 dark:text-dark">
-												4.95
-											</p>
-											<span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-											<a href="#" class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-dark">73 reviews</a>
-										</div>
-									</div>
-									<div class="flex justify-between mt-3 item-center">
-										<h1 class="text-md font-bold text-gray-700">$220</h1>
-										<button class="px-2.5 py-1.5 text-xs font-small text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-											Book Now
-										</button>
-									</div>
-								</div>
-							</div>
+						{% if (loop.index is even or loop.last) %}
 						</div>
-					</div>
-				</div>
-				<!--Second Row of Cards-->
-				<div
-					class="row align-items-center justify-content-evenly cardRow">
-					<!--card3-->
-					<div class="col-md-6">
-						<div class="card">
-							<div class="flex w-full f-full overflow-hidden bg-white shadow-lg">
-								<div class="w-2/5 bg-cover bg-landscape">
-									<img src="{{ asset('assets/images/ali.jpg') }}" alt="camp" class="w-full h-full object-cover"/>
-								</div>
-								<div class="w-3/5 p-4">
-									<div class="flex justify-between items-start">
-										<div class="flex-auto">
-											<h3 class="text-2md font-bold text-gray-900">
-												Camping Area
-											</h3>
-										</div>
-										<div class="flex-auto w-64"></div>
-										<div class="flex-auto w-32">
-											<div class="con-like">
-												<input title="like" type="checkbox" class="like"/>
-												<div class="checkmark">
-													<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-													</svg>
-													<svg viewbox="0 0 24 24" class="filled" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-													</svg>
-													<svg class="celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-														<polygon points="10,10 20,20" class="poly"></polygon>
-														<polygon points="10,50 20,50" class="poly"></polygon>
-														<polygon points="20,80 30,70" class="poly"></polygon>
-														<polygon points="90,10 80,20" class="poly"></polygon>
-														<polygon points="90,50 80,50" class="poly"></polygon>
-														<polygon points="80,80 70,70" class="poly"></polygon>
-													</svg>
-												</div>
-											</div>
-										</div>
-									</div>
-									<p class="mt-2 text-sm text-gray-600">
-										Enjoy a Thrilling Experience !
-									</p>
-
-									<div class="flex mt-2 item-center">
-										<div class="flex items-center">
-											<svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<title>Rating star</title>
-												<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-											</svg>
-											<p class="ml-2 text-sm font-bold text-gray-900 dark:text-dark">
-												4.95
-											</p>
-											<span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-											<a href="#" class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-dark">73 reviews</a>
-										</div>
-									</div>
-									<div class="flex justify-between mt-3 item-center">
-										<h1 class="text-md font-bold text-gray-700">$220</h1>
-										<button class="px-2.5 py-1.5 text-xs font-small text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-											Book Now
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--card4-->
-					<div class="col-md-6">
-						<div class="card">
-							<div class="flex w-full f-full overflow-hidden bg-white shadow-lg">
-								<div class="w-2/5 bg-cover bg-landscape">
-									<img src="{{ asset('assets/images/ali.jpg') }}" alt="camp" class="w-full h-full object-cover"/>
-								</div>
-								<div class="w-3/5 p-4">
-									<div class="flex justify-between items-start">
-										<div class="flex-auto">
-											<h3 class="text-2md font-bold text-gray-900">
-												Camping Area
-											</h3>
-										</div>
-										<div class="flex-auto w-64"></div>
-										<div class="flex-auto w-32">
-											<div class="con-like">
-												<input title="like" type="checkbox" class="like"/>
-												<div class="checkmark">
-													<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-													</svg>
-													<svg viewbox="0 0 24 24" class="filled" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-													</svg>
-													<svg class="celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-														<polygon points="10,10 20,20" class="poly"></polygon>
-														<polygon points="10,50 20,50" class="poly"></polygon>
-														<polygon points="20,80 30,70" class="poly"></polygon>
-														<polygon points="90,10 80,20" class="poly"></polygon>
-														<polygon points="90,50 80,50" class="poly"></polygon>
-														<polygon points="80,80 70,70" class="poly"></polygon>
-													</svg>
-												</div>
-											</div>
-										</div>
-									</div>
-									<p class="mt-2 text-sm text-gray-600">
-										Enjoy a Thrilling Experience !
-									</p>
-
-									<div class="flex mt-2 item-center">
-										<div class="flex items-center">
-											<svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<title>Rating star</title>
-												<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-											</svg>
-											<p class="ml-2 text-sm font-bold text-gray-900 dark:text-dark">
-												4.95
-											</p>
-											<span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-											<a href="#" class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-dark">73 reviews</a>
-										</div>
-									</div>
-									<div class="flex justify-between mt-3 item-center">
-										<h1 class="text-md font-bold text-gray-700">$220</h1>
-										<button class="px-2.5 py-1.5 text-xs font-small text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-											Book Now
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--Third Row of Cards-->
-				<div
-					class="row align-items-center justify-content-evenly cardRow">
-					<!--card5-->
-					<div class="col-md-6">
-						<div class="card">
-							<div class="flex w-full f-full overflow-hidden bg-white shadow-lg">
-								<div class="w-2/5 bg-cover bg-landscape">
-									<img src="{{ asset('assets/images/ali.jpg') }}" alt="camp" class="w-full h-full object-cover"/>
-								</div>
-								<div class="w-3/5 p-4">
-									<div class="flex justify-between items-start">
-										<div class="flex-auto">
-											<h3 class="text-2md font-bold text-gray-900">
-												Camping Area
-											</h3>
-										</div>
-										<div class="flex-auto w-64"></div>
-										<div class="flex-auto w-32">
-											<div class="con-like">
-												<input title="like" type="checkbox" class="like"/>
-												<div class="checkmark">
-													<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-													</svg>
-													<svg viewbox="0 0 24 24" class="filled" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-													</svg>
-													<svg class="celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-														<polygon points="10,10 20,20" class="poly"></polygon>
-														<polygon points="10,50 20,50" class="poly"></polygon>
-														<polygon points="20,80 30,70" class="poly"></polygon>
-														<polygon points="90,10 80,20" class="poly"></polygon>
-														<polygon points="90,50 80,50" class="poly"></polygon>
-														<polygon points="80,80 70,70" class="poly"></polygon>
-													</svg>
-												</div>
-											</div>
-										</div>
-									</div>
-									<p class="mt-2 text-sm text-gray-600">
-										Enjoy a Thrilling Experience !
-									</p>
-
-									<div class="flex mt-2 item-center">
-										<div class="flex items-center">
-											<svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<title>Rating star</title>
-												<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-											</svg>
-											<p class="ml-2 text-sm font-bold text-gray-900 dark:text-dark">
-												4.95
-											</p>
-											<span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-											<a href="#" class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-dark">73 reviews</a>
-										</div>
-									</div>
-									<div class="flex justify-between mt-3 item-center">
-										<h1 class="text-md font-bold text-gray-700">$220</h1>
-										<button class="px-2.5 py-1.5 text-xs font-small text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-											Book Now
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--card6-->
-					<div class="col-md-6">
-						<div class="card">
-							<div class="flex w-full f-full overflow-hidden bg-white shadow-lg">
-								<div class="w-2/5 bg-cover bg-landscape">
-									<img src="{{ asset('assets/images/ali.jpg') }}" alt="camp" class="w-full h-full object-cover"/>
-								</div>
-								<div class="w-3/5 p-4">
-									<div class="flex justify-between items-start">
-										<div class="flex-auto">
-											<h3 class="text-2md font-bold text-gray-900">
-												Camping Area
-											</h3>
-										</div>
-										<div class="flex-auto w-64"></div>
-										<div class="flex-auto w-32">
-											<div class="con-like">
-												<input title="like" type="checkbox" class="like"/>
-												<div class="checkmark">
-													<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-													</svg>
-													<svg viewbox="0 0 24 24" class="filled" xmlns="http://www.w3.org/2000/svg">
-														<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-													</svg>
-													<svg class="celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-														<polygon points="10,10 20,20" class="poly"></polygon>
-														<polygon points="10,50 20,50" class="poly"></polygon>
-														<polygon points="20,80 30,70" class="poly"></polygon>
-														<polygon points="90,10 80,20" class="poly"></polygon>
-														<polygon points="90,50 80,50" class="poly"></polygon>
-														<polygon points="80,80 70,70" class="poly"></polygon>
-													</svg>
-												</div>
-											</div>
-										</div>
-									</div>
-									<p class="mt-2 text-sm text-gray-600">
-										Enjoy a Thrilling Experience !
-									</p>
-
-									<div class="flex mt-2 item-center">
-										<div class="flex items-center">
-											<svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<title>Rating star</title>
-												<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-											</svg>
-											<p class="ml-2 text-sm font-bold text-gray-900 dark:text-dark">
-												4.95
-											</p>
-											<span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-											<a href="#" class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-dark">73 reviews</a>
-										</div>
-									</div>
-									<div class="flex justify-between mt-3 item-center">
-										<h1 class="text-md font-bold text-gray-700">$220</h1>
-										<button class="px-2.5 py-1.5 text-xs font-small text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-											Book Now
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+					{% endif %}
+					{% if ( loop.last and loop.index0 < 2 ) %}
+						<div class="row align-items-center justify-content-evenly cardRow"></div>
+					{% endif %}
+					{% if ( loop.last and loop.index0 < 4 ) %}
+						<div class="row align-items-center justify-content-evenly cardRow"></div>
+					{% endif %}
+				{% endfor %}
 				<!--Pagination-->
-				<nav class="pagin">
-					<ul class="pagination justify-content-center">
-						<li class="page-item disabled">
-							<a class="page-link">Previous</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">1</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">2</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">3</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">Next</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-			<!--Map-->
-			<div class="col-md-5" style="padding: 0px">
-				<div id="map"></div>
+			</br>
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<nav class="pagin justify-content-center">
+						{{ pagerfanta(fanta) }}
+					</nav>
+				</div>
+				<div class="col-3"></div>
 			</div>
 		</div>
-		<br/>
-		<br/>
+		<!--Map-->
+		<div class="col-md-5" style="padding: 0px">
+			<div id="map"></div>
+		</div>
 	</div>
-	<script>
-		let Markers = [
-{
-x: 10,
-y: 5,
-alt: "ws",
-popupText: "ws"
-},
-{
-x: 12,
-y: 5,
-alt: "ss",
-popupText: "ss"
-},
-{
-x: 13,
-y: 5,
-alt: "xs",
-popupText: "xs"
-},
-{
-x: 14,
-y: 5,
-alt: "sfff",
-popupText: "sddf"
-}, {
-x: 15,
-y: 5,
-alt: "sf",
-popupText: "sf"
-}, {
-x: 10,
-y: 6,
-alt: "s2",
-popupText: "ss"
-}, {
-x: 10,
-y: 6,
-alt: "s3",
-popupText: "sd"
-},
-];
-	</script>
-{% endblock %}
+	<br/>
+	<br/>
+</div>
+<script>
+	let Markers = [];{% for item in pager %}Markers[{{ loop.index0 }}] = {
+x: {{ item.latitude }},
+y: {{ item.longitude }},
+alt: '{{ item.city }}',
+popupText: '{{ item.name }}'
+};{% endfor %}
+</script>{% endblock %}
