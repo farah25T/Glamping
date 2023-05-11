@@ -87,7 +87,7 @@ class EventRepository extends ServiceEntityRepository
         return $result['max_guests'];
     }
 
-  public function findTopEventOfYear2023(): ?Event
+    public function findTopEventOfYear2023(): ?Event
     {
         return $this->createQueryBuilder('e')
             ->innerJoin('e.users', 'eu')
@@ -160,11 +160,9 @@ class EventRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder('event');
         if (array_key_exists('Search', $queryparams)) {
-            $tokens = explode($queryparams['Search'], " ");
-            foreach ($tokens as $token) {
-                $qb->andWhere('event.name LIKE :word')
-                    ->setParameter('word', '%' . $token . '%');
-            }
+
+            $qb->andWhere('event.name LIKE :word')
+                ->setParameter('word', '%' . $queryparams['Search'] . '%');
         }
         if (array_key_exists('minPrice', $queryparams)) {
             $MinPrice = (int)$queryparams['minPrice'];
@@ -177,20 +175,15 @@ class EventRepository extends ServiceEntityRepository
                 ->setParameter('price', $MaxPrice);
         }
         if (array_key_exists('location', $queryparams)) {
-            $tokens = explode($queryparams["location"], " ");
-            foreach ($tokens as $token) {
-                $qb->andWhere('event.city LIKE :word')
-                    ->setParameter('word', '%' . $token . '%');
-            }
-            foreach ($tokens as $token) {
-                $qb->andWhere('event.country LIKE :word')
-                    ->setParameter('word', '%' . $token . '%');
-            }
+            $qb->andWhere('event.city LIKE :loc1')
+                ->setParameter('loc1', '%' . $queryparams["location"] . '%');
+            $qb->orWhere('event.country LIKE :loc2')
+                ->setParameter('loc2', '%' . $queryparams["location"] . '%');
         }
         if (array_key_exists('sort', $queryparams)) {
             switch ($queryparams["sort"]) {
                 case "PriceAsc":
-                    $qb->orderBy('event.price','ASC');
+                    $qb->orderBy('event.price', 'ASC');
                     break;
                 case "PriceDesc":
                     $qb->orderBy('event.price', 'DESC');
