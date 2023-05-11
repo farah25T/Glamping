@@ -15,9 +15,10 @@ fetch("/event_liked")
             Event_name= card$p.querySelector('.descri')
 
             Event_name.innerHTML =response[p].name
+            const Event_link = card$p.querySelector('a');
+            Event_link.setAttribute('href',"http://127.0.0.1:8000/event/"+response[p].image );
 
             Image_event = card$p.querySelector('.image');
-            console.log(Image_event)
             Image_event.setAttribute('src', "assets/images/EventPageImages/Events/"+response[p].image+"/1.jpg");
             Price_event = card$p.querySelector('.price');
             Price_event.innerHTML="<br>Price Par Personne  =  "+response[p].price+"<br> Date Debut = "+response[p].date+"<br>Place = "+response[p].place;
@@ -93,4 +94,3 @@ fetch('/event_booked')
 
 
 
-   
