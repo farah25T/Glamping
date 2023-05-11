@@ -2,9 +2,14 @@
 
 {% block title %}Settings{% endblock %}
 {% block stylesheets %} <link rel="stylesheet" href="/assets/css/settings.css" /> {% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('assets/js/Settings.js') }}"></script>
+{% endblock %}
+
 {% block body %}
 
-{% include 'header.html.twig' with {'user': user} %}
+
+
 
     <section class="main">
       <h1 class="title">Your Informations</h1>
@@ -48,7 +53,7 @@
           </div>
         </div>
         <div class="container">
-<input type="radio" name="gender" value="male" id="circle-1" {% if user.gender == 'male' %}checked{% endif %} />
+<input type="radio" name="gender" value="male" id="circle-1" {% if user.gender == 'male' %} checked {% endif %} />
 <input type="radio" name="gender" value="female" id="circle-2" {% if user.gender == 'female' %}checked{% endif %} />
 <input type="radio" name="gender" value="other" id="circle-3" {% if user.gender == 'other' %}checked{% endif %} />
 
@@ -94,8 +99,18 @@
                })
         </script>
       </form>
-
-      <a href="{{ path('app_user_delete') }}"><button>Delete</button></a>
+      
+      <button class="delete" onclick="showPopup()">Delete Your Account</button>
+      <div id="popup" class="popup">
+        <div class="popup-content">
+        <img src="/assets/images/danger.jpg" alt="danger">
+          <h2 class="popup-title">Are You Sure You want To delete
+          <br>Your Account ?</h2>
+          <button class="cancel" onclick="hidePopup()" >Cancel</button>
+      <a href="{{ path('app_user_delete') }}" ><button class="deletebtn">Delete</button></a>
+      </div>
+        </div>
+      </div>
     </section>
   
 {% endblock %}
