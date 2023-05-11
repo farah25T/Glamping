@@ -38,7 +38,13 @@
 					<div class="row gx-2 align-items-center justify-content-evenly" style="padding: 1%; padding-bottom: 0">
 						<div class="col-md-8">
 							<div class="inputGroup">
-								<input name="Search" type="text" required="true" autocomplete="off"/>
+								{% if (search) %}
+									<input name="Search" type="text" required="true" autocomplete="off" value="{{search}}"/>
+
+								{% else %}
+									<input name="Search" type="text" required="true" autocomplete="off"/>
+
+								{% endif %}
 								<label for="Search">
 									<span class="fas fa-sharp fa-solid fa-magnifying-glass"></span>
 									SearchBar
@@ -47,7 +53,11 @@
 						</div>
 						<div class="col-md-2">
 							<div class="inputGroup">
-								<input name="minPrice" type="number" min="0" required="true" autocomplete="off"/>
+								{% if (minPrice) %}
+									<input name="minPrice" type="number" min="0" required="true" autocomplete="off" value="{{ minPrice }}"/>
+								{% else %}
+									<input name="minPrice" type="number" min="0" required="true" autocomplete="off"/>
+								{% endif %}
 								<label for="minPrice" name="minPrice">
 									<span class="fas fa-solid fa-euro-sign"></span>
 									Minimum Price
@@ -56,7 +66,11 @@
 						</div>
 						<div class="col-md-2">
 							<div class="inputGroup">
-								<input name="maxPrice" type="number" min="0" required="true" autocomplete="off"/>
+								{% if (maxPrice) %}
+									<input name="maxPrice" type="number" min="0" required="true" autocomplete="off" value="{{ maxPrice }}"/>
+								{% else %}
+									<input name="maxPrice" type="number" min="0" required="true" autocomplete="off"/>
+								{% endif %}
 								<label for="maxPrice" name="maxPrice">
 									<span class="fas fa-solid fa-euro-sign"></span>
 									Maximum Price
@@ -77,7 +91,11 @@
 					<div class="row gx-2 align-items-center justify-content-evenly" style="padding: 1%; padding-top: 0">
 						<div class="col-md-4">
 							<div class="inputGroup">
-								<input name="location" type="text" required="true" autocomplete="off"/>
+								{% if location %}
+									<input name="location" type="text" required="true" autocomplete="off" value="{{ location }}"/>
+								{% else %}
+									<input name="location" type="text" required="true" autocomplete="off"/>
+								{% endif %}
 								<label for="location">
 									<span class="fas fa-regular fa-location-dot" pattern="[A-Za-z]+"></span>
 									location
@@ -91,7 +109,11 @@
 						</div>
 						<div class="col-md-3">
 							<div class="inputGroup">
-								<input name="guests" type="number" min="1" max="{{guests}}" autocomplete="off" required="true"/>
+								{% if guestInput %}
+									<input name="guests" type="number" min="1" max="{{guests}}" autocomplete="off" required="true" value="{{ guestInput }}"/>
+								{% else %}
+									<input name="guests" type="number" min="1" max="{{guests}}" autocomplete="off" required="true" value="{{ guestInput }}"/>
+								{% endif %}
 								<label for="guests" name="guest">
 									<span class="fas fa-regular fa-user"></span>
 									Add guests
@@ -128,106 +150,114 @@
 							<option value="Relevence" selected>Relevence</option>
 							<option value="PriceAsc">PriceAsc</option>
 							<option value="PriceDesc">PriceDesc</option>
-							<option value="MostCrowded">Most Crowded</option>
-							<option value="LeastCrowded">Least Crowded</option>
-							<option value="NearestLocation">Nearest location</option>
 						</select>
 					</div>
 				</div>
-				{% for item in pager %}
-					{% if (loop.index is odd) %}
-						<div class="row align-items-center justify-content-evenly cardRow">
-						{% endif %}
-						<div class="col-md-6" style="height:100%">
-							<div class="card">
-								<div class="flex w-full f-full overflow-hidden bg-white shadow-lg">
-									<div class="w-2/5 bg-cover bg-landscape">
-										<img src="{{ asset('assets/images/EventPageImages/Events/' ~ item.id ~ '/1.jpg') }}" alt="camp" class="w-full h-full object-cover"/>
-									</div>
-									<div class="w-3/5 p-4">
-										<div class="flex justify-between items-start">
-											<div class="flex-auto">
-												<h3 class="text-2md font-bold text-gray-900">
-													{{ item.name }}
-												</h3>
-											</div>
-											<div class="flex-auto w-64"></div>
-											<div class="flex-auto w-32">
-												<div class="con-like">
-													{% if item.toggled %}
-														<input title="like" type="checkbox" checked class="like" id="like-{{ item.id }}"/>
-													{% else %}
-														<input title="like" type="checkbox" class="like" id="like-{{ item.id }}"/>
-													{% endif %}
-													<div class="checkmark">
-														<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-															<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-														</svg>
-														<svg viewbox="0 0 24 24" class="filled" xmlns="http://www.w3.org/2000/svg">
-															<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-														</svg>
-														<svg class="celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-															<polygon points="10,10 20,20" class="poly"></polygon>
-															<polygon points="10,50 20,50" class="poly"></polygon>
-															<polygon points="20,80 30,70" class="poly"></polygon>
-															<polygon points="90,10 80,20" class="poly"></polygon>
-															<polygon points="90,50 80,50" class="poly"></polygon>
-															<polygon points="80,80 70,70" class="poly"></polygon>
-														</svg>
+				{% if pager %}
+					{% for item in pager %}
+						{% if (loop.index is odd) %}
+							<div class="row align-items-center justify-content-evenly cardRow">
+							{% endif %}
+							<div class="col-md-6" style="height:100%">
+								<div class="card">
+									<div class="flex w-full f-full overflow-hidden bg-white shadow-lg">
+										<div class="w-2/5 bg-cover bg-landscape">
+											<img src="{{ asset('assets/images/EventPageImages/Events/' ~ item.id ~ '/1.jpg') }}" alt="camp" class="w-full h-full object-cover"/>
+										</div>
+										<div class="w-3/5 p-4">
+											<div class="flex justify-between items-start">
+												<div class="flex-auto">
+													<h3 class="text-2md font-bold text-gray-900">
+														{{ item.name }}
+													</h3>
+												</div>
+												<div class="flex-auto w-64"></div>
+												<div class="flex-auto w-32">
+													<div class="con-like">
+														{% if item.toggled %}
+															<input title="like" type="checkbox" checked class="like" id="like-{{ item.id }}"/>
+														{% else %}
+															<input title="like" type="checkbox" class="like" id="like-{{ item.id }}"/>
+														{% endif %}
+														<div class="checkmark">
+															<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+																<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
+															</svg>
+															<svg viewbox="0 0 24 24" class="filled" xmlns="http://www.w3.org/2000/svg">
+																<path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
+															</svg>
+															<svg class="celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+																<polygon points="10,10 20,20" class="poly"></polygon>
+																<polygon points="10,50 20,50" class="poly"></polygon>
+																<polygon points="20,80 30,70" class="poly"></polygon>
+																<polygon points="90,10 80,20" class="poly"></polygon>
+																<polygon points="90,50 80,50" class="poly"></polygon>
+																<polygon points="80,80 70,70" class="poly"></polygon>
+															</svg>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-										<p class="mt-2 text-sm text-gray-600">
-											Enjoy a Thrilling Experience in
-											{{ item.place }}
-											!
-										</p>
-										<div class="flex mt-auto item-center">
-											<h2 class="text-md text-black">
-												Debut :
-											</h2>
-											<h2 class="text-md text-black">
-												{{ item.date_debut  }}
-											</h2>
-										</div>
-										<div class="flex mt-auto item-center">
-											<h2 class="text-md text-black">
-												Fin :
-											</h2>
-											<h2 class="text-md text-black">
-												{{ item.date_fin  }}
-											</h2>
-										</div>
-										<div class="flex justify-between mt-3 item-center">
-											<h1 class="text-md font-bold text-gray-700">
-												<span class="fas fa-solid fa-euro-sign"></span>
-												{{ item.price }}</h1>
-											<button id="book-{{ item.id }}" class="px-2.5 py-1.5 text-xs font-small text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-												Book Now
-											</button>
+											<p class="mt-2 text-sm text-gray-600">
+												Enjoy a Thrilling Experience in
+												{{ item.place }}
+												!
+											</p>
+											<div class="flex mt-auto item-center">
+												<h2 class="text-md text-black">
+													Debut :
+												</h2>
+												<h2 class="text-md text-black">
+													{{ item.date_debut  }}
+												</h2>
+											</div>
+											<div class="flex mt-auto item-center">
+												<h2 class="text-md text-black">
+													Fin :
+												</h2>
+												<h2 class="text-md text-black">
+													{{ item.date_fin  }}
+												</h2>
+											</div>
+											<div class="flex justify-between mt-3 item-center">
+												<h1 class="text-md font-bold text-gray-700">
+													<span class="fas fa-solid fa-euro-sign"></span>
+													{{ item.price }}</h1>
+												<button id="book-{{ item.id }}" class="px-2.5 py-1.5 text-xs font-small text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+													Book Now
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						{% if (loop.index is even or loop.last) %}
-						</div>
-					{% endif %}
-					{% if ( loop.last and loop.index0 < 2 ) %}
-						<div class="row align-items-center justify-content-evenly cardRow"></div>
-					{% endif %}
-					{% if ( loop.last and loop.index0 < 4 ) %}
-						<div class="row align-items-center justify-content-evenly cardRow"></div>
-					{% endif %}
-				{% endfor %}
+							{% if (loop.index is even or loop.last) %}
+							</div>
+						{% endif %}
+						{% if ( loop.last and loop.index0 < 2 ) %}
+							<div class="row align-items-center justify-content-evenly cardRow"></div>
+						{% endif %}
+						{% if ( loop.last and loop.index0 < 4 ) %}
+							<div class="row align-items-center justify-content-evenly cardRow"></div>
+						{% endif %}
+					{% endfor %}
+				{% else %}
+					<div class="row align-items-center justify-content-evenly cardRow">
+						<h1 class="text-align">
+							NOTHING FOUND
+						</h1>
+					</div>
+					<div class="row align-items-center justify-content-evenly cardRow"></div>
+					<div class="row align-items-center justify-content-evenly cardRow"></div>
+				{% endif %}
+
 				<!--Pagination-->
 			</br>
 			<div class="row">
 				<div class="col-3"></div>
 				<div class="col-6">
 					<nav class="pagin justify-content-center">
-						{{ pagerfanta(fanta) }}
+						{{ pagerfanta(fanta , {parameters: [route]}) }}
 					</nav>
 				</div>
 				<div class="col-3"></div>
